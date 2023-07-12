@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import AboutPage from './../views/AboutPage.vue'
+import HousesPage from './../views/HousesPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,7 +11,7 @@ const router = createRouter({
     },
     {
       path: '/houses',
-      component: null,
+      component: HousesPage,
       children: [
         {
           path: 'search',
@@ -33,7 +35,7 @@ const router = createRouter({
     },
     {
       path: '/about',
-      component: null
+      component: AboutPage
     },
     { path: '/:notFound(.*)', component: null }
   ]

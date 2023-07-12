@@ -24,6 +24,10 @@
   --r32: calc((32 / 16) * 1rem);
 }
 
+:root {
+  --max-width: calc((1400 / 16) * 1rem);
+}
+
 *,
 *::before,
 *::after {
@@ -39,6 +43,7 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: var(--r18);
+  background-color: var(--element-color-background1);
 }
 
 ul {
@@ -48,4 +53,8 @@ ul {
 img {
   display: block;
   max-width: 100%;
+}
+
+a {
+  text-decoration: none;
 }
