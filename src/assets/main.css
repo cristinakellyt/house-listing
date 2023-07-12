@@ -1,2 +1,6 @@
 @import './base.css';
 
+#app {
+  background-color: var(--element-color-background1);
+  height: 100vh;
+}

@@ -1,7 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;1,500&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  --element-color-primary: rgb(235, 84, 64);
+  --element-color-secondary: rgb(74, 75, 76);
+  --element-color-tertiary: rgb(195, 195, 195);
+  --element-color-tertiary-lighter: rgb(232, 232, 232);
+  --element-color-background1: rgb(246, 246, 246);
+  --element-color-backgroun2: rgb(255, 255, 255);
+}
+
+:root {
+  --text-color-primary: rgb(0, 0, 0);
+  --text-color-secondary: var(--element-color-secondary);
+  --text-color-hyperlink: rgb(6, 123, 194);
+}
+
+:root {
+  --r12: calc((12 / 16) * 1rem);
+  --r14: calc((14 / 16) * 1rem);
+  --r16: calc((16 / 16) * 1rem);
+  --r18: calc((18 / 16) * 1rem);
+  --r22: calc((22 / 16) * 1rem);
+  --r32: calc((32 / 16) * 1rem);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
+html {
+  font-size: var(--r16);
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--r18);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
