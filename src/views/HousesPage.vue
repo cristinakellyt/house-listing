@@ -34,18 +34,19 @@ h2 {
 
 .house-image-container {
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: calc((10 / 16) * 1rem);
 }
 
 .house-image {
-  max-width: 305px;
+  max-width: calc((305 / 16) * 1rem);
 }
 
 .house-info {
+  grid-gap: calc((15 / 16) * 1rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  grid-gap: calc((15 / 16) * 1rem);
+  font-size: var(--r16);
 }
 
 .house-price {
@@ -58,6 +59,7 @@ h2 {
 
 .house-rooms {
   display: flex;
+  flex-wrap: wrap;
   gap: calc((20 / 16) * 1rem);
   color: var(--text-color-secondary);
 }
@@ -70,5 +72,29 @@ h2 {
 
 .house-rooms__icon {
   width: calc((20 / 16) * 1rem);
+}
+
+/*Mobile view starts at 550px */
+@media only screen and (max-width: 34.375em) {
+  h2 {
+    font-size: var(--r14);
+  }
+  .house-image {
+    max-width: calc((167 / 16) * 1rem);
+  }
+
+  .house-info {
+    grid-gap: 0;
+    font-size: var(--r12);
+    justify-content: space-evenly;
+  }
+
+  .house-rooms {
+    gap: calc((10 / 16) * 1rem);
+  }
+
+  .house-rooms__icon {
+    width: calc((15 / 16) * 1rem);
+  }
 }
 </style>
