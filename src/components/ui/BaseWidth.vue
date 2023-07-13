@@ -7,10 +7,8 @@
 <style scoped>
 main {
   max-width: var(--max-width);
-  height: 100vh;
   margin: 0 auto;
-  border: 1px solid red;
-  padding-top: calc((80 / 16) * 1rem);
+  padding: calc((80 / 16) * 1rem) 0;
 }
 
 @media only screen and (max-width: 87.5em) {
