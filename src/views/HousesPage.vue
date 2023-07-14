@@ -1,3 +1,7 @@
 <template>
-  <h1>Houses</h1>
+  <HouseList></HouseList>
 </template>
+
+<script setup>
+import HouseList from './../components/houses/HousesList.vue'
+</script>
