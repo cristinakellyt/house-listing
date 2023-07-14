@@ -5,19 +5,23 @@
     </div>
     <div class="house-info">
       <h2>{{ house.location.street }} {{ house.location.houseNumber }}</h2>
-      <p class="house-price">&euro; {{ house.price }}</p>
+      <p class="house-price">&euro; {{ formatPrice(house.price) }}</p>
       <p class="house-address">{{ house.location.zip }} {{ house.location.city }}</p>
       <div class="house-rooms">
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="./../icons/ic_bed@3x.png" alt="" />
+          <img class="house-rooms__icon" src="./../icons/ic_bed@3x.png" alt="number of bedrooms" />
           {{ house.rooms.bedrooms }}</span
         >
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="./../icons/ic_bath@3x.png" alt="" />
+          <img
+            class="house-rooms__icon"
+            src="./../icons/ic_bath@3x.png"
+            alt="number of bathrooms"
+          />
           {{ house.rooms.bathrooms }}</span
         >
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="./../icons/ic_size@3x.png" alt="" />
+          <img class="house-rooms__icon" src="./../icons/ic_size@3x.png" alt="size of the house" />
           {{ house.size }} m2</span
         >
       </div>
@@ -49,6 +53,20 @@ const getHousesList = () => {
       // TODO Add error handler
       console.log(error)
     })
+}
+
+const formatPrice = (price) => {
+  const housePrice = price.toString()
+  let arrayPrice = [...housePrice]
+  let count = 0
+  let numberOfDigits = arrayPrice.length
+  for (let i = numberOfDigits - 1; i >= 0; i--) {
+    count++
+    if (count % 3 === 0 && count < numberOfDigits) {
+      arrayPrice.splice(i, 0, '.')
+    }
+  }
+  return arrayPrice.join('')
 }
 
 onMounted(() => {
