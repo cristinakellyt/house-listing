@@ -49,6 +49,7 @@ header {
   font-size: var(--r18);
   color: var(--element-color-tertiary);
   position: fixed;
+  z-index: 100;
 }
 
 header nav {
