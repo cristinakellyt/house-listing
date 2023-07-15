@@ -1,16 +1,16 @@
 <template>
-  <house-card v-for="house in housesList" :key="house.id">
+  <house-card>
     <div class="house-image-container">
-      <img class="house-image" :src="house.image" alt="" />
+      <img class="house-image" :src="image" alt="" />
     </div>
     <div class="house-info">
-      <h2>{{ house.location.street }} {{ house.location.houseNumber }}</h2>
-      <p class="house-price">&euro; {{ formatPrice(house.price) }}</p>
-      <p class="house-address">{{ house.location.zip }} {{ house.location.city }}</p>
+      <h2>{{ props.street }} {{ props.houseNumber }}</h2>
+      <p class="house-price">&euro; {{ formatPrice(props.price) }}</p>
+      <p class="house-address">{{ props.zipCode }} {{ props.city }}</p>
       <div class="house-rooms">
         <span class="house-rooms__info">
           <img class="house-rooms__icon" src="./../icons/ic_bed@3x.png" alt="number of bedrooms" />
-          {{ house.rooms.bedrooms }}</span
+          {{ props.bedrooms }}</span
         >
         <span class="house-rooms__info">
           <img
@@ -18,11 +18,11 @@
             src="./../icons/ic_bath@3x.png"
             alt="number of bathrooms"
           />
-          {{ house.rooms.bathrooms }}</span
+          {{ props.bathrooms }}</span
         >
         <span class="house-rooms__info">
           <img class="house-rooms__icon" src="./../icons/ic_size@3x.png" alt="size of the house" />
-          {{ house.size }} m2</span
+          {{ props.size }} m2</span
         >
       </div>
     </div>
@@ -30,30 +30,18 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-
-const housesList = ref([])
-
-const getHousesList = () => {
-  fetch('https://api.intern.d-tt.nl/api/houses', {
-    method: 'GET',
-    headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      }
-    })
-    .then((data) => {
-      for (const house of data) {
-        housesList.value.push(house)
-      }
-    })
-    .catch((error) => {
-      // TODO Add error handler
-      console.log(error)
-    })
-}
+const props = defineProps({
+  id: Number,
+  image: String,
+  street: String,
+  houseNumber: Number,
+  price: Number,
+  zipCode: String,
+  city: String,
+  bedrooms: Number,
+  bathrooms: Number,
+  size: Number
+})
 
 const formatPrice = (price) => {
   const housePrice = price.toString()
@@ -68,11 +56,6 @@ const formatPrice = (price) => {
   }
   return arrayPrice.join('')
 }
-
-onMounted(() => {
-  getHousesList()
-  return
-})
 </script>
 
 <style scoped>

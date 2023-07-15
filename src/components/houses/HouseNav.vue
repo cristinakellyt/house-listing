@@ -14,8 +14,20 @@
     <div class="house-filter">
       <div class="house-search">
         <img class="house-search--icon" src="./../icons/ic_search@3x.png" />
-        <input class="house-search--input" type="search" placeholder="Search for a house" />
-        <img class="house-clear-input--icon" src="./../icons/ic_clear@3x.png" />
+        <input
+          class="house-search--input"
+          type="text"
+          placeholder="Search for a house"
+          v-model.trim="searchKey"
+          @input="clearSearchWhenInputIsEmpty"
+          @keyup.enter="searchHouseOnEnter"
+        />
+        <img
+          v-show="searchKey"
+          @click="clearInputHandler"
+          class="house-clear-input--icon"
+          src="./../icons/ic_clear@3x.png"
+        />
       </div>
       <div class="filter-buttons">
         <button class="filter-buttons__price">Price</button>
@@ -26,18 +38,35 @@
 </template>
 
 <script setup>
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 
 const windowWidth = inject('windowWidth')
-
 const desktopView = computed(() => windowWidth.value > 550)
+
+const searchKey = ref('')
+const emit = defineEmits(['searchHouses', 'cleanSearch'])
+
+const searchHouses = (input) => {
+  emit('searchHouses', input)
+}
+
+const searchHouseOnEnter = () => {
+  searchHouses(searchKey.value)
+}
+
+const clearSearchWhenInputIsEmpty = () => {
+  if (!searchKey.value) {
+    searchHouses('')
+  }
+}
+
+const clearInputHandler = () => {
+  searchKey.value = ''
+  searchHouses('')
+}
 </script>
 
 <style scoped>
-h1 {
-  text-align: start;
-}
-
 .house-nav--container {
   position: relative;
   margin-top: calc((30 / 16) * 1rem);
@@ -78,17 +107,22 @@ button {
 .house-search {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   flex: 0 0 35%;
-
   background-color: var(--element-color-tertiary-lighter);
   border-radius: var(--r10);
+  position: relative;
+}
+
+.house-search:focus-within {
+  box-shadow: 0 0 0 1px var(--element-color-secondary);
 }
 
 .house-search--input {
   width: 80%;
-  padding: var(--r15) var(--r20);
+  padding: var(--r15) var(--r20) var(--r15) 0;
   font-size: var(--r14);
+  font-family: 'Open sans', sans-serif;
+  color: var(--element-color-secondary);
   border-radius: var(--r10);
   border: none;
   background-color: var(--element-color-tertiary-lighter);
@@ -99,11 +133,18 @@ button {
 }
 
 .house-search--icon {
-  width: calc((24 / 16) * 1rem);
+  margin: 0 var(--r20);
+}
+
+.house-search--icon,
+.house-clear-input--icon {
+  width: var(--r20);
+  height: var(--r20);
 }
 
 .house-clear-input--icon {
-  width: calc((24 / 16) * 1rem);
+  position: absolute;
+  right: var(--r10);
 }
 .filter-buttons {
   flex: 0 0 20%;
@@ -137,12 +178,10 @@ button {
   .filter-buttons {
     flex: 0 0 100%;
   }
-
-  .house-search {
-    gap: var(--r10);
-  }
   .house-search--icon {
     width: var(--r15);
+    height: var(--r15);
+    margin: 0 var(--r15);
   }
   .house-search--input {
     width: 70%;
@@ -151,7 +190,8 @@ button {
   }
 
   .house-clear-input--icon {
-    width: var(--r15);
+    width: calc((16 / 16) * 1rem);
+    height: calc((17 / 16) * 1rem);
   }
 
   .position-absolute-right-top {
