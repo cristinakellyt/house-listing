@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, provide } from 'vue'
 import TheHeader from './components/layout/TheHeader.vue'
 import BaseWidth from './components/ui/BaseWidth.vue'
 
@@ -20,4 +20,5 @@ onMounted(() => {
 const handlerWindowResize = () => {
   windowWidth.value = window.innerWidth
 }
+provide('windowWidth', windowWidth)
 </script>

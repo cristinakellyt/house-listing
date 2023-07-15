@@ -16,10 +16,13 @@
 }
 
 :root {
+  --r10: calc((10 / 16) * 1rem);
   --r12: calc((12 / 16) * 1rem);
   --r14: calc((14 / 16) * 1rem);
+  --r15: calc((15 / 16) * 1rem);
   --r16: calc((16 / 16) * 1rem);
   --r18: calc((18 / 16) * 1rem);
+  --r20: calc((20 / 16) * 1rem);
   --r22: calc((22 / 16) * 1rem);
   --r32: calc((32 / 16) * 1rem);
 }
@@ -51,10 +54,40 @@ ul {
 }
 
 img {
-  display: block;
+  display: inline-block;
   max-width: 100%;
 }
 
 a {
   text-decoration: none;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--r32);
+  font-weight: 700;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--r22);
+  font-weight: 700;
+}
+
+input:focus {
+  outline: none;
+}
+
+@media only screen and (max-width: 34.375em) {
+  h1 {
+    font-size: var(--r18);
+  }
+
+  h2 {
+    font-size: var(--r14);
+  }
+
+  body {
+    font-size: var(--r12);
+  }
 }

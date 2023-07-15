@@ -8,7 +8,14 @@
 main {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: calc((80 / 16) * 1rem) 0;
+  padding-top: calc((80 / 16) * 1rem);
+}
+
+@media only screen and (max-width: 34.375em) {
+  main {
+    padding-bottom: calc((80 / 16) * 1rem);
+    padding-top: 0;
+  }
 }
 
 @media only screen and (max-width: 87.5em) {
