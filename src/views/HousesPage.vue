@@ -1,5 +1,5 @@
 <template>
-  <HouseNav @searchHouses="onSearchHouses" @cleanSearch="onSearchHouses" />
+  <HouseNav @searchHouses="onSearchHouses" />
   <h2 v-if="numberOfResults > 0 && isFiltered" class="search-results--number">
     {{ numberOfResults }} Results found
   </h2>
@@ -30,6 +30,7 @@ import { onMounted, ref } from 'vue'
 const housesList = ref([])
 const filteredHouses = ref([])
 const isFiltered = ref(false)
+
 const numberOfResults = ref('')
 
 const getHousesList = () => {
@@ -59,17 +60,24 @@ onMounted(() => {
   return
 })
 
-const onSearchHouses = (input) => {
-  filteredHouses.value = housesList.value
-  if (!input) {
+const onSearchHouses = (city, sortType) => {
+  filteredHouses.value = [...housesList.value]
+  if (city) {
+    isFiltered.value = true
+    filteredHouses.value = filteredHouses.value.filter(
+      (house) => house.location.city.toLowerCase() === city.toLowerCase()
+    )
+    numberOfResults.value = filteredHouses.value.length
+  } else {
     isFiltered.value = false
-    return
   }
-  isFiltered.value = true
-  filteredHouses.value = filteredHouses.value.filter(
-    (house) => house.location.city.toLowerCase() === input.toLowerCase()
-  )
-  numberOfResults.value = filteredHouses.value.length
+
+  if (sortType === 'price') {
+    filteredHouses.value.sort((a, b) => a.price - b.price)
+  }
+  if (sortType === 'size') {
+    filteredHouses.value.sort((a, b) => a.size - b.size)
+  }
 }
 </script>
 
