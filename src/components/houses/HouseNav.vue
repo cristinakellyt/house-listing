@@ -30,8 +30,20 @@
         />
       </div>
       <div class="filter-buttons">
-        <button class="filter-buttons__price">Price</button>
-        <button class="filter-buttons__size">Size</button>
+        <button
+          @click="sortHouse($event)"
+          value="price"
+          :class="['filter-buttons__price', { active: priceIsPressed }]"
+        >
+          Price
+        </button>
+        <button
+          @click="sortHouse($event)"
+          value="size"
+          :class="['filter-buttons__size', { active: sizeIsPressed }]"
+        >
+          Size
+        </button>
       </div>
     </div>
   </div>
@@ -44,10 +56,17 @@ const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 
 const searchKey = ref('')
-const emit = defineEmits(['searchHouses', 'cleanSearch'])
+const emit = defineEmits(['searchHouses'])
 
 const searchHouses = (input) => {
-  emit('searchHouses', input)
+  let sortType = ''
+  if (priceIsPressed.value) {
+    sortType = 'price'
+  } else if (sizeIsPressed.value) {
+    sortType = 'size'
+  }
+
+  emit('searchHouses', input, sortType)
 }
 
 const searchHouseOnEnter = () => {
@@ -63,6 +82,35 @@ const clearSearchWhenInputIsEmpty = () => {
 const clearInputHandler = () => {
   searchKey.value = ''
   searchHouses('')
+}
+
+const priceIsPressed = ref(false)
+const sizeIsPressed = ref(false)
+
+const sortHouse = ($event) => {
+  if ($event.target.value === 'price' && priceIsPressed.value) {
+    priceIsPressed.value = false
+    searchHouses(searchKey.value)
+    return
+  }
+
+  if ($event.target.value === 'size' && sizeIsPressed.value) {
+    sizeIsPressed.value = false
+    searchHouses(searchKey.value)
+    return
+  }
+
+  if ($event.target.value === 'price') {
+    priceIsPressed.value = true
+    sizeIsPressed.value = false
+  }
+
+  if ($event.target.value === 'size') {
+    priceIsPressed.value = false
+    sizeIsPressed.value = true
+  }
+
+  searchHouses(searchKey.value)
 }
 </script>
 
@@ -102,6 +150,12 @@ button {
   color: var(--element-color-backgroun2);
   font-weight: 700;
   font-size: var(--r18);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.active {
+  background-color: var(--element-color-tertiary);
 }
 
 .house-search {
