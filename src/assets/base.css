@@ -24,11 +24,13 @@
   --r18: calc((18 / 16) * 1rem);
   --r20: calc((20 / 16) * 1rem);
   --r22: calc((22 / 16) * 1rem);
+  --r30: calc((30 / 16) * 1rem);
   --r32: calc((32 / 16) * 1rem);
 }
 
 :root {
   --max-width: calc((1400 / 16) * 1rem);
+  --margin-right-left-width: calc((20 / 16) * 1rem);
 }
 
 *,

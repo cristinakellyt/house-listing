@@ -20,7 +20,7 @@ main {
 
 @media only screen and (max-width: 87.5em) {
   main {
-    margin: 0 calc((20 / 16) * 1rem);
+    margin: 0 var(--margin-right-left-width);
   }
 }
 </style>
