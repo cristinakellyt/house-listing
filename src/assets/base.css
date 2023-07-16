@@ -47,6 +47,11 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: var(--r18);
   background-color: var(--element-color-background1);
+  color: var(--element-color-secondary);
+}
+
+p {
+  line-height: 1.6;
 }
 
 ul {
@@ -54,7 +59,7 @@ ul {
 }
 
 img {
-  display: inline-block;
+  display: block;
   max-width: 100%;
 }
 
@@ -66,6 +71,7 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: var(--r32);
   font-weight: 700;
+  color: var(--text-color-primary);
 }
 
 h2 {
