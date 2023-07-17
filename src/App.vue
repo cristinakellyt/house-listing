@@ -9,6 +9,7 @@
 import { onMounted, ref, provide } from 'vue'
 import TheHeader from './components/layout/TheHeader.vue'
 import BaseWidth from './components/ui/BaseWidth.vue'
+import { useHousesStore } from './stores/HousesStore'
 
 const windowWidth = ref(0)
 
@@ -21,4 +22,7 @@ const handlerWindowResize = () => {
   windowWidth.value = window.innerWidth
 }
 provide('windowWidth', windowWidth)
+
+const housesList = useHousesStore()
+housesList.fetchHouses()
 </script>
