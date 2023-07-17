@@ -2,8 +2,8 @@
   <div class="house-description">
     <div class="house-details--content">
       <div class="house-details--options">
-        <h1>Street Name</h1>
-        <div v-if="desktopView" class="flex-gap-30">
+        <h1>{{ street }} {{ houseNumber }}</h1>
+        <div v-if="desktopView && madeByMe" class="flex-gap-30">
           <img
             src="./../icons/ic_edit@3x.png"
             alt="edit the house details"
@@ -16,18 +16,18 @@
 
       <div class="detail-grouped">
         <img src="./../icons/ic_location@3x.png" alt="location" width="16" height="20" />
-        <p>1011 AA Amsterdam</p>
+        <p>{{ zip }} {{ city }}</p>
       </div>
 
       <div class="flex-gap-30">
         <div class="detail-grouped">
           <img src="./../icons/ic_price@3x.png" alt="price" width="20" height="20" />
-          <p>500.000</p>
+          <p>{{ formatedPrice }}</p>
         </div>
 
         <div class="detail-grouped">
           <img src="./../icons/ic_size@3x.png" alt="size" width="20" height="20" />
-          <p>120 m2</p>
+          <p>{{ size }} m2</p>
         </div>
 
         <div class="detail-grouped">
@@ -37,33 +37,29 @@
             width="20"
             height="20"
           />
-          <p>Built in 1990</p>
+          <p>Built in {{ constructionYear }}</p>
         </div>
       </div>
 
       <div class="flex-gap-30">
         <div class="detail-grouped">
           <img src="./../icons/ic_bed@3x.png" alt="number of bedrooms" width="20" height="20" />
-          <p>1</p>
+          <p>{{ bedrooms }}</p>
         </div>
 
         <div class="detail-grouped">
           <img src="./../icons/ic_bath@3x.png" alt="number of bathrooms" width="20" height="20" />
-          <p>1</p>
+          <p>{{ bathrooms }}</p>
         </div>
 
         <div class="detail-grouped">
           <img src="./../icons/ic_garage@3x.png" alt="garage" width="20" height="20" />
-          <p>Yes</p>
+          <p v-if="hasGarage">Yes</p>
+          <p v-else>No</p>
         </div>
       </div>
       <p class="house-details--text">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore dolorum earum officiis
-        ducimus asperiores non, culpa dignissimos perferendis aspernatur deleniti a corporis ea
-        praesentium ipsam alias itaque inventore? Dolores, maiores? Lorem ipsum dolor sit, amet
-        consectetur adipisicing elit. Magnam cum voluptates repudiandae. Quas doloremque aliquid
-        illo, voluptate quae temporibus alias quisquam, corrupti sed corporis repudiandae,
-        praesentium suscipit expedita itaque neque.
+        {{ description }}
       </p>
     </div>
   </div>
@@ -71,9 +67,28 @@
 
 <script setup>
 import { inject, computed } from 'vue'
+import useFormatPrice from './../composables/FormatPrice'
 
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
+
+const props = defineProps({
+  id: Number,
+  street: String,
+  houseNumber: Number,
+  price: Number,
+  zip: String,
+  city: String,
+  bedrooms: Number,
+  bathrooms: Number,
+  size: Number,
+  hasGarage: Boolean,
+  description: String,
+  constructionYear: Number,
+  madeByMe: Boolean
+})
+
+const formatedPrice = useFormatPrice(props.price)
 </script>
 
 <style scoped>

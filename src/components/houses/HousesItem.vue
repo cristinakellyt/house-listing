@@ -1,16 +1,16 @@
 <template>
-  <house-card>
+  <house-card @click="detailPage">
     <div class="house-image-container">
-      <img class="house-image" :src="image" alt="" />
+      <img class="house-image" :src="image" alt="house" />
     </div>
     <div class="house-info">
-      <h2>{{ props.street }} {{ props.houseNumber }}</h2>
-      <p class="house-price">&euro; {{ formatPrice(props.price) }}</p>
-      <p class="house-address">{{ props.zipCode }} {{ props.city }}</p>
+      <h2>{{ street }} {{ houseNumber }}</h2>
+      <p class="house-price">&euro; {{ formatPrice }}</p>
+      <p class="house-address">{{ zipCode }} {{ city }}</p>
       <div class="house-rooms">
         <span class="house-rooms__info">
           <img class="house-rooms__icon" src="./../icons/ic_bed@3x.png" alt="number of bedrooms" />
-          {{ props.bedrooms }}</span
+          {{ bedrooms }}</span
         >
         <span class="house-rooms__info">
           <img
@@ -18,11 +18,11 @@
             src="./../icons/ic_bath@3x.png"
             alt="number of bathrooms"
           />
-          {{ props.bathrooms }}</span
+          {{ bathrooms }}</span
         >
         <span class="house-rooms__info">
           <img class="house-rooms__icon" src="./../icons/ic_size@3x.png" alt="size of the house" />
-          {{ props.size }} m2</span
+          {{ size }} m2</span
         >
       </div>
     </div>
@@ -30,6 +30,9 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import useFormatPrice from './../composables/FormatPrice'
+
 const props = defineProps({
   id: Number,
   image: String,
@@ -43,18 +46,11 @@ const props = defineProps({
   size: Number
 })
 
-const formatPrice = (price) => {
-  const housePrice = price.toString()
-  let arrayPrice = [...housePrice]
-  let count = 0
-  let numberOfDigits = arrayPrice.length
-  for (let i = numberOfDigits - 1; i >= 0; i--) {
-    count++
-    if (count % 3 === 0 && count < numberOfDigits) {
-      arrayPrice.splice(i, 0, '.')
-    }
-  }
-  return arrayPrice.join('')
+const formatPrice = useFormatPrice(props.price)
+
+const router = useRouter()
+const detailPage = () => {
+  router.push({ name: 'house-detail', params: { houseId: props.id } })
 }
 </script>
 

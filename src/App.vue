@@ -24,5 +24,6 @@ const handlerWindowResize = () => {
 provide('windowWidth', windowWidth)
 
 const housesList = useHousesStore()
+
 housesList.fetchHouses()
 </script>

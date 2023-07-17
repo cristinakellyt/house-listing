@@ -8,6 +8,7 @@
     v-else
     v-for="house in filteredHouses"
     :key="house.id"
+    :id="house.id"
     :image="house.image"
     :street="house.location.street"
     :houseNumber="house.location.houseNumber"
@@ -25,11 +26,9 @@ import HouseItem from './../components/houses/HousesItem.vue'
 import HouseNav from './../components/houses/HouseNav.vue'
 import HouseNotFound from '../components/houses/HouseNotFound.vue'
 import { useHousesStore } from '../stores/HousesStore'
-
 import { ref } from 'vue'
 
 const housesList = useHousesStore()
-
 const filteredHouses = ref(housesList.getHouses)
 const isFiltered = ref(false)
 const numberOfResults = ref('')

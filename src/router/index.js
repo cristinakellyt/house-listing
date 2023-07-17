@@ -10,38 +10,50 @@ const router = createRouter({
       path: '/',
       redirect: '/houses'
     },
-    {
-      path: '/details',
-      component: HouseDetails
-    },
+    // {
+    //   path: '/details',
+    //   component: HouseDetails
+    // },
     {
       path: '/houses',
-      component: HousesPage,
-      children: [
-        {
-          path: 'search',
-          component: null
-        },
-        {
-          path: 'create',
-          component: null
-        },
-        {
-          path: ':id',
-          component: null,
-          children: [
-            {
-              path: 'edit',
-              component: null
-            }
-          ]
-        }
-      ]
+      component: HousesPage
+      // children: [
+      // {
+      //   path: 'search',
+      //   component: null
+      // },
+      // {
+      //   path: 'create',
+      //   component: null
+      // },
+      // {
+      //   path: ':id',
+      //   component: null,
+      //   children: [
+      //     {
+      //       path: 'edit',
+      //       component: null
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: 'house-detail',
+      //   path: ':houseId',
+      //   component: HouseDetails,
+      //   props: true
+      // }
+      // ]
     },
 
     {
       path: '/about',
       component: AboutPage
+    },
+    {
+      name: 'house-detail',
+      path: '/houses-detail/:houseId',
+      component: HouseDetails,
+      props: true
     },
     { path: '/:notFound(.*)', component: null }
   ]

@@ -1,8 +1,14 @@
 <template>
-  <img src="./../icons/img_placeholder_house@3x.png" alt="house selected" />
+  <img :src="image" alt="house selected" />
   <div class="house-details--options mobile-options">
-    <img src="./../icons/ic_back_white@3x.png" alt="back button" width="20" height="20" />
-    <div class="flex-gap-30">
+    <img
+      src="./../icons/ic_back_white@3x.png"
+      alt="back button"
+      width="20"
+      height="20"
+      @click="backToHouses"
+    />
+    <div v-if="madeByMe" class="flex-gap-30">
       <img
         src="./../icons/ic_edit_white@3x.png"
         alt="edit the house details"
@@ -13,6 +19,20 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const props = defineProps({
+  image: String,
+  madeByMe: Boolean
+})
+
+const router = useRouter()
+const backToHouses = () => {
+  router.push('/houses')
+}
+</script>
 
 <style scoped>
 .house-details--options {
