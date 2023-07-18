@@ -167,6 +167,10 @@ button {
   position: relative;
 }
 
+.house-search input:focus {
+  outline: none;
+}
+
 .house-search:focus-within {
   box-shadow: 0 0 0 1px var(--element-color-secondary);
 }
