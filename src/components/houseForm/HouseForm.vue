@@ -137,6 +137,7 @@ const desktopView = computed(() => windowWidth.value > 550)
   position: absolute;
   z-index: -10;
   height: 100vh;
+  top: 0;
   right: 0;
   zoom: 1.1;
 }
@@ -250,5 +251,34 @@ input[type='file']::before {
 
 .back--icon {
   width: var(--r20);
+}
+
+@media only screen and (max-width: 34.375em) {
+  h1 {
+    text-align: center;
+  }
+
+  .form-container {
+    margin-top: var(--r30);
+  }
+  .form {
+    max-width: 100%;
+  }
+  .post {
+    width: 100%;
+  }
+  .form label {
+    font-size: var(--r12);
+  }
+  .form-control input::placeholder,
+  .form select,
+  .form-control textarea::placeholder {
+    font-size: var(--r12);
+  }
+  .background-image {
+    height: max-content;
+    top: revert;
+    bottom: 0;
+  }
 }
 </style>
