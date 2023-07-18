@@ -8,6 +8,7 @@
     v-else
     v-for="house in filteredHouses"
     :key="house.id"
+    :id="house.id"
     :image="house.image"
     :street="house.location.street"
     :houseNumber="house.location.houseNumber"
@@ -24,44 +25,16 @@
 import HouseItem from './../components/houses/HousesItem.vue'
 import HouseNav from './../components/houses/HouseNav.vue'
 import HouseNotFound from '../components/houses/HouseNotFound.vue'
+import { useHousesStore } from '../stores/HousesStore'
+import { ref } from 'vue'
 
-import { onMounted, ref } from 'vue'
-
-const housesList = ref([])
-const filteredHouses = ref([])
+const housesList = useHousesStore()
+const filteredHouses = ref(housesList.getHouses)
 const isFiltered = ref(false)
-
 const numberOfResults = ref('')
 
-const getHousesList = () => {
-  fetch('https://api.intern.d-tt.nl/api/houses', {
-    method: 'GET',
-    headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      }
-    })
-    .then((data) => {
-      for (const house of data) {
-        housesList.value.push(house)
-      }
-    })
-    .catch((error) => {
-      // TODO Add error handler
-      console.log(error)
-    })
-}
-
-onMounted(() => {
-  getHousesList()
-  filteredHouses.value = housesList.value
-  return
-})
-
 const onSearchHouses = (city, sortType) => {
-  filteredHouses.value = [...housesList.value]
+  filteredHouses.value = [...housesList.getHouses]
   if (city) {
     isFiltered.value = true
     filteredHouses.value = filteredHouses.value.filter(

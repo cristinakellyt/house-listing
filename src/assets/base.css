@@ -24,11 +24,13 @@
   --r18: calc((18 / 16) * 1rem);
   --r20: calc((20 / 16) * 1rem);
   --r22: calc((22 / 16) * 1rem);
+  --r30: calc((30 / 16) * 1rem);
   --r32: calc((32 / 16) * 1rem);
 }
 
 :root {
   --max-width: calc((1400 / 16) * 1rem);
+  --margin-right-left-width: calc((20 / 16) * 1rem);
 }
 
 *,
@@ -47,6 +49,11 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: var(--r18);
   background-color: var(--element-color-background1);
+  color: var(--element-color-secondary);
+}
+
+p {
+  line-height: 1.6;
 }
 
 ul {
@@ -54,7 +61,7 @@ ul {
 }
 
 img {
-  display: inline-block;
+  display: block;
   max-width: 100%;
 }
 
@@ -66,6 +73,7 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: var(--r32);
   font-weight: 700;
+  color: var(--text-color-primary);
 }
 
 h2 {
