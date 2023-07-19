@@ -10,121 +10,270 @@
       class="position-absolute-right-top back--icon"
       src="./../icons/ic_back_grey@3x.png"
     />
-    <form class="form">
+    <form class="form" @submit.prevent="submitForm">
       <div class="form-control all-width">
-        <label for="street-name">Street name*</label>
-        <input
+        <FormInput
           id="street-name"
-          name="street-name"
+          label="Street Name*"
+          name="streetName"
           type="text"
-          placeholder="Enter the street name"
-          required
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('street-name')"
+          placeholder="Enter street name"
+          @onChange="(value) => (streetName = value.trim())"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
         />
       </div>
 
       <div class="form-group--flex">
         <div class="form-control">
-          <label for="house-number">House number*</label>
-          <input
+          <FormInput
             id="house-number"
-            name="house-number"
-            type="text"
+            label="House number*"
+            name="houseNumber"
+            type="number"
+            :isRequired="true"
+            :isInvalid="isSubmited && formErrors.includes('house-number')"
             placeholder="Enter the house number"
-            required
+            @onChange="(value) => (houseNumber = value.trim())"
+            @onError="onFormInputErrorHandler"
+            @onValid="onFormInputValidHandler"
           />
         </div>
         <div class="form-control">
-          <label for="addition">Addition(optional)</label>
-          <input id="addition" name="addition" type="text" placeholder="e.g.A" />
+          <FormInput
+            id="addition"
+            label="Addition(optional)"
+            name="numberAddition"
+            type="text"
+            placeholder="e.g.A"
+            :isRequired="false"
+            :isInvalid="isSubmited && formErrors.includes('addition')"
+            @onChange="(value) => (addition = value.trim())"
+            @onError="onFormInputErrorHandler"
+            @onValid="onFormInputValidHandler"
+          />
         </div>
       </div>
+
       <div class="form-control all-width">
-        <label for="postal-code">Postal code*</label>
-        <input
+        <FormInput
           id="postal-code"
-          name="postal-code"
+          label="Postal code*"
+          name="zip"
           type="text"
           placeholder="e.g. 1000 AA"
-          required
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('postal-code')"
+          @onChange="(value) => (zip = value.trim())"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
         />
       </div>
 
       <div class="form-control all-width">
-        <label for="city">City*</label>
-        <input id="city" name="city" type="text" placeholder="e.g. Utrecht" required />
+        <FormInput
+          id="city"
+          label="City*"
+          name="city"
+          type="text"
+          placeholder="e.g. Utrecht"
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('city')"
+          @onChange="(value) => (city = value.trim())"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
+        />
       </div>
 
       <div class="form-control all-width">
-        <label for="picture">Upload picture(PNG or JPG)*</label>
-        <input id="picture" name="picture" type="file" accept="image/png, image/jpeg" required />
+        <FormInput
+          id="image"
+          label="Upload picture(PNG or JPG)*"
+          name="image"
+          type="file"
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('image')"
+          @onChange="(value) => (image = value)"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
+        />
       </div>
 
       <div class="form-control all-width">
-        <label for="price">Price*</label>
-        <input id="price" name="price" type="text" placeholder="e.g. 150.000" required />
+        <FormInput
+          id="price"
+          label="Price*"
+          name="price"
+          type="number"
+          placeholder="e.g. 150.000"
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('price')"
+          @onChange="(value) => (price = value.trim())"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
+        />
       </div>
+
       <div class="form-group--flex">
         <div class="form-control">
-          <label for="size">Size*</label>
-          <input id="size" name="size" type="text" placeholder="e.g. 60m2" required />
+          <FormInput
+            id="size"
+            label="Size*"
+            name="size"
+            type="text"
+            placeholder="e.g. 60m2"
+            :isRequired="true"
+            :isInvalid="isSubmited && formErrors.includes('size')"
+            @onChange="(value) => (size = value.trim())"
+            @onError="onFormInputErrorHandler"
+            @onValid="onFormInputValidHandler"
+          />
         </div>
         <div class="form-control">
-          <label for="garage">Garage*</label>
-          <select id="garage" name="garage" required>
-            <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
+          <FormInput
+            id="garage"
+            name="garage"
+            label="Garage*"
+            type="select"
+            :isRequired="true"
+            :isInvalid="isSubmited && formErrors.includes('garage')"
+            @onChange="(value) => (hasGarage = value.trim())"
+            @onError="onFormInputErrorHandler"
+            @onValid="onFormInputValidHandler"
+          />
         </div>
       </div>
+
       <div class="form-group--flex">
         <div class="form-control">
-          <label for="bedrooms">Bedrooms*</label>
-          <input id="bedrooms" name="bedrooms" type="number" placeholder="Enter amount" required />
+          <FormInput
+            id="bedrooms"
+            label="Bedrooms*"
+            name="bedrooms"
+            type="number"
+            placeholder="Enter amount"
+            :isRequired="true"
+            :isInvalid="isSubmited && formErrors.includes('bedrooms')"
+            @onChange="(value) => (bedrooms = value.trim())"
+            @onError="onFormInputErrorHandler"
+            @onValid="onFormInputValidHandler"
+          />
         </div>
         <div class="form-control">
-          <label for="bathrooms">Bathrooms*</label>
-          <input
+          <FormInput
             id="bathrooms"
+            label="Bathrooms*"
             name="bathrooms"
             type="number"
             placeholder="Enter amount"
-            required
+            :isRequired="true"
+            :isInvalid="isSubmited && formErrors.includes('bathrooms')"
+            @onChange="(value) => (bathrooms = value.trim())"
+            @onError="onFormInputErrorHandler"
+            @onValid="onFormInputValidHandler"
           />
         </div>
       </div>
+
       <div class="form-control all-width">
-        <label for="construction-date">Construction date*</label>
-        <input
+        <FormInput
           id="construction-date"
-          name="construction-date"
+          label="Construction date*"
+          name="constructionYear"
           type="number"
           placeholder="e.g. 1990"
-          required
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('construction-date')"
+          @onChange="(value) => (constructionDate = value.trim())"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
         />
       </div>
+
       <div class="form-control all-width">
-        <label for="description">Description*</label>
-        <textarea
+        <FormInput
           id="description"
+          label="Description*"
+          type="textarea"
           name="description"
           rows="5"
           placeholder="Enter description"
-          required
-        ></textarea>
+          :isRequired="true"
+          :isInvalid="isSubmited && formErrors.includes('description')"
+          @onChange="(value) => (description = value.trim())"
+          @onError="onFormInputErrorHandler"
+          @onValid="onFormInputValidHandler"
+        />
       </div>
-      <button class="post">Post</button>
+
+      <button :class="['post', { 'valid-form': formErrors.length === 0 }]">Post</button>
     </form>
   </div>
 </template>
 
 <script setup>
 import BackTo from './../ui/BackTo.vue'
+import FormInput from './FormInput.vue'
 
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
+
+const emit = defineEmits(['onFormSubmit'])
 
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
+
+const streetName = ref('')
+const houseNumber = ref('')
+const addition = ref('')
+const zip = ref('')
+const city = ref('')
+const image = ref('')
+const price = ref('')
+const size = ref('')
+const hasGarage = ref('')
+const bedrooms = ref('')
+const bathrooms = ref('')
+const constructionDate = ref('')
+const description = ref('')
+const formErrors = ref([])
+const isSubmited = ref(false)
+
+const onFormInputErrorHandler = (id) => {
+  formErrors.value.push(id)
+}
+
+const onFormInputValidHandler = (id) => {
+  formErrors.value = formErrors.value.filter((elId) => elId !== id)
+}
+
+const submitForm = ($event) => {
+  isSubmited.value = true
+
+  if (formErrors.value.length) return
+
+  let formData = new FormData()
+  formData.append('price', price.value)
+  formData.append('bedrooms', bedrooms.value)
+  formData.append('bathrooms', bathrooms.value)
+  formData.append('size', size.value)
+  formData.append('streetName', streetName.value)
+  formData.append('houseNumber', houseNumber.value)
+  formData.append('numberAddition', addition.value)
+  formData.append('zip', zip.value)
+  formData.append('city', city.value)
+  formData.append('constructionYear', constructionDate.value)
+  formData.append('hasGarage', hasGarage.value)
+  formData.append('description', description.value)
+
+  let imageFormData = new FormData()
+  imageFormData.append('image', image.value)
+
+  emit('onFormSubmit', formData, imageFormData)
+
+  $event.target.reset()
+}
 </script>
 
 <style scoped>
@@ -161,26 +310,6 @@ const desktopView = computed(() => windowWidth.value > 550)
   margin-top: var(--r20);
 }
 
-.form input,
-.form select,
-.form textarea {
-  border: none;
-  padding: var(--r15);
-  border-radius: calc((5 / 16) * 1rem);
-  font-size: var(--r14);
-  background-color: var(--element-color-backgroun2);
-}
-
-.form select {
-  padding: var(--r10);
-}
-.form label {
-  font-size: var(--r14);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  color: var(--text-color-secondary);
-}
-
 .all-width input {
   width: 100%;
 }
@@ -190,56 +319,25 @@ const desktopView = computed(() => windowWidth.value > 550)
   flex-direction: column;
   gap: calc((5 / 16) * 1rem);
 }
-.form-control input::placeholder,
-.form select,
-.form-control textarea::placeholder {
-  color: var(--element-color-tertiary);
-  font-family: 'Open Sans', sans-serif;
-  font-size: var(--r14);
-}
-
-input[type='file'] {
-  border: 2px dashed var(--element-color-tertiary);
-  height: 120px;
-  width: 120px;
-  cursor: pointer;
-  color: transparent;
-  margin-top: 10px;
-  position: relative;
-  background-color: transparent;
-}
-
-::-webkit-file-upload-button {
-  visibility: hidden;
-}
-
-input[type='file']::before {
-  position: absolute;
-  background-image: url('./../icons/ic_plus_grey@3x.png');
-  content: '';
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc((35 / 16) * 1rem);
-  height: calc((35 / 16) * 1rem);
-  background-size: calc((35 / 16) * 1rem);
-  background-repeat: no-repeat;
-}
 
 .post {
   display: inline-block;
-  background-color: rgb(235 84 64 / 59%);
+  background-color: rgba(235, 84, 64, 0.507);
   border: none;
   padding: var(--r15) var(--r20);
   border-radius: var(--r10);
   color: var(--element-color-backgroun2);
   font-weight: 700;
   font-size: var(--r18);
-  cursor: pointer;
   transition: all 0.3s;
   margin: var(--r20) 0;
   align-self: flex-end;
   width: 50%;
+}
+
+.valid-form {
+  background-color: var(--element-color-primary);
+  cursor: pointer;
 }
 
 .position-absolute-right-top {
