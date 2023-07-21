@@ -1,15 +1,7 @@
 <template>
   <div v-if="houseFound" class="house-details">
     <div class="house-details__container">
-      <div v-if="desktopView" class="back-to-house-list" @click="backToHouses">
-        <img
-          src="./../components/icons/ic_back_grey@3x.png"
-          alt="back button"
-          height="20"
-          width="20"
-        />
-        <p>Back to overview</p>
-      </div>
+      <BackTo></BackTo>
       <DetailImage :image="selectedHouse.image" :madeByMe="selectedHouse.madeByMe" />
       <HouseDescription
         :street="selectedHouse.location.street"
@@ -35,14 +27,11 @@
 import DetailImage from './../components/houseDetail/DetailImage.vue'
 import HouseDescription from './../components/houseDetail/HouseDescription.vue'
 import HouseNotFound from './../components/houses/HouseNotFound.vue'
+import BackTo from '../components/ui/BackTo.vue'
 import { useHousesStore } from '../stores/HousesStore'
-import { inject, computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const props = defineProps({ houseId: String })
-
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
 
 const housesList = useHousesStore()
 
@@ -63,11 +52,6 @@ const dataCallback = (error, data) => {
 }
 
 housesList.houseById(props.houseId, dataCallback)
-
-const router = useRouter()
-const backToHouses = () => {
-  router.push('/houses')
-}
 </script>
 
 <style scoped>
@@ -78,18 +62,6 @@ const backToHouses = () => {
 
 .house-details__container {
   position: relative;
-}
-
-.back-to-house-list {
-  display: flex;
-  align-items: center;
-  gap: var(--r15);
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: var(--r16);
-  margin: calc((30 / 16) * 1rem) 0;
-  color: var(--text-color-primary);
-  cursor: pointer;
 }
 
 @media only screen and (max-width: 34.375em) {

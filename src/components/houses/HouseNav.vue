@@ -2,9 +2,11 @@
   <div class="house-nav--container">
     <h1>Houses</h1>
     <button v-if="desktopView" class="position-absolute-right-top">
-      <div class="house-create--div">
-        <img class="house-create--icon" src="./../icons/ic_plus_white@3x.png" />CREATE NEW
-      </div>
+      <router-link to="/houses/create">
+        <div class="house-create--div">
+          <img class="house-create--icon" src="./../icons/ic_plus_white@3x.png" />CREATE NEW
+        </div>
+      </router-link>
     </button>
     <img
       v-else
@@ -165,6 +167,10 @@ button {
   background-color: var(--element-color-tertiary-lighter);
   border-radius: var(--r10);
   position: relative;
+}
+
+.house-search input:focus {
+  outline: none;
 }
 
 .house-search:focus-within {

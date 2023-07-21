@@ -1,6 +1,7 @@
 export default function useFormatPrice(price) {
   const housePrice = price.toString()
   let arrayPrice = [...housePrice]
+  arrayPrice = arrayPrice.filter((element) => element !== '.')
   let count = 0
   let numberOfDigits = arrayPrice.length
   for (let i = numberOfDigits - 1; i >= 0; i--) {

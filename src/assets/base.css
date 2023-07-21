@@ -82,8 +82,8 @@ h2 {
   font-weight: 700;
 }
 
-input:focus {
-  outline: none;
+#app {
+  position: relative;
 }
 
 @media only screen and (max-width: 34.375em) {

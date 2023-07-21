@@ -18,9 +18,7 @@ export const useHousesStore = defineStore('HousesStore', {
         headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
       })
         .then((response) => {
-          if (response.ok) {
-            return response.json()
-          }
+          return response.json()
         })
         .then((data) => {
           for (const house of data) {
@@ -32,6 +30,7 @@ export const useHousesStore = defineStore('HousesStore', {
           console.log(error)
         })
     },
+
     houseById(houseId, cb) {
       const apiURL = 'https://api.intern.d-tt.nl/api/houses/' + houseId
 
@@ -44,9 +43,7 @@ export const useHousesStore = defineStore('HousesStore', {
           headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
         })
           .then((response) => {
-            if (response.ok) {
-              return response.json()
-            }
+            return response.json()
           })
           .then((data) => {
             cb(undefined, data)
@@ -55,6 +52,36 @@ export const useHousesStore = defineStore('HousesStore', {
             // TODO Add error handler
             cb(error, undefined)
           })
+      }
+    },
+
+    async postHouse(data) {
+      try {
+        const response = await fetch('https://api.intern.d-tt.nl/api/houses', {
+          method: 'POST',
+          body: data,
+          headers: {
+            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
+          }
+        })
+        return await response.json()
+      } catch (error) {
+        return error
+      }
+    },
+
+    async postImage(img, houseId) {
+      try {
+        const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}/upload`, {
+          method: 'POST',
+          body: img,
+          headers: {
+            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
+          }
+        })
+        return response
+      } catch (error) {
+        return error
       }
     }
   }
