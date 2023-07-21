@@ -27,8 +27,9 @@ const router = createRouter({
         },
         {
           name: 'edit',
-          path: 'edit',
-          component: HouseEdit
+          path: 'edit/:houseId',
+          component: HouseEdit,
+          props: true
         }
       ]
     },

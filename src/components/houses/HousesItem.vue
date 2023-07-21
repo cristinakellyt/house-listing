@@ -6,7 +6,7 @@
     <div class="house-info">
       <div class="house-info__options">
         <h2>{{ street }} {{ houseNumber }}</h2>
-        <EditDeleteBtns v-if="madeByMe" :mediumSize="true" />
+        <EditDeleteBtns v-if="madeByMe" :mediumSize="true" :id="id" />
       </div>
       <p class="house-price">&euro; {{ formatPrice }}</p>
       <p class="house-address">{{ zipCode }} {{ city }}</p>

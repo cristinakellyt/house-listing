@@ -29,7 +29,7 @@ import HouseDescription from './../components/houseDetail/HouseDescription.vue'
 import HouseNotFound from './../components/houses/HouseNotFound.vue'
 import BackTo from '../components/ui/BackTo.vue'
 import { useHousesStore } from '../stores/HousesStore'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({ houseId: String })
 
@@ -39,19 +39,19 @@ const loading = ref(true)
 const houseFound = ref(false)
 const selectedHouse = ref()
 
-const dataCallback = (error, data) => {
-  loading.value = false
-  if (error || data.length === 0) {
-    return
-  }
-
-  if (data) {
+const getHouse = async () => {
+  try {
+    selectedHouse.value = await housesList.houseById(props.houseId)
     houseFound.value = true
-    selectedHouse.value = { ...data[0] }
+    loading.value = false
+  } catch (error) {
+    houseFound.value = false
   }
 }
 
-housesList.houseById(props.houseId, dataCallback)
+onMounted(() => {
+  getHouse()
+})
 </script>
 
 <style scoped>

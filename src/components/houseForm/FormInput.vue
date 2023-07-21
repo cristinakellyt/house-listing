@@ -21,8 +21,8 @@
     @input="inputChange"
   >
     <option value="">Select</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
+    <option value="true">Yes</option>
+    <option value="false">No</option>
   </select>
   <input
     v-else-if="type === 'file'"
@@ -57,19 +57,26 @@ const inputValue = ref('')
 const inputIsValid = ref(true)
 
 onMounted(() => {
+  if (props.data) {
+    inputValue.value = props.data
+    emit('onChange', inputValue.value)
+  }
   checkError()
 })
 
-const props = defineProps({
-  id: String,
-  label: String,
-  name: String,
-  type: String,
-  placeholder: String,
-  isRequired: Boolean,
-  rows: String,
-  isInvalid: Boolean
-})
+const props = defineProps([
+  'id',
+  'label',
+  'name',
+  'type',
+  'placeholder',
+  'isRequired',
+  'rows',
+  'isInvalid',
+  'data'
+])
+
+console.log(props.data)
 
 const inputChange = ($event) => {
   if (props.type === 'file' && $event.target.files.length > 0) {

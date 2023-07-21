@@ -20,15 +20,16 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-defineProps({
+const props = defineProps({
   madeByMe: Boolean,
   mediumSize: Boolean,
-  largeSize: Boolean
+  largeSize: Boolean,
+  id: Number
 })
 
 const editPage = ($event) => {
   $event.cancelBubble = true
-  router.push({ name: 'edit' })
+  router.push({ name: 'edit', params: { houseId: props.id } })
 }
 </script>
 

@@ -31,27 +31,22 @@ export const useHousesStore = defineStore('HousesStore', {
         })
     },
 
-    houseById(houseId, cb) {
-      const apiURL = 'https://api.intern.d-tt.nl/api/houses/' + houseId
-
+    async houseById(houseId) {
       const selectedHouse = this.houses.find((house) => house.id === +houseId)
+
       if (selectedHouse) {
-        cb(undefined, [selectedHouse])
+        return selectedHouse
       } else {
-        fetch(apiURL, {
-          method: 'GET',
-          headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
-        })
-          .then((response) => {
-            return response.json()
+        try {
+          const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+            method: 'GET',
+            headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
           })
-          .then((data) => {
-            cb(undefined, data)
-          })
-          .catch((error) => {
-            // TODO Add error handler
-            cb(error, undefined)
-          })
+          const data = await response.json()
+          return data[0]
+        } catch (error) {
+          return error
+        }
       }
     },
 
@@ -64,7 +59,8 @@ export const useHousesStore = defineStore('HousesStore', {
             'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
           }
         })
-        return await response.json()
+        const newHouse = await response.json()
+        return this.houses.push(newHouse)
       } catch (error) {
         return error
       }
@@ -79,10 +75,38 @@ export const useHousesStore = defineStore('HousesStore', {
             'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
           }
         })
+        await this.updateHousesStore(houseId)
         return response
       } catch (error) {
         return error
       }
+    },
+
+    async editHouse(data, houseId) {
+      console.log(data, houseId)
+      for (const [key, value] of data) {
+        console.log('»', key, value)
+      }
+      try {
+        const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+          method: 'POST',
+          body: data,
+          headers: {
+            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
+          }
+        })
+        await this.updateHousesStore(houseId)
+        return response
+      } catch (error) {
+        return error
+      }
+    },
+
+    async updateHousesStore(houseId) {
+      this.houses = this.houses.filter((house) => house.id !== +houseId)
+
+      const house = await this.houseById(houseId)
+      this.houses.push(house)
     }
   }
 })
