@@ -18,6 +18,7 @@
     :bedrooms="house.rooms.bedrooms"
     :bathrooms="house.rooms.bathrooms"
     :size="house.size"
+    :madeByMe="house.madeByMe"
   />
 </template>
 

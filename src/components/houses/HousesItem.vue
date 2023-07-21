@@ -4,7 +4,10 @@
       <img class="house-image" :src="image" alt="house" />
     </div>
     <div class="house-info">
-      <h2>{{ street }} {{ houseNumber }}</h2>
+      <div class="house-info__options">
+        <h2>{{ street }} {{ houseNumber }}</h2>
+        <EditDeleteBtns v-if="madeByMe" :mediumSize="true" />
+      </div>
       <p class="house-price">&euro; {{ formatPrice }}</p>
       <p class="house-address">{{ zipCode }} {{ city }}</p>
       <div class="house-rooms">
@@ -30,6 +33,7 @@
 </template>
 
 <script setup>
+import EditDeleteBtns from '../ui/EditDeleteBtns.vue'
 import { useRouter } from 'vue-router'
 import useFormatPrice from './../composables/FormatPrice'
 
@@ -43,7 +47,8 @@ const props = defineProps({
   city: String,
   bedrooms: Number,
   bathrooms: Number,
-  size: Number
+  size: Number,
+  madeByMe: Boolean
 })
 
 const formatPrice = useFormatPrice(props.price)
@@ -78,6 +83,11 @@ h2 {
   flex-direction: column;
   justify-content: center;
   font-size: var(--r16);
+}
+
+.house-info__options {
+  display: flex;
+  justify-content: space-between;
 }
 
 .house-price {
