@@ -11,12 +11,16 @@
       src="./../icons/ic_delete@3x.png"
       alt="delete the house"
       :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
+      @click="showDeleteModal"
     />
   </div>
+  <house-delete v-if="deleteModalIsVisible" @closeModal="hideDeleteModal"></house-delete>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import HouseDelete from './HouseDelete.vue'
 
 const router = useRouter()
 
@@ -30,6 +34,16 @@ const props = defineProps({
 const editPage = ($event) => {
   $event.cancelBubble = true
   router.push({ name: 'edit', params: { houseId: props.id } })
+}
+
+const deleteModalIsVisible = ref(false)
+
+const showDeleteModal = () => {
+  deleteModalIsVisible.value = true
+}
+
+const hideDeleteModal = () => {
+  deleteModalIsVisible.value = false
 }
 </script>
 
