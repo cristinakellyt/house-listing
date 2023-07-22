@@ -13,8 +13,6 @@
 </template>
 
 <script setup>
-import BaseCard from './BaseCard.vue'
-
 const emit = defineEmits(['confirm', 'cancel'])
 
 const confirm = () => {
