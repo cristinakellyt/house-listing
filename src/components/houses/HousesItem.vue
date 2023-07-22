@@ -55,7 +55,7 @@ const formatPrice = useFormatPrice(props.price)
 
 const router = useRouter()
 const detailPage = () => {
-  router.push({ name: 'house-detail', params: { houseId: props.id } })
+  router.push({ name: 'detail', params: { houseId: props.id } })
 }
 </script>
 

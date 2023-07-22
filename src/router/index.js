@@ -30,18 +30,18 @@ const router = createRouter({
           path: 'edit/:houseId',
           component: HouseEdit,
           props: true
+        },
+        {
+          name: 'detail',
+          path: 'detail/:houseId',
+          component: HouseDetails,
+          props: true
         }
       ]
     },
     {
       path: '/about',
       component: AboutPage
-    },
-    {
-      name: 'house-detail',
-      path: '/houses-detail/:houseId',
-      component: HouseDetails,
-      props: true
     },
     { path: '/:notFound(.*)', component: null }
   ]

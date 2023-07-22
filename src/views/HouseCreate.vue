@@ -16,7 +16,7 @@ const createHouse = async (formData, imageFormData) => {
     const newHouse = await housesStore.postHouse(formData)
     if (newHouse.id) {
       await housesStore.postImage(imageFormData, newHouse.id)
-      router.push({ name: 'house-detail', params: { houseId: newHouse.id } })
+      router.push({ name: 'detail', params: { houseId: newHouse.id } })
     } else {
       alert('Error to create a new house')
       return

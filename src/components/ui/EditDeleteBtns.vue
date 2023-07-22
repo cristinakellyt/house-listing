@@ -14,7 +14,11 @@
       @click="showDeleteModal"
     />
   </div>
-  <house-delete v-if="deleteModalIsVisible" @closeModal="hideDeleteModal"></house-delete>
+  <house-delete
+    v-if="deleteModalIsVisible"
+    :houseId="id"
+    @closeModal="hideDeleteModal"
+  ></house-delete>
 </template>
 
 <script setup>
@@ -25,7 +29,6 @@ import HouseDelete from './HouseDelete.vue'
 const router = useRouter()
 
 const props = defineProps({
-  madeByMe: Boolean,
   mediumSize: Boolean,
   largeSize: Boolean,
   id: Number

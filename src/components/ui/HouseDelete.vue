@@ -13,9 +13,20 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['closeModal'])
+import { useRouter } from 'vue-router'
+import { useHousesStore } from './../../stores/HousesStore'
 
-const deleteHouse = () => {
+const router = useRouter()
+const emit = defineEmits(['closeModal'])
+const housesList = useHousesStore()
+
+const props = defineProps({
+  houseId: Number
+})
+
+const deleteHouse = async () => {
+  await housesList.deleteHouse(props.houseId)
+  router.push({ path: '/houses' })
   emit('closeModal')
 }
 

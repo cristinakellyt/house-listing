@@ -3,7 +3,7 @@
     <div class="house-details--content">
       <div class="house-details--options">
         <h1>{{ street }} {{ houseNumber }}</h1>
-        <EditDeleteBtns v-if="desktopView && madeByMe" :largeSize="true" />
+        <EditDeleteBtns v-if="desktopView && madeByMe" :largeSize="true" :id="id" />
       </div>
 
       <div class="detail-grouped">

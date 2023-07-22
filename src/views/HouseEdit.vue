@@ -30,7 +30,7 @@ const editHouse = async (formData, imageFormData) => {
   try {
     await housesList.editHouse(formData, props.houseId)
     await housesList.postImage(imageFormData, props.houseId)
-    router.push({ name: 'house-detail', params: { houseId: props.houseId } })
+    router.push({ name: 'detail', params: { houseId: props.houseId } })
   } catch (error) {
     alert(error)
   }

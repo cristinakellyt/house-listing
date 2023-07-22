@@ -4,6 +4,7 @@
       <BackTo></BackTo>
       <DetailImage :image="selectedHouse.image" :madeByMe="selectedHouse.madeByMe" />
       <HouseDescription
+        :id="selectedHouse.id"
         :street="selectedHouse.location.street"
         :zipcode="selectedHouse.location.zip"
         :city="selectedHouse.location.city"

@@ -107,6 +107,21 @@ export const useHousesStore = defineStore('HousesStore', {
 
       const house = await this.houseById(houseId)
       this.houses.push(house)
+    },
+
+    async deleteHouse(houseId) {
+      try {
+        const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+          method: 'DELETE',
+          headers: {
+            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
+          }
+        })
+        this.houses = this.houses.filter((house) => house.id !== +houseId)
+        return response
+      } catch (error) {
+        return error
+      }
     }
   }
 })
