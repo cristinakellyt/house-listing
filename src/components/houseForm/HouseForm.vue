@@ -220,7 +220,9 @@
           @onValid="onFormInputValidHandler"
         />
       </div>
-
+      <p v-show="isSubmited && formErrors.length > 0" class="required-field">
+        Required field missing.
+      </p>
       <button :class="['post', { 'valid-form': formErrors.length === 0 }]">Post</button>
     </form>
   </div>
@@ -368,6 +370,16 @@ const submitForm = ($event) => {
   width: var(--r20);
 }
 
+.required-field {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--element-color-primary);
+  font-size: var(--r14);
+  position: absolute;
+  bottom: calc((70 / 16) * 1rem);
+}
+
 @media only screen and (max-width: 34.375em) {
   h1 {
     text-align: center;
@@ -394,6 +406,11 @@ const submitForm = ($event) => {
     height: max-content;
     top: revert;
     bottom: 0;
+  }
+
+  .required-field {
+    font-size: var(--r12);
+    bottom: calc((80 / 16) * 1rem);
   }
 }
 </style>
