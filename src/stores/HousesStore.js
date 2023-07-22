@@ -60,7 +60,8 @@ export const useHousesStore = defineStore('HousesStore', {
           }
         })
         const newHouse = await response.json()
-        return this.houses.push(newHouse)
+        this.houses.push(newHouse)
+        return newHouse
       } catch (error) {
         return error
       }
@@ -83,10 +84,6 @@ export const useHousesStore = defineStore('HousesStore', {
     },
 
     async editHouse(data, houseId) {
-      console.log(data, houseId)
-      for (const [key, value] of data) {
-        console.log('»', key, value)
-      }
       try {
         const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
           method: 'POST',
