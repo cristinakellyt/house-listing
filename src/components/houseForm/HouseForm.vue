@@ -157,6 +157,7 @@
           type="number"
           placeholder="e.g. 1991"
           min="1901"
+          :max="new Date().getFullYear()"
           v-model="constructionDate"
         />
       </div>
@@ -188,7 +189,7 @@ import BackTo from '@/components/ui/BackTo.vue'
 import CloseableContent from '@/components/ui/CloseableContent.vue'
 import useFormatPrice from '@/components/composables/FormatPrice'
 
-import { compile, computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref } from 'vue'
 
 const emit = defineEmits(['onFormSubmit'])
 
