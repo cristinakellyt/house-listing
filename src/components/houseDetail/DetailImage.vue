@@ -1,37 +1,49 @@
 <template>
   <img :src="image" alt="house selected" />
   <div class="house-details--options mobile-options">
-    <img
-      src="./../icons/ic_back_white@3x.png"
-      alt="back button"
-      width="20"
-      height="20"
-      @click="backToHouses"
-    />
-    <div v-if="madeByMe" class="flex-gap-30">
-      <img
-        src="./../icons/ic_edit_white@3x.png"
-        alt="edit the house details"
-        width="20"
-        height="20"
-      />
-      <img src="./../icons/ic_delete_white@3x.png" alt="delete the house" width="15" height="20" />
+    <base-button goTo="/houses">
+      <template v-slot:icon>
+        <img
+          src="./../icons/ic_back_white@3x.png"
+          alt="back button"
+          width="20"
+          height="20"
+          @click="backToHouses"
+        />
+      </template>
+    </base-button>
+
+    <div v-if="madeByMe">
+      <edit-delete-btns gap="large" :id="id">
+        <template v-slot:editBtn>
+          <img
+            src="./../icons/ic_edit_white@3x.png"
+            alt="edit the house details"
+            width="20"
+            height="20"
+          />
+        </template>
+
+        <template v-slot:deleteBtn>
+          <img
+            src="./../icons/ic_delete_white@3x.png"
+            alt="delete the house"
+            width="16"
+            height="20"
+          />
+        </template>
+      </edit-delete-btns>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
 
-const props = defineProps({
+defineProps({
   image: String,
-  madeByMe: Boolean
+  madeByMe: Boolean,
+  id: Number
 })
-
-const router = useRouter()
-const backToHouses = () => {
-  router.push('/houses')
-}
 </script>
 
 <style scoped>
@@ -46,11 +58,6 @@ const backToHouses = () => {
   width: 90%;
   left: var(--r20);
   top: 0;
-}
-
-.flex-gap-30 {
-  display: flex;
-  gap: var(--r15);
 }
 
 @media only screen and (max-width: 34.375em) {

@@ -6,7 +6,23 @@
     <div class="house-info">
       <div class="house-info__options">
         <h2>{{ street }} {{ houseNumber }}</h2>
-        <EditDeleteBtns v-if="madeByMe" :mediumSize="true" :id="id" />
+        <edit-delete-btns v-if="madeByMe" :gap="desktopView ? 'medium' : 'small'" :id="id">
+          <template v-slot:editBtn>
+            <img
+              src="./../icons/ic_edit@3x.png"
+              alt="edit the house details"
+              class="edit-btn__size"
+            />
+          </template>
+
+          <template v-slot:deleteBtn>
+            <img
+              src="./../icons/ic_delete@3x.png"
+              alt="delete the house"
+              class="delete-btn__size"
+            />
+          </template>
+        </edit-delete-btns>
       </div>
       <p class="house-price">&euro; {{ formatPrice }}</p>
       <p class="house-address">{{ zipCode }} {{ city }}</p>
@@ -33,9 +49,13 @@
 </template>
 
 <script setup>
-import EditDeleteBtns from '../ui/EditDeleteBtns.vue'
 import { useRouter } from 'vue-router'
 import useFormatPrice from './../composables/FormatPrice'
+
+import { computed, inject } from 'vue'
+
+const windowWidth = inject('windowWidth')
+const desktopView = computed(() => windowWidth.value > 550)
 
 const props = defineProps({
   id: Number,
@@ -115,6 +135,16 @@ h2 {
   width: calc((20 / 16) * 1rem);
 }
 
+.edit-btn__size {
+  width: var(--r20);
+  height: var(--r20);
+}
+
+.delete-btn__size {
+  width: calc((16 / 16) * 1rem);
+  height: var(--r20);
+}
+
 /*Mobile view starts at 550px */
 @media only screen and (max-width: 34.375em) {
   h2 {
@@ -136,6 +166,17 @@ h2 {
 
   .house-rooms__icon {
     width: calc((15 / 16) * 1rem);
+  }
+
+  .edit-btn__size {
+    width: calc((16 / 16) * 1rem);
+    height: calc((16 / 16) * 1rem);
+    /* margin-right: -10px; */
+  }
+
+  .delete-btn__size {
+    width: calc((16 / 16) * 1rem);
+    height: calc((18 / 16) * 1rem);
   }
 }
 </style>

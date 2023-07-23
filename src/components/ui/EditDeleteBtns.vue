@@ -1,18 +1,15 @@
 <template>
-  <div :class="{ 'flex-gap-20': mediumSize, 'flex-gap-30': largeSize }">
+  <div :class="`gap ${gap}`">
     <base-button @click="editPage">
-      <img
-        src="./../icons/ic_edit@3x.png"
-        alt="edit the house details"
-        :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
-      />
+      <template v-slot:icon>
+        <slot name="editBtn" />
+      </template>
     </base-button>
+
     <base-button @click="showDeleteModal">
-      <img
-        src="./../icons/ic_delete@3x.png"
-        alt="delete the house"
-        :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
-      />
+      <template v-slot:icon>
+        <slot name="deleteBtn" />
+      </template>
     </base-button>
   </div>
   <Teleport to="#app">
@@ -32,9 +29,11 @@ import HouseDelete from './HouseDelete.vue'
 const router = useRouter()
 
 const props = defineProps({
-  mediumSize: Boolean,
-  largeSize: Boolean,
-  id: Number
+  id: Number,
+  gap: {
+    type: String,
+    default: 'large'
+  }
 })
 
 const editPage = ($event) => {
@@ -55,21 +54,18 @@ const hideDeleteModal = () => {
 </script>
 
 <style scoped>
-.medium-size__btn {
-  width: var(--r20);
-  height: var(--r20);
-}
-.flex-gap-20 {
+.gap {
   display: flex;
+}
+.gap.small {
+  gap: var(--r10);
+}
+
+.gap.medium {
   gap: var(--r20);
 }
 
-.large-size__btn {
-  width: calc((24 / 16) * 1rem);
-  height: calc((24 / 16) * 1rem);
-}
-.flex-gap-30 {
-  display: flex;
+.gap.large {
   gap: var(--r30);
 }
 </style>

@@ -3,7 +3,20 @@
     <div class="house-details--content">
       <div class="house-details--options">
         <h1>{{ street }} {{ houseNumber }}</h1>
-        <EditDeleteBtns v-if="desktopView && madeByMe" :largeSize="true" :id="id" />
+        <edit-delete-btns v-if="desktopView && madeByMe" gap="large" :id="id">
+          <template v-slot:editBtn>
+            <img
+              src="./../icons/ic_edit@3x.png"
+              alt="edit the house details"
+              width="24"
+              height="24"
+            />
+          </template>
+
+          <template v-slot:deleteBtn>
+            <img src="./../icons/ic_delete@3x.png" alt="delete the house" width="20" height="24" />
+          </template>
+        </edit-delete-btns>
       </div>
 
       <div class="detail-grouped">
@@ -60,7 +73,6 @@
 <script setup>
 import { inject, computed } from 'vue'
 import useFormatPrice from './../composables/FormatPrice'
-import EditDeleteBtns from '../ui/EditDeleteBtns.vue'
 
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)

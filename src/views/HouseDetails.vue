@@ -2,7 +2,11 @@
   <div v-if="houseFound" class="house-details">
     <div class="house-details__container">
       <BackTo />
-      <DetailImage :image="selectedHouse.image" :madeByMe="selectedHouse.madeByMe" />
+      <DetailImage
+        :image="selectedHouse.image"
+        :madeByMe="selectedHouse.madeByMe"
+        :id="selectedHouse.id"
+      />
       <HouseDescription
         :id="selectedHouse.id"
         :street="selectedHouse.location.street"
