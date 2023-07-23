@@ -2,7 +2,7 @@
   <header>
     <nav>
       <router-link to="/houses" v-if="desktopView"
-        ><img src="./../icons/img_logo_dtt@3x.png" alt="dtt-logo"
+        ><img src="/icons/img_logo_dtt@3x.png" alt="dtt-logo"
       /></router-link>
       <ul>
         <li>
@@ -11,7 +11,7 @@
             <img
               v-else
               id="mobile-header-home-btn"
-              src="../icons/ic_mobile_navigarion_home@3x.png"
+              src="/icons/ic_mobile_navigarion_home@3x.png"
               alt="home page"
             />
           </router-link>
@@ -22,7 +22,7 @@
             <img
               v-else
               id="mobile-header-info-btn"
-              src="../icons/ic_mobile_navigarion_info@3x.png"
+              src="/icons/ic_mobile_navigarion_info@3x.png"
               alt="about page"
             />
           </router-link>
@@ -113,11 +113,11 @@ a.router-link-active {
   }
 
   a.router-link-active #mobile-header-info-btn {
-    content: url(./../icons/ic_mobile_navigarion_info_active@3x.png);
+    content: url(/icons/ic_mobile_navigarion_info_active@3x.png);
   }
 
   a.router-link-active #mobile-header-home-btn {
-    content: url(./../icons/ic_mobile_navigarion_home_active@3x.png);
+    content: url(/icons/ic_mobile_navigarion_home_active@3x.png);
   }
 }
 </style>

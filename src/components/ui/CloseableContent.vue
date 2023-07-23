@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <img
-      src="./../icons/ic_clear_white@3x.png"
+      src="/icons/ic_clear_white@3x.png"
       class="clear-content__icon"
       :class="`${size}`"
       @click="onClickHandler"

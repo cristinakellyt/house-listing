@@ -4,7 +4,7 @@
     <base-button goTo="/houses">
       <template v-slot:icon>
         <img
-          src="./../icons/ic_back_white@3x.png"
+          src="/icons/ic_back_white@3x.png"
           alt="back button"
           width="20"
           height="20"
@@ -17,7 +17,7 @@
       <edit-delete-btns gap="large" :id="id">
         <template v-slot:editBtn>
           <img
-            src="./../icons/ic_edit_white@3x.png"
+            src="/icons/ic_edit_white@3x.png"
             alt="edit the house details"
             width="20"
             height="20"
@@ -25,12 +25,7 @@
         </template>
 
         <template v-slot:deleteBtn>
-          <img
-            src="./../icons/ic_delete_white@3x.png"
-            alt="delete the house"
-            width="16"
-            height="20"
-          />
+          <img src="/icons/ic_delete_white@3x.png" alt="delete the house" width="16" height="20" />
         </template>
       </edit-delete-btns>
     </div>
@@ -38,7 +33,6 @@
 </template>
 
 <script setup>
-
 defineProps({
   image: String,
   madeByMe: Boolean,

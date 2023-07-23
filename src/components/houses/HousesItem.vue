@@ -8,19 +8,11 @@
         <h2>{{ street }} {{ houseNumber }}</h2>
         <edit-delete-btns v-if="madeByMe" :gap="desktopView ? 'medium' : 'small'" :id="id">
           <template v-slot:editBtn>
-            <img
-              src="./../icons/ic_edit@3x.png"
-              alt="edit the house details"
-              class="edit-btn__size"
-            />
+            <img src="/icons/ic_edit@3x.png" alt="edit the house details" class="edit-btn__size" />
           </template>
 
           <template v-slot:deleteBtn>
-            <img
-              src="./../icons/ic_delete@3x.png"
-              alt="delete the house"
-              class="delete-btn__size"
-            />
+            <img src="/icons/ic_delete@3x.png" alt="delete the house" class="delete-btn__size" />
           </template>
         </edit-delete-btns>
       </div>
@@ -28,19 +20,15 @@
       <p class="house-address">{{ zipCode }} {{ city }}</p>
       <div class="house-rooms">
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="./../icons/ic_bed@3x.png" alt="number of bedrooms" />
+          <img class="house-rooms__icon" src="/icons/ic_bed@3x.png" alt="number of bedrooms" />
           {{ bedrooms }}</span
         >
         <span class="house-rooms__info">
-          <img
-            class="house-rooms__icon"
-            src="./../icons/ic_bath@3x.png"
-            alt="number of bathrooms"
-          />
+          <img class="house-rooms__icon" src="/icons/ic_bath@3x.png" alt="number of bathrooms" />
           {{ bathrooms }}</span
         >
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="./../icons/ic_size@3x.png" alt="size of the house" />
+          <img class="house-rooms__icon" src="/icons/ic_size@3x.png" alt="size of the house" />
           {{ size }} m2</span
         >
       </div>

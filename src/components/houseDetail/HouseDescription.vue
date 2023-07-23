@@ -5,39 +5,34 @@
         <h1>{{ street }} {{ houseNumber }}</h1>
         <edit-delete-btns v-if="desktopView && madeByMe" gap="large" :id="id">
           <template v-slot:editBtn>
-            <img
-              src="./../icons/ic_edit@3x.png"
-              alt="edit the house details"
-              width="24"
-              height="24"
-            />
+            <img src="/icons/ic_edit@3x.png" alt="edit the house details" width="24" height="24" />
           </template>
 
           <template v-slot:deleteBtn>
-            <img src="./../icons/ic_delete@3x.png" alt="delete the house" width="20" height="24" />
+            <img src="/icons/ic_delete@3x.png" alt="delete the house" width="20" height="24" />
           </template>
         </edit-delete-btns>
       </div>
 
       <div class="detail-grouped">
-        <img src="./../icons/ic_location@3x.png" alt="location" width="16" height="20" />
+        <img src="/icons/ic_location@3x.png" alt="location" width="16" height="20" />
         <p>{{ zip }} {{ city }}</p>
       </div>
 
       <div class="flex-gap-30">
         <div class="detail-grouped">
-          <img src="./../icons/ic_price@3x.png" alt="price" width="20" height="20" />
+          <img src="/icons/ic_price@3x.png" alt="price" width="20" height="20" />
           <p>{{ formatedPrice }}</p>
         </div>
 
         <div class="detail-grouped">
-          <img src="./../icons/ic_size@3x.png" alt="size" width="20" height="20" />
+          <img src="/icons/ic_size@3x.png" alt="size" width="20" height="20" />
           <p>{{ size }} m2</p>
         </div>
 
         <div class="detail-grouped">
           <img
-            src="./../icons/ic_construction_date@3x.png"
+            src="/icons/ic_construction_date@3x.png"
             alt="construction year"
             width="20"
             height="20"
@@ -48,17 +43,17 @@
 
       <div class="flex-gap-30">
         <div class="detail-grouped">
-          <img src="./../icons/ic_bed@3x.png" alt="number of bedrooms" width="20" height="20" />
+          <img src="/icons/ic_bed@3x.png" alt="number of bedrooms" width="20" height="20" />
           <p>{{ bedrooms }}</p>
         </div>
 
         <div class="detail-grouped">
-          <img src="./../icons/ic_bath@3x.png" alt="number of bathrooms" width="20" height="20" />
+          <img src="/icons/ic_bath@3x.png" alt="number of bathrooms" width="20" height="20" />
           <p>{{ bathrooms }}</p>
         </div>
 
         <div class="detail-grouped">
-          <img src="./../icons/ic_garage@3x.png" alt="garage" width="20" height="20" />
+          <img src="/icons/ic_garage@3x.png" alt="garage" width="20" height="20" />
           <p v-if="hasGarage">Yes</p>
           <p v-else>No</p>
         </div>

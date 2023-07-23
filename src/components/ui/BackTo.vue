@@ -2,7 +2,7 @@
   <div v-if="desktopView" class="component--back-to">
     <base-button goTo="/houses">
       <template v-slot:icon>
-        <img src="./../icons/ic_back_grey@3x.png" alt="back button" height="20" width="20" />
+        <img src="/icons/ic_back_grey@3x.png" alt="back button" height="20" width="20" />
       </template>
       <p class="back-to--component__color">Back to overview</p>
     </base-button>

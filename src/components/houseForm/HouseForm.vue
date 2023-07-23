@@ -1,11 +1,11 @@
 <template>
-  <img src="./../icons/img_background@3x.png" class="background-image" />
+  <img src="/icons/img_background@3x.png" class="background-image" />
   <div class="form-container">
     <BackTo />
     <h1>{{ title }}</h1>
     <base-button v-if="!desktopView" goTo="/houses">
       <template v-slot:icon>
-        <img class="position-absolute-right-top" src="./../icons/ic_back_grey@3x.png" />
+        <img class="position-absolute-right-top" src="/icons/ic_back_grey@3x.png" />
       </template>
     </base-button>
 
@@ -412,7 +412,7 @@ input[type='file'].form-input__invalid {
 
 input[type='file']::before {
   position: absolute;
-  background-image: url('./../icons/ic_plus_grey@3x.png');
+  background-image: url('/icons/ic_plus_grey@3x.png');
   content: '';
   top: 50%;
   left: 50%;

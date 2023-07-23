@@ -4,7 +4,7 @@
       <h1>Houses</h1>
       <base-button v-if="desktopView" type="primary" size="large" goTo="/houses/create">
         <template v-slot:icon>
-          <img class="house-create--icon" src="./../icons/ic_plus_white@3x.png" />
+          <img class="house-create--icon" src="/icons/ic_plus_white@3x.png" />
         </template>
         <span>CREATE NEW</span>
       </base-button>
@@ -12,14 +12,14 @@
         <template v-slot:icon>
           <img
             class="house-create--icon position-absolute-right-top"
-            src="./../icons/ic_plus_grey@3x.png"
+            src="/icons/ic_plus_grey@3x.png"
           />
         </template>
       </base-button>
     </div>
     <div class="house-filter">
       <div class="house-search">
-        <img class="house-search--icon" src="./../icons/ic_search@3x.png" />
+        <img class="house-search--icon" src="/icons/ic_search@3x.png" />
         <input
           class="house-search--input"
           type="text"
@@ -32,7 +32,7 @@
           v-show="searchKey"
           @click="clearInputHandler"
           class="house-clear-input--icon"
-          src="./../icons/ic_clear@3x.png"
+          src="/icons/ic_clear@3x.png"
         />
       </div>
       <div class="filter-buttons">
