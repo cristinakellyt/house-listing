@@ -18,22 +18,8 @@
       </base-button>
     </div>
     <div class="house-filter">
-      <div class="house-search">
-        <img class="house-search--icon" src="/icons/ic_search@3x.png" />
-        <input
-          class="house-search--input"
-          type="text"
-          placeholder="Search for a house"
-          v-model.trim="searchKey"
-          @input="clearSearchWhenInputIsEmpty"
-          @keyup.enter="searchHouseOnEnter"
-        />
-        <img
-          v-show="searchKey"
-          @click="clearInputHandler"
-          class="house-clear-input--icon"
-          src="/icons/ic_clear@3x.png"
-        />
+      <div class="house-nav__search">
+        <search-bar :size="desktopView ? 'large' : 'small'" @onSearch="searchHouses" />
       </div>
       <div class="filter-buttons">
         <base-button
@@ -63,8 +49,8 @@ import { computed, inject, ref } from 'vue'
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 
-const searchKey = ref('')
 const emit = defineEmits(['searchHouses'])
+const searchKey = ref('')
 
 const searchHouses = (input) => {
   searchKey.value = input
@@ -76,21 +62,6 @@ const searchHouses = (input) => {
   }
 
   emit('searchHouses', input, sortType)
-}
-
-const searchHouseOnEnter = () => {
-  searchHouses(searchKey.value)
-}
-
-const clearSearchWhenInputIsEmpty = () => {
-  if (!searchKey.value) {
-    searchHouses('')
-  }
-}
-
-const clearInputHandler = () => {
-  searchKey.value = ''
-  searchHouses('')
 }
 
 const priceIsPressed = ref(false)
@@ -126,9 +97,6 @@ const sortHouse = (sortType) => {
 <style scoped>
 .house-nav {
   position: relative;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; */
   margin-top: calc((30 / 16) * 1rem);
 }
 
@@ -145,12 +113,6 @@ const sortHouse = (sortType) => {
   transform: translateY(-10%);
 }
 
-/* .house-create--div {
-  display: flex;
-  align-items: center;
-  gap: var(--r15);
-} */
-
 .house-filter {
   display: flex;
   flex-wrap: wrap;
@@ -159,73 +121,16 @@ const sortHouse = (sortType) => {
   margin-top: calc((35 / 16) * 1rem);
 }
 
-/* button {
-  display: inline-block;
-  background-color: var(--element-color-primary);
-  border: none;
-  padding: var(--r15) var(--r20);
-  border-radius: var(--r10);
-  color: var(--element-color-background2);
-  font-weight: 700;
-  font-size: var(--r18);
-  cursor: pointer;
-  transition: all 0.3s;
-} */
-
-.house-search {
-  display: flex;
-  align-items: center;
-  flex: 0 0 35%;
-  background-color: var(--element-color-tertiary-lighter);
-  border-radius: var(--r10);
-  position: relative;
+.house-nav__search {
+  flex: 0 0 40%;
 }
 
-.house-search input:focus {
-  outline: none;
-}
-
-.house-search:focus-within {
-  box-shadow: 0 0 0 1px var(--element-color-secondary);
-}
-
-.house-search--input {
-  width: 80%;
-  padding: var(--r15) var(--r20) var(--r15) 0;
-  font-size: var(--r14);
-  font-family: 'Open sans', sans-serif;
-  color: var(--element-color-secondary);
-  border-radius: var(--r10);
-  border: none;
-  background-color: var(--element-color-tertiary-lighter);
-}
-
-.house-search--input::placeholder {
-  color: var(--element-color-tertiary);
-}
-
-.house-search--icon {
-  margin: 0 var(--r20);
-}
-
-.house-search--icon,
-.house-clear-input--icon {
-  width: var(--r20);
-  height: var(--r20);
-}
-
-.house-clear-input--icon {
-  position: absolute;
-  right: var(--r10);
-}
 .filter-buttons {
   flex: 0 0 20%;
 }
 .filter-buttons__price,
 .filter-buttons__size {
   width: 50%;
-
-  /* padding: var(--r12) var(--r20); */
 }
 .filter-buttons__price {
   border-radius: var(--r10) 0 0 var(--r10);
@@ -246,32 +151,13 @@ const sortHouse = (sortType) => {
     gap: var(--r15);
   }
 
-  .house-search,
+  .house-nav__search,
   .filter-buttons {
     flex: 0 0 100%;
-  }
-  .house-search--icon {
-    width: var(--r15);
-    height: var(--r15);
-    margin: 0 var(--r15);
-  }
-  .house-search--input {
-    width: 70%;
-    font-size: var(--r12);
-    padding: var(--r10) var(--r15) var(--r10) 0;
-  }
-
-  .house-clear-input--icon {
-    width: calc((16 / 16) * 1rem);
-    height: calc((17 / 16) * 1rem);
   }
 
   .position-absolute-right-top {
     transform: translateY(0);
-  }
-
-  button {
-    font-size: var(--r12);
   }
 }
 </style>
