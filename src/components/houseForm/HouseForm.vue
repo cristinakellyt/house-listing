@@ -17,7 +17,7 @@
           id="street-name"
           type="text"
           placeholder="Enter street name"
-          v-model="street"
+          v-model.trim="street"
         />
       </div>
 
@@ -40,7 +40,7 @@
             id="addition"
             type="text"
             placeholder="e.g.A"
-            v-model="houseNumberAddition"
+            v-model.trim="houseNumberAddition"
           />
         </div>
       </div>
@@ -63,7 +63,7 @@
           id="city"
           type="text"
           placeholder="e.g. Utrecht"
-          v-model="city"
+          v-model.trim="city"
         />
       </div>
 
@@ -109,7 +109,7 @@
             id="size"
             type="text"
             placeholder="e.g. 60m2"
-            v-model="size"
+            v-model.trim="size"
           />
         </div>
         <div class="form-control">
@@ -169,7 +169,7 @@
           id="description"
           rows="5"
           placeholder="Enter description"
-          v-model="description"
+          v-model.trim="description"
         ></textarea>
       </div>
       <p v-show="isSubmitted && isFormInvalid" class="required-field">Required field(s) missing.</p>
