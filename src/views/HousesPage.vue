@@ -27,29 +27,41 @@ import HouseItem from './../components/houses/HousesItem.vue'
 import HouseNav from './../components/houses/HouseNav.vue'
 import HouseNotFound from '../components/houses/HouseNotFound.vue'
 import { useHousesStore } from '../stores/HousesStore'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const housesList = useHousesStore()
 const filteredHouses = ref(housesList.getHouses)
 const isFiltered = ref(false)
 const numberOfResults = ref('')
+const cityFilter = ref('')
+const sortType = ref('')
 
-const onSearchHouses = (city, sortType) => {
+// Update list if houses in store changes, maintaining the sort and filters
+watch(
+  () => housesList.getHouses,
+  () => {
+    onSearchHouses(cityFilter.value, sortType.value)
+  }
+)
+
+const onSearchHouses = (city, sort) => {
+  cityFilter.value = city
+  sortType.value = sort
   filteredHouses.value = [...housesList.getHouses]
-  if (city) {
+  if (cityFilter.value) {
     isFiltered.value = true
     filteredHouses.value = filteredHouses.value.filter(
-      (house) => house.location.city.toLowerCase() === city.toLowerCase()
+      (house) => house.location.city.toLowerCase() === cityFilter.value.toLowerCase()
     )
     numberOfResults.value = filteredHouses.value.length
   } else {
     isFiltered.value = false
   }
 
-  if (sortType === 'price') {
+  if (sortType.value === 'price') {
     filteredHouses.value.sort((a, b) => a.price - b.price)
   }
-  if (sortType === 'size') {
+  if (sortType.value === 'size') {
     filteredHouses.value.sort((a, b) => a.size - b.size)
   }
 }
