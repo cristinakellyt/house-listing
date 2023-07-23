@@ -88,9 +88,16 @@
         <input
           :class="['form-input', { 'form-input__invalid': price === '' && isSubmitted }]"
           id="price"
-          type="number"
+          type="text"
           placeholder="e.g. 150.000"
-          v-model="price"
+          pattern="[0-9]{1,3}(\.[0-9]{1,3})?"
+          title="Valid from 0 to 999.999 above that you need premium account :p"
+          :value="priceFormatted"
+          @input="
+            (e) => {
+              price = e.target.value
+            }
+          "
         />
       </div>
 
@@ -179,8 +186,9 @@
 <script setup>
 import BackTo from '@/components/ui/BackTo.vue'
 import CloseableContent from '@/components/ui/CloseableContent.vue'
+import useFormatPrice from '@/components/composables/FormatPrice'
 
-import { computed, inject, ref } from 'vue'
+import { compile, computed, inject, ref, watch } from 'vue'
 
 const emit = defineEmits(['onFormSubmit'])
 
@@ -217,6 +225,10 @@ const imageSrc = computed(() => {
   return image.value
 })
 
+const priceFormatted = computed(() => {
+  return useFormatPrice(price.value)
+})
+
 // Check if all required fields are filled in and return an array with the missing fields
 // If the array is empty, all required fields are filled in and the form can be submitted
 const isFormInvalid = computed(() => {
@@ -247,6 +259,11 @@ const submitForm = ($event) => {
   if (isFormInvalid.value) return
 
   let formData = new FormData()
+  // Normalize price to remove dots. API does tell much about how many digits are allows. It was noted that
+  // after some number of digits (6) it just add zeros so it was decided to allow from 0 to 999.999
+  price.value = [...price.value.toString()]
+  price.value = price.value.filter((element) => element !== '.')
+  price.value = price.value.join('')
   formData.append('price', price.value)
   formData.append('bedrooms', bedrooms.value)
   formData.append('bathrooms', bathrooms.value)
