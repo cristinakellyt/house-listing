@@ -20,7 +20,6 @@ const house = ref('')
 const getHouse = async () => {
   try {
     house.value = await housesList.houseById(props.houseId)
-    console.log(house.value)
   } catch (error) {
     console.log(error)
   }

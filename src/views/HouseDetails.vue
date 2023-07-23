@@ -1,7 +1,7 @@
 <template>
   <div v-if="houseFound" class="house-details">
     <div class="house-details__container">
-      <BackTo></BackTo>
+      <BackTo />
       <DetailImage :image="selectedHouse.image" :madeByMe="selectedHouse.madeByMe" />
       <HouseDescription
         :id="selectedHouse.id"

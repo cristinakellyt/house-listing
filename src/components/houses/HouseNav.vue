@@ -1,18 +1,22 @@
 <template>
-  <div class="house-nav--container">
-    <h1>Houses</h1>
-    <button v-if="desktopView" class="position-absolute-right-top">
-      <router-link to="/houses/create">
-        <div class="house-create--div">
-          <img class="house-create--icon" src="./../icons/ic_plus_white@3x.png" />CREATE NEW
-        </div>
-      </router-link>
-    </button>
-    <img
-      v-else
-      class="position-absolute-right-top house-create--icon"
-      src="./../icons/ic_plus_grey@3x.png"
-    />
+  <div class="house-nav">
+    <div class="house-nav__header">
+      <h1>Houses</h1>
+      <base-button v-if="desktopView" type="primary" size="large" goTo="/houses/create">
+        <template v-slot:icon>
+          <img class="house-create--icon" src="./../icons/ic_plus_white@3x.png" />
+        </template>
+        <span>CREATE NEW</span>
+      </base-button>
+      <base-button v-else goTo="/houses/create" size="small">
+        <template v-slot:icon>
+          <img
+            class="house-create--icon position-absolute-right-top"
+            src="./../icons/ic_plus_grey@3x.png"
+          />
+        </template>
+      </base-button>
+    </div>
     <div class="house-filter">
       <div class="house-search">
         <img class="house-search--icon" src="./../icons/ic_search@3x.png" />
@@ -32,20 +36,22 @@
         />
       </div>
       <div class="filter-buttons">
-        <button
-          @click="sortHouse($event)"
-          value="price"
-          :class="['filter-buttons__price', { active: priceIsPressed }]"
+        <base-button
+          :type="priceIsPressed ? 'primary' : 'tertiary'"
+          :size="desktopView ? 'large' : 'small'"
+          @click="sortHouse('price')"
+          class="filter-buttons__price"
         >
           Price
-        </button>
-        <button
-          @click="sortHouse($event)"
-          value="size"
-          :class="['filter-buttons__size', { active: sizeIsPressed }]"
+        </base-button>
+        <base-button
+          :type="sizeIsPressed ? 'primary' : 'tertiary'"
+          :size="desktopView ? 'large' : 'small'"
+          @click="sortHouse('size')"
+          class="filter-buttons__size"
         >
           Size
-        </button>
+        </base-button>
       </div>
     </div>
   </div>
@@ -61,6 +67,7 @@ const searchKey = ref('')
 const emit = defineEmits(['searchHouses'])
 
 const searchHouses = (input) => {
+  searchKey.value = input
   let sortType = ''
   if (priceIsPressed.value) {
     sortType = 'price'
@@ -89,25 +96,25 @@ const clearInputHandler = () => {
 const priceIsPressed = ref(false)
 const sizeIsPressed = ref(false)
 
-const sortHouse = ($event) => {
-  if ($event.target.value === 'price' && priceIsPressed.value) {
+const sortHouse = (sortType) => {
+  if (sortType === 'price' && priceIsPressed.value) {
     priceIsPressed.value = false
     searchHouses(searchKey.value)
     return
   }
 
-  if ($event.target.value === 'size' && sizeIsPressed.value) {
+  if (sortType === 'size' && sizeIsPressed.value) {
     sizeIsPressed.value = false
     searchHouses(searchKey.value)
     return
   }
 
-  if ($event.target.value === 'price') {
+  if (sortType === 'price') {
     priceIsPressed.value = true
     sizeIsPressed.value = false
   }
 
-  if ($event.target.value === 'size') {
+  if (sortType === 'size') {
     priceIsPressed.value = false
     sizeIsPressed.value = true
   }
@@ -117,9 +124,18 @@ const sortHouse = ($event) => {
 </script>
 
 <style scoped>
-.house-nav--container {
+.house-nav {
   position: relative;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
   margin-top: calc((30 / 16) * 1rem);
+}
+
+.house-nav__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .position-absolute-right-top {
@@ -129,11 +145,11 @@ const sortHouse = ($event) => {
   transform: translateY(-10%);
 }
 
-.house-create--div {
+/* .house-create--div {
   display: flex;
   align-items: center;
   gap: var(--r15);
-}
+} */
 
 .house-filter {
   display: flex;
@@ -143,7 +159,7 @@ const sortHouse = ($event) => {
   margin-top: calc((35 / 16) * 1rem);
 }
 
-button {
+/* button {
   display: inline-block;
   background-color: var(--element-color-primary);
   border: none;
@@ -154,11 +170,7 @@ button {
   font-size: var(--r18);
   cursor: pointer;
   transition: all 0.3s;
-}
-
-.active {
-  background-color: var(--element-color-tertiary);
-}
+} */
 
 .house-search {
   display: flex;
@@ -213,7 +225,7 @@ button {
 .filter-buttons__size {
   width: 50%;
 
-  padding: var(--r12) var(--r20);
+  /* padding: var(--r12) var(--r20); */
 }
 .filter-buttons__price {
   border-radius: var(--r10) 0 0 var(--r10);

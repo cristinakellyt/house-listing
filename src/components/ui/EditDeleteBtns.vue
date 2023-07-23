@@ -1,24 +1,27 @@
 <template>
   <div :class="{ 'flex-gap-20': mediumSize, 'flex-gap-30': largeSize }">
-    <img
-      @click="editPage"
-      src="./../icons/ic_edit@3x.png"
-      alt="edit the house details"
-      :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
-    />
-
-    <img
-      src="./../icons/ic_delete@3x.png"
-      alt="delete the house"
-      :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
-      @click="showDeleteModal"
-    />
+    <base-button @click="editPage">
+      <img
+        src="./../icons/ic_edit@3x.png"
+        alt="edit the house details"
+        :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
+      />
+    </base-button>
+    <base-button @click="showDeleteModal">
+      <img
+        src="./../icons/ic_delete@3x.png"
+        alt="delete the house"
+        :class="{ 'medium-size__btn': mediumSize, 'large-size__btn': largeSize }"
+      />
+    </base-button>
   </div>
-  <house-delete
-    v-if="deleteModalIsVisible"
-    :houseId="id"
-    @closeModal="hideDeleteModal"
-  ></house-delete>
+  <Teleport to="#app">
+    <house-delete
+      v-if="deleteModalIsVisible"
+      :houseId="id"
+      @closeModal="hideDeleteModal"
+    ></house-delete>
+  </Teleport>
 </template>
 
 <script setup>
@@ -41,7 +44,8 @@ const editPage = ($event) => {
 
 const deleteModalIsVisible = ref(false)
 
-const showDeleteModal = () => {
+const showDeleteModal = ($event) => {
+  $event.cancelBubble = true
   deleteModalIsVisible.value = true
 }
 

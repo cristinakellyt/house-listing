@@ -76,8 +76,6 @@ const props = defineProps([
   'data'
 ])
 
-console.log(props.data)
-
 const inputChange = ($event) => {
   if (props.type === 'file' && $event.target.files.length > 0) {
     inputValue.value = $event.target.files[0]

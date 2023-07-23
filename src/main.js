@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import HouseCard from './components/ui/HouseCard.vue'
 import BaseModal from './components/ui/BaseModal.vue'
 import BaseCard from './components/ui/BaseCard.vue'
+import BaseButton from './components/ui/BaseButton.vue'
 
 import App from './App.vue'
 import router from './router'
@@ -17,5 +18,6 @@ app.use(router)
 app.component('base-card', BaseCard)
 app.component('house-card', HouseCard)
 app.component('base-modal', BaseModal)
+app.component('base-button', BaseButton)
 
 app.mount('#app')

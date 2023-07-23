@@ -1,9 +1,7 @@
 <template>
   <img src="./../icons/img_background@3x.png" class="background-image" />
   <div class="form-container">
-    <BackTo>
-      <p>Back to overview</p>
-    </BackTo>
+    <BackTo> </BackTo>
     <h1>Create new Listing</h1>
     <img
       v-if="!desktopView"
@@ -223,7 +221,13 @@
       <p v-show="isSubmited && formErrors.length > 0" class="required-field">
         Required field missing.
       </p>
-      <button :class="['post', { 'valid-form': formErrors.length === 0 }]">Post</button>
+      <base-button
+        :type="formErrors.length === 0 ? 'primary' : 'tertiary'"
+        size="large"
+        class="form--button"
+      >
+        <span>Post</span>
+      </base-button>
     </form>
   </div>
 </template>
@@ -339,24 +343,9 @@ const submitForm = ($event) => {
   gap: calc((5 / 16) * 1rem);
 }
 
-.post {
-  display: inline-block;
-  background-color: rgba(235, 84, 64, 0.507);
-  border: none;
-  padding: var(--r15) var(--r20);
-  border-radius: var(--r10);
-  color: var(--element-color-backgroun2);
-  font-weight: 700;
-  font-size: var(--r18);
-  transition: all 0.3s;
-  margin: var(--r20) 0;
+.form--button {
   align-self: flex-end;
   width: 50%;
-}
-
-.valid-form {
-  background-color: var(--element-color-primary);
-  cursor: pointer;
 }
 
 .position-absolute-right-top {
