@@ -3,8 +3,8 @@
 </template>
 
 <script setup>
-import HouseForm from './../components/houseForm/HouseForm.vue'
-import { useHousesStore } from '../stores/HousesStore'
+import HouseForm from '@/components/houseForm/HouseForm.vue'
+import { useHousesStore } from '@/stores/HousesStore'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 

@@ -23,10 +23,10 @@
 </template>
 
 <script setup>
-import HouseItem from './../components/houses/HousesItem.vue'
-import HouseNav from './../components/houses/HouseNav.vue'
-import HouseNotFound from '../components/houses/HouseNotFound.vue'
-import { useHousesStore } from '../stores/HousesStore'
+import HouseItem from '@/components/houses/HousesItem.vue'
+import HouseNav from '@/components/houses/HouseNav.vue'
+import HouseNotFound from '@/components/houses/HouseNotFound.vue'
+import { useHousesStore } from '@/stores/HousesStore'
 import { ref, watch } from 'vue'
 
 const housesList = useHousesStore()

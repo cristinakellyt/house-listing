@@ -38,7 +38,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import useFormatPrice from './../composables/FormatPrice'
+import useFormatPrice from '@/components/composables/FormatPrice'
 
 import { computed, inject } from 'vue'
 

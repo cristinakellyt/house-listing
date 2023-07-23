@@ -67,7 +67,7 @@
 
 <script setup>
 import { inject, computed } from 'vue'
-import useFormatPrice from './../composables/FormatPrice'
+import useFormatPrice from '@/components/composables/FormatPrice'
 
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)

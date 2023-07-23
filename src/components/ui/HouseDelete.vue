@@ -14,7 +14,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { useHousesStore } from './../../stores/HousesStore'
+import { useHousesStore } from '@/stores/HousesStore'
 
 const router = useRouter()
 const emit = defineEmits(['closeModal'])

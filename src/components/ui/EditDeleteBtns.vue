@@ -24,7 +24,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import HouseDelete from './HouseDelete.vue'
+import HouseDelete from '@/components/ui/HouseDelete.vue'
 
 const router = useRouter()
 

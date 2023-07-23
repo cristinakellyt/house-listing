@@ -29,11 +29,11 @@
 </template>
 
 <script setup>
-import DetailImage from './../components/houseDetail/DetailImage.vue'
-import HouseDescription from './../components/houseDetail/HouseDescription.vue'
-import HouseNotFound from './../components/houses/HouseNotFound.vue'
-import BackTo from '../components/ui/BackTo.vue'
-import { useHousesStore } from '../stores/HousesStore'
+import DetailImage from '@/components/houseDetail/DetailImage.vue'
+import HouseDescription from '@/components/houseDetail/HouseDescription.vue'
+import HouseNotFound from '@/components/houses/HouseNotFound.vue'
+import BackTo from '@/components/ui/BackTo.vue'
+import { useHousesStore } from '@/stores/HousesStore'
 import { onMounted, ref } from 'vue'
 
 const props = defineProps({ houseId: String })

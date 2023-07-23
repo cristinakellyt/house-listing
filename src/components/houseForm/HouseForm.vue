@@ -177,8 +177,8 @@
 </template>
 
 <script setup>
-import BackTo from './../ui/BackTo.vue'
-import CloseableContent from '../ui/CloseableContent.vue'
+import BackTo from '@/components/ui/BackTo.vue'
+import CloseableContent from '@/components/ui/CloseableContent.vue'
 
 import { computed, inject, ref } from 'vue'
 

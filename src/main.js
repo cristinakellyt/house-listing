@@ -1,15 +1,15 @@
-import './assets/base.css'
+import '@/assets/base.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import HouseCard from './components/ui/HouseCard.vue'
-import BaseModal from './components/ui/BaseModal.vue'
-import BaseCard from './components/ui/BaseCard.vue'
-import BaseButton from './components/ui/BaseButton.vue'
-import EditDeleteBtns from './components/ui/EditDeleteBtns.vue'
+import HouseCard from '@/components/ui/HouseCard.vue'
+import BaseModal from '@/components/ui/BaseModal.vue'
+import BaseCard from '@/components/ui/BaseCard.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import EditDeleteBtns from '@/components/ui/EditDeleteBtns.vue'
 
-import App from './App.vue'
-import router from './router'
+import App from '@/App.vue'
+import router from '@/router'
 
 const app = createApp(App)
 
