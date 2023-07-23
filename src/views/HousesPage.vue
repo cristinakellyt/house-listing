@@ -1,5 +1,6 @@
 <template>
-  <HouseNav @searchHouses="onSearchHouses" />
+  <HouseNav />
+  <HouseFilter @searchHouses="onSearchHouses" />
   <h2 v-if="numberOfResults > 0 && isFiltered" class="search-results--number">
     {{ numberOfResults }} Results found
   </h2>
@@ -25,6 +26,7 @@
 <script setup>
 import HouseItem from '@/components/houses/HousesItem.vue'
 import HouseNav from '@/components/houses/HouseNav.vue'
+import HouseFilter from '../components/houses/HouseFilter.vue'
 import HouseNotFound from '@/components/houses/HouseNotFound.vue'
 import { useHousesStore } from '@/stores/HousesStore'
 import { ref, watch } from 'vue'
