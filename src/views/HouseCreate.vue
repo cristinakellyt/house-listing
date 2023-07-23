@@ -1,5 +1,5 @@
 <template>
-  <HouseForm @onFormSubmit="createHouse" />
+  <HouseForm @onFormSubmit="createHouse" title="Create new listing" />
 </template>
 
 <script setup>

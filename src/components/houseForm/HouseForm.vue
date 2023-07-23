@@ -1,232 +1,176 @@
 <template>
   <img src="./../icons/img_background@3x.png" class="background-image" />
   <div class="form-container">
-    <BackTo> </BackTo>
-    <h1>Create new Listing</h1>
-    <img
-      v-if="!desktopView"
-      class="position-absolute-right-top back--icon"
-      src="./../icons/ic_back_grey@3x.png"
-    />
+    <BackTo />
+    <h1>{{ title }}</h1>
+    <base-button v-if="!desktopView" goTo="/houses">
+      <template v-slot:icon>
+        <img class="position-absolute-right-top" src="./../icons/ic_back_grey@3x.png" />
+      </template>
+    </base-button>
+
     <form class="form" @submit.prevent="submitForm">
       <div class="form-control all-width">
-        <FormInput
+        <label for="street-name">Street Name*</label>
+        <input
+          :class="['form-input', { 'form-input__invalid': street === '' && isSubmitted }]"
           id="street-name"
-          label="Street Name*"
-          name="streetName"
           type="text"
           placeholder="Enter street name"
-          :isRequired="true"
-          :data="house ? house.location.street : ''"
-          :isInvalid="isSubmited && formErrors.includes('street-name')"
-          @onChange="(value) => (streetName = value.trim())"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
+          v-model="street"
         />
       </div>
 
       <div class="form-group--flex">
         <div class="form-control">
-          <FormInput
+          <label for="house-number">House number*</label>
+          <input
+            :class="['form-input', { 'form-input__invalid': houseNumber === '' && isSubmitted }]"
             id="house-number"
-            label="House number*"
-            name="houseNumber"
             type="number"
             placeholder="Enter the house number"
-            :isRequired="true"
-            :data="house ? house.location.houseNumber.toString() : ''"
-            :isInvalid="isSubmited && formErrors.includes('house-number')"
-            @onChange="(value) => (houseNumber = value.trim())"
-            @onError="onFormInputErrorHandler"
-            @onValid="onFormInputValidHandler"
+            v-model="houseNumber"
           />
         </div>
+
         <div class="form-control">
-          <FormInput
+          <label for="addition">Addition(optional)</label>
+          <input
+            class="form-input"
             id="addition"
-            label="Addition(optional)"
-            name="numberAddition"
             type="text"
             placeholder="e.g.A"
-            :isRequired="false"
-            :data="house ? house.location.houseNumberAddition.toString() : ''"
-            :isInvalid="isSubmited && formErrors.includes('addition')"
-            @onChange="(value) => (addition = value.trim())"
-            @onError="onFormInputErrorHandler"
-            @onValid="onFormInputValidHandler"
+            v-model="houseNumberAddition"
           />
         </div>
       </div>
 
       <div class="form-control all-width">
-        <FormInput
+        <label for="postal-code">Postal code*</label>
+        <input
+          :class="['form-input', { 'form-input__invalid': zip === '' && isSubmitted }]"
           id="postal-code"
-          label="Postal code*"
-          name="zip"
           type="text"
           placeholder="e.g. 1000 AA"
-          :isRequired="true"
-          :data="house ? house.location.zip : ''"
-          :isInvalid="isSubmited && formErrors.includes('postal-code')"
-          @onChange="(value) => (zip = value.trim())"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
+          v-model="zip"
         />
       </div>
 
       <div class="form-control all-width">
-        <FormInput
+        <label for="city">City*</label>
+        <input
+          :class="['form-input', { 'form-input__invalid': city === '' && isSubmitted }]"
           id="city"
-          label="City*"
-          name="city"
           type="text"
           placeholder="e.g. Utrecht"
-          :isRequired="true"
-          :data="house ? house.location.city : ''"
-          :isInvalid="isSubmited && formErrors.includes('city')"
-          @onChange="(value) => (city = value.trim())"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
+          v-model="city"
         />
       </div>
 
       <div class="form-control all-width">
-        <FormInput
-          id="image"
-          label="Upload picture(PNG or JPG)*"
-          name="image"
+        <label>Upload picture(PNG or JPG)*</label>
+        <div v-if="image" class="image-input">
+          <closeable-content @onClose="() => (image = '')" size="small">
+            <img :src="imageSrc" class="fit-image" />
+          </closeable-content>
+        </div>
+        <input
+          v-else
           type="file"
-          :isRequired="true"
-          :data="house ? house.image : ''"
-          :isInvalid="isSubmited && formErrors.includes('image')"
-          @onChange="(value) => (image = value)"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
+          accept="image/png, image/jpeg"
+          :class="['form-input', { 'form-input__invalid': image === '' && isSubmitted }]"
+          @change="(e) => (image = e.target.files[0])"
         />
       </div>
 
       <div class="form-control all-width">
-        <FormInput
+        <label for="price">Price*</label>
+        <input
+          :class="['form-input', { 'form-input__invalid': price === '' && isSubmitted }]"
           id="price"
-          label="Price*"
-          name="price"
           type="number"
           placeholder="e.g. 150.000"
-          :isRequired="true"
-          :data="house ? house.price.toString() : ''"
-          :isInvalid="isSubmited && formErrors.includes('price')"
-          @onChange="(value) => (price = value.trim())"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
+          v-model="price"
         />
       </div>
 
       <div class="form-group--flex">
         <div class="form-control">
-          <FormInput
+          <label for="size">Size*</label>
+          <input
+            :class="['form-input', { 'form-input__invalid': size === '' && isSubmitted }]"
             id="size"
-            label="Size*"
-            name="size"
             type="text"
             placeholder="e.g. 60m2"
-            :isRequired="true"
-            :data="house ? house.size.toString() : ''"
-            :isInvalid="isSubmited && formErrors.includes('size')"
-            @onChange="(value) => (size = value.trim())"
-            @onError="onFormInputErrorHandler"
-            @onValid="onFormInputValidHandler"
+            v-model="size"
           />
         </div>
         <div class="form-control">
-          <FormInput
+          <label for="garage">Garage*</label>
+          <select
+            :class="['form-input', { 'form-input__invalid': hasGarage === '' && isSubmitted }]"
             id="garage"
-            name="garage"
-            label="Garage*"
-            type="select"
-            :isRequired="true"
-            :data="house ? house.hasGarage.toString() : ''"
-            :isInvalid="isSubmited && formErrors.includes('garage')"
-            @onChange="(value) => (hasGarage = value.trim())"
-            @onError="onFormInputErrorHandler"
-            @onValid="onFormInputValidHandler"
-          />
+            v-model="hasGarage"
+          >
+            <option value="">Select</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
         </div>
       </div>
 
       <div class="form-group--flex">
         <div class="form-control">
-          <FormInput
+          <label for="bedrooms">Bedrooms*</label>
+          <input
+            :class="['form-input', { 'form-input__invalid': bedrooms === '' && isSubmitted }]"
             id="bedrooms"
-            label="Bedrooms*"
-            name="bedrooms"
             type="number"
             placeholder="Enter amount"
-            :isRequired="true"
-            :data="house ? house.rooms.bedrooms.toString() : ''"
-            :isInvalid="isSubmited && formErrors.includes('bedrooms')"
-            @onChange="(value) => (bedrooms = value.trim())"
-            @onError="onFormInputErrorHandler"
-            @onValid="onFormInputValidHandler"
+            v-model="bedrooms"
           />
         </div>
         <div class="form-control">
-          <FormInput
+          <label for="bathrooms">Bathrooms*</label>
+          <input
+            :class="['form-input', { 'form-input__invalid': bathrooms === '' && isSubmitted }]"
             id="bathrooms"
-            label="Bathrooms*"
-            name="bathrooms"
             type="number"
             placeholder="Enter amount"
-            :isRequired="true"
-            :data="house ? house.rooms.bathrooms.toString() : ''"
-            :isInvalid="isSubmited && formErrors.includes('bathrooms')"
-            @onChange="(value) => (bathrooms = value.trim())"
-            @onError="onFormInputErrorHandler"
-            @onValid="onFormInputValidHandler"
+            v-model="bathrooms"
           />
         </div>
       </div>
 
       <div class="form-control all-width">
-        <FormInput
+        <label for="construction-date">Construction date*</label>
+        <input
+          :class="['form-input', { 'form-input__invalid': constructionDate === '' && isSubmitted }]"
           id="construction-date"
-          label="Construction date*"
-          name="constructionYear"
           type="number"
-          placeholder="e.g. 1990"
-          :isRequired="true"
-          :data="house ? house.constructionYear.toString() : ''"
-          :isInvalid="isSubmited && formErrors.includes('construction-date')"
-          @onChange="(value) => (constructionDate = value.trim())"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
+          placeholder="e.g. 1991"
+          min="1901"
+          v-model="constructionDate"
         />
       </div>
 
       <div class="form-control all-width">
-        <FormInput
+        <label for="description">Description*</label>
+        <textarea
+          :class="['form-input', { 'form-input__invalid': description === '' && isSubmitted }]"
           id="description"
-          label="Description*"
-          type="textarea"
-          name="description"
           rows="5"
           placeholder="Enter description"
-          :data="house ? house.description : ''"
-          :isRequired="true"
-          :isInvalid="isSubmited && formErrors.includes('description')"
-          @onChange="(value) => (description = value.trim())"
-          @onError="onFormInputErrorHandler"
-          @onValid="onFormInputValidHandler"
-        />
+          v-model="description"
+        ></textarea>
       </div>
-      <p v-show="isSubmited && formErrors.length > 0" class="required-field">
-        Required field missing.
-      </p>
+      <p v-show="isSubmitted && isFormInvalid" class="required-field">Required field(s) missing.</p>
       <base-button
-        :type="formErrors.length === 0 ? 'primary' : 'tertiary'"
+        :type="!isFormInvalid ? 'primary' : 'tertiary'"
         size="large"
-        class="form--button"
+        class="form__button"
       >
-        <span>Post</span>
+        Post
       </base-button>
     </form>
   </div>
@@ -234,7 +178,7 @@
 
 <script setup>
 import BackTo from './../ui/BackTo.vue'
-import FormInput from './FormInput.vue'
+import CloseableContent from '../ui/CloseableContent.vue'
 
 import { computed, inject, ref } from 'vue'
 
@@ -243,47 +187,73 @@ const emit = defineEmits(['onFormSubmit'])
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 
-defineProps({
-  house: Object
+const props = defineProps({
+  house: Object,
+  title: String
 })
 
-const streetName = ref('')
-const houseNumber = ref('')
-const addition = ref('')
-const zip = ref('')
-const city = ref('')
-const image = ref('')
-const price = ref('')
-const size = ref('')
-const hasGarage = ref('')
-const bedrooms = ref('')
-const bathrooms = ref('')
-const constructionDate = ref('')
-const description = ref('')
-const formErrors = ref([])
-const isSubmited = ref(false)
+const isHouseInitialized = props.house !== undefined
 
-const onFormInputErrorHandler = (id) => {
-  formErrors.value.push(id)
-}
+const street = ref(isHouseInitialized ? props.house.location.street : '')
+const houseNumber = ref(isHouseInitialized ? props.house.location.houseNumber : '')
+const houseNumberAddition = ref(isHouseInitialized ? props.house.location.houseNumberAddition : '')
+const zip = ref(isHouseInitialized ? props.house.location.zip : '')
+const city = ref(isHouseInitialized ? props.house.location.city : '')
+const image = ref(isHouseInitialized ? props.house.image : '')
+const price = ref(isHouseInitialized ? props.house.price : '')
+const size = ref(isHouseInitialized ? props.house.size : '')
+const hasGarage = ref(isHouseInitialized ? props.house.hasGarage : '')
+const bedrooms = ref(isHouseInitialized ? props.house.rooms.bedrooms : '')
+const bathrooms = ref(isHouseInitialized ? props.house.rooms.bathrooms : '')
+const constructionDate = ref(isHouseInitialized ? props.house.constructionYear : '')
+const description = ref(isHouseInitialized ? props.house.description : '')
 
-const onFormInputValidHandler = (id) => {
-  formErrors.value = formErrors.value.filter((elId) => elId !== id)
-}
+const isSubmitted = ref(false)
+
+const imageSrc = computed(() => {
+  if (image.value instanceof File) {
+    return URL.createObjectURL(image.value)
+  }
+  return image.value
+})
+
+// Check if all required fields are filled in and return an array with the missing fields
+// If the array is empty, all required fields are filled in and the form can be submitted
+const isFormInvalid = computed(() => {
+  let error = false
+  if (
+    street.value === '' ||
+    houseNumber.value === '' ||
+    zip.value === '' ||
+    city.value === '' ||
+    image.value === '' ||
+    price.value === '' ||
+    size.value === '' ||
+    hasGarage.value === '' ||
+    bedrooms.value === '' ||
+    bathrooms.value === '' ||
+    constructionDate.value === '' ||
+    description.value === ''
+  ) {
+    error = true
+  }
+
+  return error
+})
 
 const submitForm = ($event) => {
-  isSubmited.value = true
+  isSubmitted.value = true
 
-  if (formErrors.value.length) return
+  if (isFormInvalid.value) return
 
   let formData = new FormData()
   formData.append('price', price.value)
   formData.append('bedrooms', bedrooms.value)
   formData.append('bathrooms', bathrooms.value)
   formData.append('size', size.value)
-  formData.append('streetName', streetName.value)
+  formData.append('streetName', street.value)
   formData.append('houseNumber', houseNumber.value)
-  formData.append('numberAddition', addition.value)
+  formData.append('numberAddition', houseNumberAddition.value)
   formData.append('zip', zip.value)
   formData.append('city', city.value)
   formData.append('constructionYear', constructionDate.value)
@@ -343,7 +313,8 @@ const submitForm = ($event) => {
   gap: calc((5 / 16) * 1rem);
 }
 
-.form--button {
+.form__button {
+  margin: var(--r20) 0;
   align-self: flex-end;
   width: 50%;
 }
@@ -355,10 +326,6 @@ const submitForm = ($event) => {
   transform: translateY(-10%);
 }
 
-.back--icon {
-  width: var(--r20);
-}
-
 .required-field {
   font-family: 'Montserrat', sans-serif;
   font-style: italic;
@@ -368,6 +335,95 @@ const submitForm = ($event) => {
   position: absolute;
   bottom: calc((70 / 16) * 1rem);
 }
+
+/* Start Image */
+.image-input {
+  width: calc((120 / 16) * 1rem);
+  height: calc((120 / 16) * 1rem);
+}
+
+.fit-image {
+  border-radius: 5px;
+  object-fit: cover;
+  height: 100%;
+}
+
+/* End Image */
+
+/* Start Form Input */
+
+.form-input {
+  border: 1px solid transparent;
+  padding: var(--r15);
+  border-radius: calc((5 / 16) * 1rem);
+  font-size: var(--r14);
+  background-color: var(--element-color-backgroun2);
+}
+
+.form-input::placeholder {
+  color: var(--element-color-tertiary);
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--r14);
+}
+
+.form-input__invalid {
+  border: 1px solid var(--element-color-primary);
+}
+.form-input__invalid::placeholder {
+  color: var(--element-color-primary);
+}
+
+label {
+  font-size: var(--r14);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+}
+
+select {
+  padding: var(--r10);
+}
+
+select,
+textarea::placeholder {
+  color: var(--element-color-tertiary);
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--r14);
+}
+
+input[type='file'] {
+  border: 2px dashed var(--element-color-tertiary);
+  height: 120px;
+  width: 120px;
+  cursor: pointer;
+  color: transparent;
+  margin-top: 10px;
+  position: relative;
+  background-color: transparent;
+}
+
+input[type='file'].form-input__invalid {
+  border: 2px dashed var(--element-color-primary);
+}
+
+::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type='file']::before {
+  position: absolute;
+  background-image: url('./../icons/ic_plus_grey@3x.png');
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc((35 / 16) * 1rem);
+  height: calc((35 / 16) * 1rem);
+  background-size: calc((35 / 16) * 1rem);
+  background-repeat: no-repeat;
+}
+
+/* End Form Input */
 
 @media only screen and (max-width: 34.375em) {
   h1 {

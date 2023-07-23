@@ -1,5 +1,5 @@
 <template>
-  <HouseForm v-if="house" :house="house" @onFormSubmit="editHouse" />
+  <HouseForm v-if="house" :house="house" @onFormSubmit="editHouse" title="Edit listing" />
 </template>
 
 <script setup>

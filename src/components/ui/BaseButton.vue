@@ -1,11 +1,17 @@
 <template>
-  <button :class="`${type} ${size}`">
-    <router-link :to="goTo ? goTo : ''">
+  <router-link v-if="goTo" :to="goTo ? goTo : ''">
+    <button :class="`${type} ${size}`">
       <div class="button-div">
         <slot name="icon"></slot>
         <slot></slot>
       </div>
-    </router-link>
+    </button>
+  </router-link>
+  <button v-else :class="`${type} ${size}`">
+    <div class="button-div">
+      <slot name="icon"></slot>
+      <slot></slot>
+    </div>
   </button>
 </template>
 
