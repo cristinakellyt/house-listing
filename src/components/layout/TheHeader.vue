@@ -43,7 +43,7 @@ const desktopView = computed(() => props.windowWidth > 550)
 <style scoped>
 header {
   width: 100%;
-  background-color: var(--element-color-backgroun2);
+  background-color: var(--element-color-background2);
   padding: calc((20 / 16) * 1rem);
   font-family: 'Montserrat', sans-serif;
   font-size: var(--r18);

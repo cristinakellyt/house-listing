@@ -357,7 +357,7 @@ const submitForm = ($event) => {
   padding: var(--r15);
   border-radius: calc((5 / 16) * 1rem);
   font-size: var(--r14);
-  background-color: var(--element-color-backgroun2);
+  background-color: var(--element-color-background2);
 }
 
 .form-input::placeholder {

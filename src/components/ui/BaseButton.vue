@@ -45,7 +45,7 @@ button {
   border: none;
   border-radius: var(--r10);
   background-color: transparent;
-  color: var(--element-color-backgroun2);
+  color: var(--element-color-background2);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s;

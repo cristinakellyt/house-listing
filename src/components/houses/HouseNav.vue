@@ -165,7 +165,7 @@ const sortHouse = (sortType) => {
   border: none;
   padding: var(--r15) var(--r20);
   border-radius: var(--r10);
-  color: var(--element-color-backgroun2);
+  color: var(--element-color-background2);
   font-weight: 700;
   font-size: var(--r18);
   cursor: pointer;

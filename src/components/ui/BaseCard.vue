@@ -6,7 +6,7 @@
 
 <style scoped>
 .base-card {
-  background-color: var(--element-color-backgroun2);
+  background-color: var(--element-color-background2);
   border-radius: calc((10 / 16) * 1rem);
   box-shadow: 0px 0px 20px -4px var(--element-color-tertiary);
   padding: calc((20 / 16) * 1rem);

@@ -98,7 +98,7 @@ const formatedPrice = useFormatPrice(props.price)
 
 <style scoped>
 .house-description {
-  background-color: var(--element-color-backgroun2);
+  background-color: var(--element-color-background2);
   padding-bottom: calc((40 / 16) * 1rem);
 }
 
