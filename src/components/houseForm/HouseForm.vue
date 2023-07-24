@@ -114,7 +114,7 @@
             id="garage"
             v-model="hasGarage"
           >
-            <option value="">Select</option>
+            <option value="" disabled>Select</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
@@ -383,9 +383,11 @@ label {
 
 select {
   padding: var(--r10);
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--r14);
+  color: black;
 }
 
-select,
 textarea::placeholder {
   color: var(--element-color-tertiary);
   font-family: 'Open Sans', sans-serif;
