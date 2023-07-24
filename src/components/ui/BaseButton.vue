@@ -1,13 +1,13 @@
 <template>
   <router-link v-if="goTo" :to="goTo ? goTo : ''">
-    <button :class="`${type} ${size}`">
+    <button :class="`${btnColor} ${size}`">
       <div class="button-div">
         <slot name="icon"></slot>
         <slot></slot>
       </div>
     </button>
   </router-link>
-  <button v-else :class="`${type} ${size}`">
+  <button v-else :class="`${btnColor} ${size}`">
     <div class="button-div">
       <slot name="icon"></slot>
       <slot></slot>
@@ -21,7 +21,7 @@ defineProps({
     type: String,
     default: ''
   },
-  type: {
+  btnColor: {
     type: String,
     default: 'default'
   },

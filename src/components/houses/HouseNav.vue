@@ -2,7 +2,7 @@
   <div class="house-nav">
     <div class="house-nav__header">
       <h1>Houses</h1>
-      <base-button v-if="desktopView" type="primary" size="large" goTo="/houses/create">
+      <base-button v-if="desktopView" btnColor="primary" size="large" goTo="/houses/create">
         <template v-slot:icon>
           <img class="house-nav--icon" src="/icons/ic_plus_white@3x.png" />
         </template>

@@ -5,7 +5,7 @@
     </div>
     <div class="house-filter__buttons">
       <base-button
-        :type="priceIsPressed ? 'primary' : 'tertiary'"
+        :btnColor="priceIsPressed ? 'primary' : 'tertiary'"
         :size="desktopView ? 'large' : 'small'"
         @click="sortHouse('price')"
         class="filter-buttons__price"
@@ -13,7 +13,7 @@
         Price
       </base-button>
       <base-button
-        :type="sizeIsPressed ? 'primary' : 'tertiary'"
+        :btnColor="sizeIsPressed ? 'primary' : 'tertiary'"
         :size="desktopView ? 'large' : 'small'"
         @click="sortHouse('size')"
         class="filter-buttons__size"

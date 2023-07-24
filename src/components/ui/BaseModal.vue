@@ -6,8 +6,12 @@
       <h2><slot name="title">title</slot></h2>
       <p><slot name="text">Are you sure?</slot></p>
 
-      <base-button type="primary" @click="confirm"><slot name="firstBtn">Yes</slot></base-button>
-      <base-button type="secondary" @click="cancel"><slot name="secondBtn">No</slot></base-button>
+      <base-button btnColor="primary" @click="confirm"
+        ><slot name="firstBtn">Yes</slot></base-button
+      >
+      <base-button btnColor="secondary" @click="cancel"
+        ><slot name="secondBtn">No</slot></base-button
+      >
     </div>
   </base-card>
 </template>

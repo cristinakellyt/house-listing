@@ -169,7 +169,7 @@
       </div>
       <p v-show="isSubmitted && isFormInvalid" class="required-field">Required field(s) missing.</p>
       <base-button
-        :type="!isFormInvalid ? 'primary' : 'tertiary'"
+        :btnColor="!isFormInvalid ? 'primary' : 'tertiary'"
         size="large"
         class="form__button"
       >
