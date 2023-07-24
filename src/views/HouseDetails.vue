@@ -1,7 +1,7 @@
 <template>
   <div v-if="houseFound" class="house-details">
     <div class="house-details__container">
-      <BackTo />
+      <BackTo v-if="desktopView" goTo="/houses" />
       <DetailImage
         :image="selectedHouse.image"
         :madeByMe="selectedHouse.madeByMe"
@@ -35,6 +35,10 @@ import HouseNotFound from '@/components/houses/HouseNotFound.vue'
 import BackTo from '@/components/ui/BackTo.vue'
 import { useHousesStore } from '@/stores/HousesStore'
 import { onMounted, ref } from 'vue'
+import { inject, computed } from 'vue'
+
+const windowWidth = inject('windowWidth')
+const desktopView = computed(() => windowWidth.value > 550)
 
 const props = defineProps({ houseId: String })
 

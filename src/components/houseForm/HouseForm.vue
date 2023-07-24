@@ -1,13 +1,8 @@
 <template>
   <img src="/icons/img_background@3x.png" class="background-image" />
   <div class="form-container">
-    <BackTo />
+    <BackTo goTo="/houses" class="margin-zero" />
     <h1>{{ title }}</h1>
-    <base-button v-if="!desktopView" goTo="/houses">
-      <template v-slot:icon>
-        <img class="position-absolute-right-top" src="/icons/ic_back_grey@3x.png" />
-      </template>
-    </base-button>
 
     <form class="form" @submit.prevent="submitForm">
       <div class="form-control all-width">
@@ -189,12 +184,9 @@ import BackTo from '@/components/ui/BackTo.vue'
 import CloseableContent from '@/components/ui/CloseableContent.vue'
 import useFormatPrice from '@/components/composables/FormatPrice'
 
-import { computed, inject, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const emit = defineEmits(['onFormSubmit'])
-
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
 
 const props = defineProps({
   house: Object,
@@ -292,6 +284,7 @@ const submitForm = ($event) => {
   display: flex;
   flex-direction: column;
   position: relative;
+  max-width: 35%;
 }
 .background-image {
   position: absolute;
@@ -301,7 +294,6 @@ const submitForm = ($event) => {
   right: 0;
   zoom: 1.1;
 }
-
 .form-group--flex {
   flex: 0 1 100%;
   display: flex;
@@ -314,7 +306,6 @@ const submitForm = ($event) => {
 }
 
 .form {
-  max-width: 35%;
   display: flex;
   flex-direction: column;
   gap: var(--r15);
@@ -336,14 +327,6 @@ const submitForm = ($event) => {
   align-self: flex-end;
   width: 50%;
 }
-
-.position-absolute-right-top {
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(-10%);
-}
-
 .required-field {
   font-family: 'Montserrat', sans-serif;
   font-style: italic;
@@ -448,11 +431,12 @@ input[type='file']::before {
     text-align: center;
   }
 
-  .form-container {
-    margin-top: var(--r30);
+  .margin-zero {
+    margin: 0;
   }
-  .form {
+  .form-container {
     max-width: 100%;
+    margin-top: var(--r30);
   }
   .post {
     width: 100%;

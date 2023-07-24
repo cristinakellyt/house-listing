@@ -1,10 +1,12 @@
 <template>
-  <div v-if="desktopView" class="component--back-to">
-    <base-button goTo="/houses">
+  <div class="back-to__container">
+    <base-button :goTo="goTo" :class="{ 'position-absolute-right-top': !desktopView }">
       <template v-slot:icon>
-        <img src="/icons/ic_back_grey@3x.png" alt="back button" height="20" width="20" />
+        <img src="/icons/ic_back_grey@3x.png" width="20" height="20" />
       </template>
-      <p class="back-to--component__color">Back to overview</p>
+      <slot>
+        <p v-if="desktopView" class="back-to__paragraph">Back to overview</p>
+      </slot>
     </base-button>
   </div>
 </template>
@@ -14,17 +16,30 @@ import { inject, computed } from 'vue'
 
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
+
+defineProps({
+  goTo: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
 <style scoped>
-.component--back-to {
+.back-to__container {
   margin: calc((30 / 16) * 1rem) 0;
 }
 
-.back-to--component__color {
+.back-to__paragraph {
   color: var(--text-color-primary);
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: var(--r16);
+}
+
+.position-absolute-right-top {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>
