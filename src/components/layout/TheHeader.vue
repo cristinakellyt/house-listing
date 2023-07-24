@@ -49,7 +49,7 @@ header {
   font-size: var(--r18);
   color: var(--element-color-tertiary);
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
 }
 
 header nav {
@@ -100,8 +100,8 @@ a.router-link-active {
   }
 
   img {
-    width: calc((30 / 16) * 1rem);
-    height: calc((30 / 16) * 1rem);
+    width: calc((25 / 16) * 1rem);
+    height: calc((25 / 16) * 1rem);
   }
 
   ul {
