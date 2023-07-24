@@ -10,10 +10,7 @@
       </base-button>
       <base-button v-else goTo="/houses/create" size="small">
         <template v-slot:icon>
-          <img
-            class="house-nav--icon position-absolute-right-top"
-            src="/icons/ic_plus_grey@3x.png"
-          />
+          <img class="house-nav--icon__mobile" src="/icons/ic_plus_grey@3x.png" />
         </template>
       </base-button>
     </div>
@@ -27,39 +24,36 @@ const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .house-nav {
   position: relative;
-  margin-top: calc((30 / 16) * 1rem);
-}
+  margin-top: pxToRem(30);
 
-.house-nav__header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
-.position-absolute-right-top {
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: translateY(-10%);
-}
+  &--icon {
+    width: pxToRem(20);
 
-.house-nav--icon {
-  width: var(--r20);
+    &__mobile {
+      @include position-absolute(0, 0);
+      width: pxToRem(20);
+    }
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
   h1 {
     text-align: center;
   }
-  .position-absolute-right-top {
-    transform: translateY(0);
-  }
-
-  .house-nav__header {
-    display: block;
+  .house-nav {
+    &__header {
+      display: block;
+    }
   }
 }
 </style>

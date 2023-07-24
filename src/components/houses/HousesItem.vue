@@ -6,7 +6,7 @@
     <div class="house-info">
       <div class="house-info__options">
         <h2>{{ street }} {{ houseNumber }}</h2>
-        <edit-delete-btns v-if="madeByMe" :gap="desktopView ? 'medium' : 'small'" :id="id">
+        <edit-delete-btns v-if="madeByMe" :gap="desktopView ? 'gap-medium' : 'gap-small'" :id="id">
           <template v-slot:editBtn>
             <img src="/icons/ic_edit@3x.png" alt="edit the house details" class="edit-btn__size" />
           </template>
@@ -20,15 +20,15 @@
       <p class="house-address">{{ zipCode }} {{ city }}</p>
       <div class="house-rooms">
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="/icons/ic_bed@3x.png" alt="number of bedrooms" />
+          <img src="/icons/ic_bed@3x.png" alt="number of bedrooms" class="house-rooms__icon" />
           {{ bedrooms }}</span
         >
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="/icons/ic_bath@3x.png" alt="number of bathrooms" />
+          <img src="/icons/ic_bath@3x.png" alt="number of bathrooms" class="house-rooms__icon" />
           {{ bathrooms }}</span
         >
         <span class="house-rooms__info">
-          <img class="house-rooms__icon" src="/icons/ic_size@3x.png" alt="size of the house" />
+          <img src="/icons/ic_size@3x.png" alt="size of the house" class="house-rooms__icon" />
           {{ size }} m2</span
         >
       </div>
@@ -67,104 +67,96 @@ const detailPage = () => {
 }
 </script>
 
-<style scoped>
-h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: var(--r22);
-}
-
-.house-image-container {
-  overflow: hidden;
-  border-radius: calc((10 / 16) * 1rem);
-}
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 
 .house-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  &-container {
+    overflow: hidden;
+    border-radius: pxToRem(10);
+  }
 }
 
 .house-info {
-  grid-gap: calc((15 / 16) * 1rem);
+  grid-gap: pxToRem(15);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: var(--r16);
+  font-size: pxToRem(16);
+
+  &__options {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
-.house-info__options {
-  display: flex;
-  justify-content: space-between;
-}
-
-.house-price {
-  color: var(--text-color-secondary);
-  font-weight: 600;
-}
-.house-address {
-  color: var(--element-color-tertiary);
+.house {
+  &-price {
+    color: $text-color-secondary;
+    font-weight: 600;
+  }
+  &-address {
+    color: $element-color-tertiary;
+  }
 }
 
 .house-rooms {
-  display: flex;
+  @include flex-gap(row, pxToRem(20));
   flex-wrap: wrap;
-  gap: calc((20 / 16) * 1rem);
-  color: var(--text-color-secondary);
-}
+  color: $text-color-secondary;
 
-.house-rooms__info {
-  display: flex;
-  align-items: center;
-  gap: calc((10 / 16) * 1rem);
-}
+  &__info {
+    @include flex-gap(row, pxToRem(10));
+    align-items: center;
+  }
 
-.house-rooms__icon {
-  width: calc((20 / 16) * 1rem);
+  &__icon {
+    width: pxToRem(20);
+  }
 }
 
 .edit-btn__size {
-  width: var(--r20);
-  height: var(--r20);
+  width: pxToRem(20);
+  height: pxToRem(20);
 }
 
 .delete-btn__size {
-  width: calc((16 / 16) * 1rem);
-  height: var(--r20);
+  width: pxToRem(16);
+  height: pxToRem(20);
 }
 
 /*Mobile view starts at 550px */
 @media only screen and (max-width: 34.375em) {
-  h2 {
-    font-size: var(--r14);
-  }
   .house-image {
-    max-width: calc((167 / 16) * 1rem);
+    max-width: pxToRem(167);
   }
 
   .house-info {
     grid-gap: 0;
-    font-size: var(--r12);
+    font-size: pxToRem(12);
     justify-content: space-evenly;
   }
 
   .house-rooms {
-    gap: calc((10 / 16) * 1rem);
-  }
+    gap: pxToRem(10);
 
-  .house-rooms__icon {
-    width: calc((15 / 16) * 1rem);
+    &__icon {
+      width: pxToRem(15);
+    }
   }
 
   .edit-btn__size {
-    width: calc((16 / 16) * 1rem);
-    height: calc((16 / 16) * 1rem);
-    /* margin-right: -10px; */
+    width: pxToRem(16);
+    height: pxToRem(16);
   }
 
   .delete-btn__size {
-    width: calc((16 / 16) * 1rem);
-    height: calc((18 / 16) * 1rem);
+    width: pxToRem(16);
+    height: pxToRem(18);
   }
 }
 </style>

@@ -32,20 +32,20 @@ defineProps({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+
 .button-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--r15);
+  @extend %flex-centralize;
+  gap: pxToRem(15);
 }
 
 button {
   display: inline-block;
   border: none;
-  border-radius: var(--r10);
+  border-radius: pxToRem(10);
   background-color: transparent;
-  color: var(--element-color-background2);
+  color: $element-color-background2;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s;
@@ -55,25 +55,25 @@ button.default {
 }
 
 button.primary {
-  background-color: var(--element-color-primary);
+  background-color: $element-color-primary;
 }
 
 button.secondary {
-  background-color: var(--element-color-secondary);
+  background-color: $element-color-secondary;
 }
 
 button.tertiary {
-  background-color: var(--element-color-tertiary);
+  background-color: $element-color-tertiary;
 }
 
 button.large {
-  padding: var(--r15) var(--r20);
-  font-size: var(--r18);
+  padding: pxToRem(15) pxToRem(20);
+  font-size: pxToRem(18);
 }
 
 button.small {
-  padding: var(--r10) var(--r15);
-  font-size: var(--r12);
+  padding: pxToRem(10) pxToRem(15);
+  font-size: pxToRem(12);
 }
 
 a:link,

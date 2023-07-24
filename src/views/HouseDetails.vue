@@ -63,20 +63,21 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .house-details {
   display: grid;
   grid-template-columns: 2fr 1fr;
-}
 
-.house-details__container {
-  position: relative;
+  &__container {
+    position: relative;
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
   .house-details {
     grid-template-columns: 1fr;
-    margin: 0 calc((-1) * var(--margin-right-left-width));
+    margin: 0 pxToRem(-20);
   }
 }
 </style>

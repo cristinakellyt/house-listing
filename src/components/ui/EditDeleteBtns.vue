@@ -1,5 +1,5 @@
 <template>
-  <div :class="`gap ${gap}`">
+  <div :class="`flex ${gap}`">
     <base-button @click="editPage">
       <template v-slot:icon>
         <slot name="editBtn" />
@@ -53,19 +53,21 @@ const hideDeleteModal = () => {
 }
 </script>
 
-<style scoped>
-.gap {
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+.flex {
   display: flex;
-}
-.gap.small {
-  gap: var(--r10);
-}
 
-.gap.medium {
-  gap: var(--r20);
-}
+  &.gap-small {
+    gap: pxToRem(10);
+  }
 
-.gap.large {
-  gap: var(--r30);
+  &.gap-medium {
+    gap: pxToRem(20);
+  }
+
+  &.gap-large {
+    gap: pxToRem(30);
+  }
 }
 </style>

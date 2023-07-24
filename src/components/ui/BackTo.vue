@@ -1,6 +1,6 @@
 <template>
   <div class="back-to__container">
-    <base-button :goTo="goTo" :class="{ 'position-absolute-right-top': !desktopView }">
+    <base-button :goTo="goTo" :class="{ 'back-to__icon-position': !desktopView }">
       <template v-slot:icon>
         <img src="/icons/ic_back_grey@3x.png" width="20" height="20" />
       </template>
@@ -25,21 +25,24 @@ defineProps({
 })
 </script>
 
-<style scoped>
-.back-to__container {
-  margin: calc((30 / 16) * 1rem) 0;
-}
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 
-.back-to__paragraph {
-  color: var(--text-color-primary);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: var(--r16);
-}
+.back-to {
+  &__container {
+    margin: pxToRem(30) 0;
+  }
 
-.position-absolute-right-top {
-  position: absolute;
-  left: 0;
-  top: 0;
+  &__paragraph {
+    color: $text-color-primary;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: pxToRem(16);
+  }
+
+  &__icon-position {
+    @include position-top-left(absolute, 0, 0);
+    color: red;
+  }
 }
 </style>

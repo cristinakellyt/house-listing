@@ -37,65 +37,67 @@ const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .dtt-info {
-  margin: calc((60 / 16) * 1rem) 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--r30);
+  @include flex-gap(column, pxToRem(30));
+  margin: pxToRem(60) 0;
+
+  & h2 {
+    color: $text-color-primary;
+    font-size: pxToRem(32);
+  }
 }
 
-.dtt-info h2 {
-  color: var(--text-color-primary);
-  font-size: var(--r32);
-}
+.dtt {
+  &-logo {
+    width: pxToRem(250);
+  }
 
-.dtt-design {
-  margin-top: var(--r15);
-}
+  &-design {
+    margin-top: pxToRem(15);
 
-.dtt-design__contact {
-  margin-top: var(--r30);
-  display: flex;
-  gap: calc((40 / 16) * 1rem);
-}
+    &__contact {
+      @include flex-gap(row, pxToRem(40));
+      margin-top: pxToRem(30);
 
-.dtt-design__contact-web {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+      &-web {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-.dtt-design__contact-web a {
-  color: var(--text-color-hyperlink);
-}
-
-.dtt-logo {
-  width: calc((250 / 16) * 1rem);
+        & a {
+          color: $text-color-hyperlink;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
   .about-header {
     text-align: center;
-    margin-top: var(--r30);
+    margin-top: pxToRem(30);
   }
-  .dtt-info {
-    margin: calc((30 / 16) * 1rem) 0;
-    gap: var(--r10);
-  }
+  .dtt {
+    &-info {
+      margin: pxToRem(30) 0;
+      gap: pxToRem(10);
 
-  .dtt-info h2 {
-    font-size: var(--r14);
-  }
+      & h2 {
+        font-size: pxToRem(14);
+      }
+    }
 
-  .dtt-logo {
-    width: calc((100 / 16) * 1rem);
-    height: calc((40 / 16) * 1rem);
-  }
+    &-logo {
+      width: pxToRem(100);
+      height: pxToRem(40);
+    }
 
-  .dtt-design__contact {
-    margin-top: var(--r15);
-    gap: var(--r20);
+    &-design__contact {
+      margin-top: pxToRem(15);
+      gap: pxToRem(20);
+    }
   }
 }
 </style>

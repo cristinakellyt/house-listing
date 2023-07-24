@@ -5,10 +5,14 @@
     <h1>{{ title }}</h1>
 
     <form class="form" @submit.prevent="submitForm">
-      <div class="form-control all-width">
+      <div class="form-input">
         <label for="street-name">Street Name*</label>
         <input
-          :class="['form-input', { 'form-input__invalid': street === '' && isSubmitted }]"
+          :class="[
+            'form-input-content',
+            'form-input__all-width',
+            { 'form-input__invalid': street === '' && isSubmitted }
+          ]"
           id="street-name"
           type="text"
           placeholder="Enter street name"
@@ -16,11 +20,14 @@
         />
       </div>
 
-      <div class="form-group--flex">
-        <div class="form-control">
+      <div class="form-input__grouped">
+        <div class="form-input">
           <label for="house-number">House number*</label>
           <input
-            :class="['form-input', { 'form-input__invalid': houseNumber === '' && isSubmitted }]"
+            :class="[
+              'form-input-content',
+              { 'form-input__invalid': houseNumber === '' && isSubmitted }
+            ]"
             id="house-number"
             type="number"
             placeholder="Enter the house number"
@@ -28,10 +35,10 @@
           />
         </div>
 
-        <div class="form-control">
+        <div class="form-input">
           <label for="addition">Addition(optional)</label>
           <input
-            class="form-input"
+            class="form-input-content"
             id="addition"
             type="text"
             placeholder="e.g.A"
@@ -40,10 +47,14 @@
         </div>
       </div>
 
-      <div class="form-control all-width">
+      <div class="form-input">
         <label for="postal-code">Postal code*</label>
         <input
-          :class="['form-input', { 'form-input__invalid': zip === '' && isSubmitted }]"
+          :class="[
+            'form-input-content',
+            'form-input__all-width',
+            { 'form-input__invalid': zip === '' && isSubmitted }
+          ]"
           id="postal-code"
           type="text"
           placeholder="e.g. 1000 AA"
@@ -51,10 +62,10 @@
         />
       </div>
 
-      <div class="form-control all-width">
+      <div class="form-input form-input__all-width">
         <label for="city">City*</label>
         <input
-          :class="['form-input', { 'form-input__invalid': city === '' && isSubmitted }]"
+          :class="['form-input-content', { 'form-input__invalid': city === '' && isSubmitted }]"
           id="city"
           type="text"
           placeholder="e.g. Utrecht"
@@ -62,26 +73,30 @@
         />
       </div>
 
-      <div class="form-control all-width">
+      <div class="form-input form-input__all-width">
         <label>Upload picture(PNG or JPG)*</label>
-        <div v-if="image" class="image-input">
+        <div v-if="image" class="form-input__image">
           <closeable-content @onClose="() => (image = '')" size="small">
-            <img :src="imageSrc" class="fit-image" />
+            <img :src="imageSrc" class="form-input__image-fit" />
           </closeable-content>
         </div>
         <input
           v-else
           type="file"
           accept="image/png, image/jpeg"
-          :class="['form-input', { 'form-input__invalid': image === '' && isSubmitted }]"
+          :class="['form-input-content', { 'form-input__invalid': image === '' && isSubmitted }]"
           @change="(e) => (image = e.target.files[0])"
         />
       </div>
 
-      <div class="form-control all-width">
+      <div class="form-input">
         <label for="price">Price*</label>
         <input
-          :class="['form-input', { 'form-input__invalid': price === '' && isSubmitted }]"
+          :class="[
+            'form-input-content',
+            'form-input__all-width',
+            { 'form-input__invalid': price === '' && isSubmitted }
+          ]"
           id="price"
           type="text"
           placeholder="e.g. 150.000"
@@ -96,21 +111,24 @@
         />
       </div>
 
-      <div class="form-group--flex">
-        <div class="form-control">
+      <div class="form-input__grouped">
+        <div class="form-input">
           <label for="size">Size*</label>
           <input
-            :class="['form-input', { 'form-input__invalid': size === '' && isSubmitted }]"
+            :class="['form-input-content', { 'form-input__invalid': size === '' && isSubmitted }]"
             id="size"
             type="text"
             placeholder="e.g. 60m2"
             v-model.trim="size"
           />
         </div>
-        <div class="form-control">
+        <div class="form-input">
           <label for="garage">Garage*</label>
           <select
-            :class="['form-input', { 'form-input__invalid': hasGarage === '' && isSubmitted }]"
+            :class="[
+              'form-input-content',
+              { 'form-input__invalid': hasGarage === '' && isSubmitted }
+            ]"
             id="garage"
             v-model="hasGarage"
           >
@@ -121,21 +139,27 @@
         </div>
       </div>
 
-      <div class="form-group--flex">
-        <div class="form-control">
+      <div class="form-input__grouped">
+        <div class="form-input">
           <label for="bedrooms">Bedrooms*</label>
           <input
-            :class="['form-input', { 'form-input__invalid': bedrooms === '' && isSubmitted }]"
+            :class="[
+              'form-input-content',
+              { 'form-input__invalid': bedrooms === '' && isSubmitted }
+            ]"
             id="bedrooms"
             type="number"
             placeholder="Enter amount"
             v-model="bedrooms"
           />
         </div>
-        <div class="form-control">
+        <div class="form-input">
           <label for="bathrooms">Bathrooms*</label>
           <input
-            :class="['form-input', { 'form-input__invalid': bathrooms === '' && isSubmitted }]"
+            :class="[
+              'form-input-content',
+              { 'form-input__invalid': bathrooms === '' && isSubmitted }
+            ]"
             id="bathrooms"
             type="number"
             placeholder="Enter amount"
@@ -144,10 +168,14 @@
         </div>
       </div>
 
-      <div class="form-control all-width">
+      <div class="form-input">
         <label for="construction-date">Construction date*</label>
         <input
-          :class="['form-input', { 'form-input__invalid': constructionDate === '' && isSubmitted }]"
+          :class="[
+            'form-input-content',
+            'form-input__all-width',
+            { 'form-input__invalid': constructionDate === '' && isSubmitted }
+          ]"
           id="construction-date"
           type="number"
           placeholder="e.g. 1991"
@@ -157,10 +185,14 @@
         />
       </div>
 
-      <div class="form-control all-width">
+      <div class="form-input">
         <label for="description">Description*</label>
         <textarea
-          :class="['form-input', { 'form-input__invalid': description === '' && isSubmitted }]"
+          :class="[
+            'form-input-content',
+            'form-input__all-width',
+            { 'form-input__invalid': description === '' && isSubmitted }
+          ]"
           id="description"
           rows="5"
           placeholder="Enter description"
@@ -279,154 +311,152 @@ const submitForm = ($event) => {
 }
 </script>
 
-<style scoped>
-.form-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  max-width: 35%;
-}
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+
 .background-image {
-  position: absolute;
+  @include position-absolute(0, 0);
   z-index: -10;
   height: 100vh;
-  top: 0;
-  right: 0;
   zoom: 1.1;
 }
-.form-group--flex {
-  flex: 0 1 100%;
+.form-container {
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  gap: var(--r10);
-}
-
-.form-group--flex div {
-  width: 50%;
+  flex-direction: column;
+  max-width: 35%;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--r15);
-  margin-top: var(--r20);
+  @include flex-gap(column, pxToRem(15));
+  margin-top: pxToRem(20);
+
+  &-input {
+    @include flex-gap(column, pxToRem(5));
+
+    &__grouped {
+      flex: 0 1 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: pxToRem(10);
+
+      & div {
+        width: 50%;
+      }
+    }
+
+    &__all-width {
+      width: 100%;
+    }
+
+    &__invalid {
+      border: 1px solid $element-color-primary;
+    }
+  }
+
+  &__button {
+    margin: pxToRem(20) 0;
+    align-self: flex-end;
+    width: 50%;
+  }
 }
 
-.all-width input {
-  width: 100%;
+// Start Image
+.form-input__image {
+  width: pxToRem(120);
+  height: pxToRem(120);
+
+  &-fit {
+    border-radius: pxToRem(5);
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
 }
+// End Image
 
-.form-control {
-  display: flex;
-  flex-direction: column;
-  gap: calc((5 / 16) * 1rem);
-}
-
-.form__button {
-  margin: var(--r20) 0;
-  align-self: flex-end;
-  width: 50%;
-}
-.required-field {
-  font-family: 'Montserrat', sans-serif;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--element-color-primary);
-  font-size: var(--r14);
-  position: absolute;
-  bottom: calc((70 / 16) * 1rem);
-}
-
-/* Start Image */
-.image-input {
-  width: calc((120 / 16) * 1rem);
-  height: calc((120 / 16) * 1rem);
-}
-
-.fit-image {
-  border-radius: 5px;
-  object-fit: cover;
-  height: 100%;
-}
-
-/* End Image */
-
-/* Start Form Input */
-
+// Start Form Input
 .form-input {
-  border: 1px solid transparent;
-  padding: var(--r15);
-  border-radius: calc((5 / 16) * 1rem);
-  font-size: var(--r14);
-  background-color: var(--element-color-background2);
-}
+  &-content {
+    border: 1px solid transparent;
+    padding: pxToRem(15);
+    border-radius: pxToRem(5);
+    font-size: pxToRem(14);
+    background-color: $element-color-background2;
+  }
 
-.form-input::placeholder {
-  color: var(--element-color-tertiary);
-  font-family: 'Open Sans', sans-serif;
-  font-size: var(--r14);
-}
+  &::placeholder {
+    color: $element-color-tertiary;
+    font-family: 'Open Sans', sans-serif;
+    font-size: pxToRem(14);
+  }
 
-.form-input__invalid {
-  border: 1px solid var(--element-color-primary);
-}
-.form-input__invalid::placeholder {
-  color: var(--element-color-primary);
+  &__invalid::placeholder {
+    color: $element-color-primary;
+  }
 }
 
 label {
-  font-size: var(--r14);
+  font-size: pxToRem(14);
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  color: var(--text-color-secondary);
+  color: $text-color-secondary;
 }
 
 select {
-  padding: var(--r10);
+  padding: pxToRem(10);
   font-family: 'Open Sans', sans-serif;
-  font-size: var(--r14);
+  font-size: pxToRem(14);
   color: black;
 }
 
 textarea::placeholder {
-  color: var(--element-color-tertiary);
+  color: $element-color-tertiary;
   font-family: 'Open Sans', sans-serif;
-  font-size: var(--r14);
+  font-size: pxToRem(14);
 }
 
+// Input type 'file' style
 input[type='file'] {
-  border: 2px dashed var(--element-color-tertiary);
-  height: 120px;
-  width: 120px;
+  border: 2px dashed $element-color-tertiary;
+  height: pxToRem(120);
+  width: pxToRem(120);
   cursor: pointer;
   color: transparent;
-  margin-top: 10px;
+  margin-top: pxToRem(10);
   position: relative;
   background-color: transparent;
-}
 
-input[type='file'].form-input__invalid {
-  border: 2px dashed var(--element-color-primary);
+  &.form-input__invalid {
+    border: 2px dashed $element-color-primary;
+  }
+
+  &::before {
+    @include position-top-left(absolute, 50%, 50%);
+    background-image: url('/icons/ic_plus_grey@3x.png');
+    content: '';
+    transform: translate(-50%, -50%);
+    width: pxToRem(35);
+    height: pxToRem(35);
+    background-size: pxToRem(35);
+    background-repeat: no-repeat;
+  }
 }
 
 ::-webkit-file-upload-button {
   visibility: hidden;
 }
+// End Form Input
 
-input[type='file']::before {
+.required-field {
   position: absolute;
-  background-image: url('/icons/ic_plus_grey@3x.png');
-  content: '';
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc((35 / 16) * 1rem);
-  height: calc((35 / 16) * 1rem);
-  background-size: calc((35 / 16) * 1rem);
-  background-repeat: no-repeat;
+  bottom: pxToRem(70);
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 500;
+  color: $element-color-primary;
+  font-size: pxToRem(14);
 }
-
-/* End Form Input */
 
 @media only screen and (max-width: 34.375em) {
   h1 {
@@ -436,33 +466,31 @@ input[type='file']::before {
   .margin-zero {
     margin: 0;
   }
-  .form-container {
-    max-width: 100%;
-    margin-top: var(--r30);
-  }
-  .post {
-    width: 100%;
-  }
-  .form label {
-    font-size: var(--r12);
-  }
-  .form-control input::placeholder,
-  .form select,
-  .form-control textarea::placeholder {
-    font-size: var(--r12);
-  }
   .background-image {
     height: max-content;
     top: revert;
     bottom: 0;
+  }
+  .form-container {
+    max-width: 100%;
+    margin-top: pxToRem(30);
+  }
+
+  .form label {
+    font-size: pxToRem(12);
+  }
+  .form-input input::placeholder,
+  .form select,
+  .form-input textarea::placeholder {
+    font-size: pxToRem(12);
   }
 
   .form__button {
     width: 100%;
   }
   .required-field {
-    font-size: var(--r12);
-    bottom: calc((80 / 16) * 1rem);
+    font-size: pxToRem(12);
+    bottom: pxToRem(80);
   }
 }
 </style>

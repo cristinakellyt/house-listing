@@ -1,6 +1,6 @@
 <template>
   <img :src="image" alt="house selected" />
-  <div class="house-details--options mobile-options">
+  <div class="house-details--options">
     <base-button goTo="/houses">
       <template v-slot:icon>
         <img
@@ -14,7 +14,7 @@
     </base-button>
 
     <div v-if="madeByMe">
-      <edit-delete-btns gap="large" :id="id">
+      <edit-delete-btns gap="gap-large" :id="id">
         <template v-slot:editBtn>
           <img
             src="/icons/ic_edit_white@3x.png"
@@ -40,18 +40,15 @@ defineProps({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .house-details--options {
+  @include position-top-left(absolute, 0, pxToRem(20));
   display: none;
   justify-content: space-between;
   align-items: center;
-}
-.mobile-options {
-  position: absolute;
-  margin-top: calc((55 / 16) * 1rem);
+  margin-top: pxToRem(55);
   width: 90%;
-  left: var(--r20);
-  top: 0;
 }
 
 @media only screen and (max-width: 34.375em) {

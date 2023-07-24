@@ -43,64 +43,85 @@ const clearSearchKey = () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: var(--element-color-tertiary-lighter);
-  border-radius: var(--r10);
+  background-color: $element-color-tertiary-lighter;
+  border-radius: pxToRem(10);
   position: relative;
-}
 
-.search-bar input:focus {
-  outline: none;
-}
+  & input:focus {
+    outline: none;
+  }
 
-.search-bar:focus-within {
-  box-shadow: 0 0 0 1px var(--element-color-secondary);
+  &:focus-within {
+    box-shadow: 0 0 0 1px $element-color-secondary;
+  }
 }
 
 input {
   width: 100%;
   font-family: 'Open sans', sans-serif;
-  color: var(--element-color-secondary);
-  border-radius: var(--r10);
+  color: $element-color-secondary;
+  border-radius: pxToRem(10);
   border: none;
-  background-color: var(--element-color-tertiary-lighter);
-}
+  background-color: $element-color-tertiary-lighter;
 
-input::placeholder {
-  color: var(--element-color-tertiary);
-}
+  &::placeholder {
+    color: $element-color-tertiary;
+  }
 
-input.large {
-  padding: var(--r15) var(--r20) var(--r15) 0;
-  font-size: var(--r14);
-}
+  &.large {
+    padding: pxToRem(15) pxToRem(20) pxToRem(15) 0;
+    font-size: pxToRem(14);
+  }
 
-input.small {
-  padding: var(--r10) var(--r15) var(--r10) 0;
-  font-size: var(--r12);
+  &.small {
+    padding: pxToRem(10) pxToRem(15) pxToRem(10) 0;
+    font-size: pxToRem(12);
+  }
 }
 
 .search-icon {
-  margin: 0 var(--r20);
+  margin: 0 pxToRem(20);
+
+  &.large {
+    width: pxToRem(20);
+    height: pxToRem(20);
+  }
+
+  &.small {
+    width: pxToRem(15);
+    height: pxToRem(15);
+  }
 }
 
 .clear-icon {
   position: absolute;
-  right: var(--r10);
+  right: pxToRem(10);
+
+  &.large {
+    width: pxToRem(20);
+    height: pxToRem(20);
+  }
+
+  &.small {
+    width: pxToRem(15);
+    height: pxToRem(15);
+  }
 }
 
-.search-icon.large,
-.clear-icon.large {
-  width: var(--r20);
-  height: var(--r20);
-}
+// .search-icon.large,
+// .clear-icon.large {
+//   width: pxToRem(20);
+//   height: pxToRem(20);
+// }
 
-.search-icon.small,
-.clear-icon.small {
-  width: var(--r15);
-  height: var(--r15);
-}
+// .search-icon.small,
+// .clear-icon.small {
+//   width: pxToRem(15);
+//   height: pxToRem(15);
+// }
 </style>

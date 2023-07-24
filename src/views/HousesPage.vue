@@ -1,7 +1,7 @@
 <template>
   <HouseNav />
   <HouseFilter @searchHouses="onSearchHouses" />
-  <h2 v-if="numberOfResults > 0 && isFiltered" class="search-results--number">
+  <h2 v-if="numberOfResults > 0 && isFiltered" class="search-results-number">
     {{ numberOfResults }} Results found
   </h2>
   <HouseNotFound v-if="numberOfResults === 0 && isFiltered" />
@@ -69,14 +69,15 @@ const onSearchHouses = (city, sort) => {
 }
 </script>
 
-<style scoped>
-.search-results--number {
-  margin: calc((30 / 16) * 1rem) 0;
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+.search-results-number {
+  margin: pxToRem(30);
 }
 
 @media only screen and (max-width: 34.375em) {
-  .search-results--number {
-    margin: var(--r20) 0;
+  .search-results-number {
+    margin: pxToRem(20) 0;
   }
 }
 </style>

@@ -5,16 +5,14 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .page-not-found {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @extend %flex-column-centralize;
   height: 40vh;
-}
 
-.page-not-found__image {
-  width: 40%;
+  &__image {
+    width: 40%;
+  }
 }
 </style>

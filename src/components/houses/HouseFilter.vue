@@ -74,60 +74,45 @@ const sortHouse = (sortType) => {
 }
 </script>
 
-<style scoped>
-.position-absolute-right-top {
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: translateY(-10%);
-}
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 
 .house-filter {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-top: calc((35 / 16) * 1rem);
+  margin-top: pxToRem(35);
+
+  &__search {
+    flex: 0 0 40%;
+  }
+
+  &__buttons {
+    flex: 0 0 20%;
+  }
 }
 
-.house-filter__search {
-  flex: 0 0 40%;
-}
-
-.house-filter__buttons {
-  flex: 0 0 20%;
-}
-
-.filter-buttons__price,
-.filter-buttons__size {
-  width: 50%;
-}
-.filter-buttons__price {
-  border-radius: var(--r10) 0 0 var(--r10);
-}
-.filter-buttons__size {
-  border-radius: 0 var(--r10) var(--r10) 0;
+.filter-buttons {
+  &__price {
+    width: 50%;
+    border-radius: pxToRem(10) 0 0 pxToRem(10);
+  }
+  &__size {
+    width: 50%;
+    border-radius: 0 pxToRem(10) pxToRem(10) 0;
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
-  h1 {
-    text-align: center;
-  }
   .house-filter {
-    margin-top: calc((10 / 16) * 1rem);
-    gap: var(--r15);
-  }
+    margin-top: pxToRem(10);
+    gap: pxToRem(15);
 
-  .house-filter__search {
-    flex: 0 0 100%;
-  }
-
-  .house-filter__buttons {
-    flex: 0 0 100%;
-  }
-
-  .position-absolute-right-top {
-    transform: translateY(0);
+    &__search,
+    &__buttons {
+      flex: 0 0 100%;
+    }
   }
 }
 </style>
