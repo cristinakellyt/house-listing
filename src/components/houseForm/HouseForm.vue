@@ -455,6 +455,9 @@ input[type='file']::before {
     bottom: 0;
   }
 
+  .form__button {
+    width: 100%;
+  }
   .required-field {
     font-size: var(--r12);
     bottom: calc((80 / 16) * 1rem);
