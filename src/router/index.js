@@ -5,6 +5,7 @@ import HouseDetails from '@/views/HouseDetails.vue'
 import HousesHome from '@/views/HousesHome.vue'
 import HouseCreate from '@/views/HouseCreate.vue'
 import HouseEdit from '@/views/HouseEdit.vue'
+import PageNotfound from '@/views/PageNotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,7 +44,7 @@ const router = createRouter({
       path: '/about',
       component: AboutPage
     },
-    { path: '/:notFound(.*)', component: null }
+    { path: '/:notFound(.*)', component: PageNotfound }
   ]
 })
 
