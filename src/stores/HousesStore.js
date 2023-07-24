@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 
+const APIkey = { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
+const baseAPIUrl = 'https://api.intern.d-tt.nl/api/houses'
+
 export const useHousesStore = defineStore('HousesStore', {
   state: () => {
     return {
@@ -12,23 +15,19 @@ export const useHousesStore = defineStore('HousesStore', {
     }
   },
   actions: {
-    fetchHouses() {
-      fetch('https://api.intern.d-tt.nl/api/houses', {
-        method: 'GET',
-        headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
-      })
-        .then((response) => {
-          return response.json()
+    async fetchHouses() {
+      try {
+        const houses = await fetch(baseAPIUrl, {
+          method: 'GET',
+          headers: APIkey
         })
-        .then((data) => {
-          for (const house of data) {
-            this.houses.push(house)
-          }
-        })
-        .catch((error) => {
-          // TODO Add error handler
-          console.log(error)
-        })
+        const data = await houses.json()
+        for (const house of data) {
+          this.houses.push(house)
+        }
+      } catch (err) {
+        console.log(err)
+      }
     },
 
     async houseById(houseId) {
@@ -38,9 +37,9 @@ export const useHousesStore = defineStore('HousesStore', {
         return selectedHouse
       } else {
         try {
-          const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+          const response = await fetch(`${baseAPIUrl}/${houseId}`, {
             method: 'GET',
-            headers: { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
+            headers: APIkey
           })
           const data = await response.json()
           return data[0]
@@ -52,12 +51,10 @@ export const useHousesStore = defineStore('HousesStore', {
 
     async postHouse(data) {
       try {
-        const response = await fetch('https://api.intern.d-tt.nl/api/houses', {
+        const response = await fetch(baseAPIUrl, {
           method: 'POST',
           body: data,
-          headers: {
-            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
-          }
+          headers: APIkey
         })
         const newHouse = await response.json()
         this.houses.push(newHouse)
@@ -69,12 +66,10 @@ export const useHousesStore = defineStore('HousesStore', {
 
     async postImage(img, houseId) {
       try {
-        const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}/upload`, {
+        const response = await fetch(`${baseAPIUrl}/${houseId}/upload`, {
           method: 'POST',
           body: img,
-          headers: {
-            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
-          }
+          headers: APIkey
         })
         await this.updateHousesStore(houseId)
         return response
@@ -85,12 +80,10 @@ export const useHousesStore = defineStore('HousesStore', {
 
     async editHouse(data, houseId) {
       try {
-        const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+        const response = await fetch(`${baseAPIUrl}/${houseId}`, {
           method: 'POST',
           body: data,
-          headers: {
-            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
-          }
+          headers: APIkey
         })
         await this.updateHousesStore(houseId)
         return response
@@ -108,11 +101,9 @@ export const useHousesStore = defineStore('HousesStore', {
 
     async deleteHouse(houseId) {
       try {
-        const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+        const response = await fetch(`${baseAPIUrl}/${houseId}`, {
           method: 'DELETE',
-          headers: {
-            'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l'
-          }
+          headers: APIkey
         })
         this.houses = this.houses.filter((house) => house.id !== +houseId)
         return response
