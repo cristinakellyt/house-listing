@@ -10,7 +10,7 @@
       <HouseDescription
         :id="selectedHouse.id"
         :street="selectedHouse.location.street"
-        :zipcode="selectedHouse.location.zip"
+        :zip="selectedHouse.location.zip"
         :city="selectedHouse.location.city"
         :houseNumber="selectedHouse.location.houseNumber"
         :price="selectedHouse.price"
