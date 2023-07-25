@@ -1,6 +1,6 @@
 <template>
   <div class="not-found-house">
-    <img src="/icons/img_empty_houses@3x.png" alt="" class="not-found-house__image" />
+    <img src="/icons/img_empty_houses@3x.png" alt="house not found" class="not-found-house__image" />
     <p>No results found.</p>
     <p>Please try another keyword</p>
   </div>

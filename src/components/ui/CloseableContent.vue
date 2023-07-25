@@ -5,6 +5,7 @@
       class="clear-content__icon"
       :class="`${size}`"
       @click="onClickHandler"
+      alt="close image"
     />
     <slot></slot>
   </div>

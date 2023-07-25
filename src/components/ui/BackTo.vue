@@ -2,7 +2,7 @@
   <div class="back-to__container">
     <base-button :goTo="goTo" :class="{ 'back-to__icon-position': !desktopView }">
       <template v-slot:icon>
-        <img src="/icons/ic_back_grey@3x.png" width="20" height="20" />
+        <img src="/icons/ic_back_grey@3x.png" width="20" height="20" alt="back to button" />
       </template>
       <slot>
         <p v-if="desktopView" class="back-to__paragraph">Back to overview</p>

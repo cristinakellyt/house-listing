@@ -77,7 +77,7 @@
         <label>Upload picture(PNG or JPG)*</label>
         <div v-if="image" class="form-input__image">
           <closeable-content @onClose="() => (image = '')" size="small">
-            <img :src="imageSrc" class="form-input__image-fit" />
+            <img :src="imageSrc" class="form-input__image-fit" alt="file image selected" />
           </closeable-content>
         </div>
         <input

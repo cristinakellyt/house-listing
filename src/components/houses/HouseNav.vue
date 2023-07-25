@@ -4,13 +4,17 @@
       <h1>Houses</h1>
       <base-button v-if="desktopView" btnColor="primary" size="large" goTo="/houses/create">
         <template v-slot:icon>
-          <img class="house-nav--icon" src="/icons/ic_plus_white@3x.png" />
+          <img class="house-nav--icon" src="/icons/ic_plus_white@3x.png" alt="create new house" />
         </template>
         <span>CREATE NEW</span>
       </base-button>
       <base-button v-else goTo="/houses/create" size="small">
         <template v-slot:icon>
-          <img class="house-nav--icon__mobile" src="/icons/ic_plus_grey@3x.png" />
+          <img
+            class="house-nav--icon__mobile"
+            src="/icons/ic_plus_grey@3x.png"
+            alt="create new house"
+          />
         </template>
       </base-button>
     </div>

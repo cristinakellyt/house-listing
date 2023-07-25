@@ -14,6 +14,7 @@
       @click="clearSearchKey"
       :class="`clear-icon ${size}`"
       src="/icons/ic_clear@3x.png"
+      alt="clear input"
     />
   </div>
 </template>
