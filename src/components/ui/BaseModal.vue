@@ -1,22 +1,33 @@
 <template>
   <div class="backdrop" @click="cancel"></div>
-
   <base-card class="modal">
     <div class="modal__content">
-      <h2><slot name="title">title</slot></h2>
-      <p><slot name="text">Are you sure?</slot></p>
-      <base-button btnColor="primary" size="large" @click="confirm"
-        ><slot name="firstBtn">Yes</slot></base-button
-      >
-      <base-button btnColor="secondary" size="large" @click="cancel">
-        <slot name="secondBtn">No</slot></base-button
-      >
+      <slot name="title">title</slot>
+      <div>
+        <slot name="text">Are you sure?</slot>
+      </div>
+
+      <div class="modal__content--buttons">
+        <base-button :btnColor="firstBnTheme" :size="btnsSize" @click="confirm"
+          ><slot name="firstBtn">Yes</slot></base-button
+        >
+        <base-button :btnColor="secondBtnTheme" :size="btnsSize" @click="cancel">
+          <slot name="secondBtn">No</slot></base-button
+        >
+      </div>
     </div>
   </base-card>
 </template>
 
 <script setup>
 const emit = defineEmits(['confirm', 'cancel'])
+const props = defineProps({
+  firstBnTheme: String,
+  secondBtnTheme: String,
+  btnsSize: String
+})
+
+console.log(props.firstBnTheme)
 
 const confirm = () => {
   emit('confirm')
@@ -40,32 +51,36 @@ const cancel = () => {
   @extend %flex-centralize;
   @include position-top-left(fixed, 50%, 50%);
   transform: translate(-50%, -50%);
-  width: pxToRem(688);
+  width: pxToRem(640);
   z-index: 100;
   transition: all 0.2s ease-out;
 
   &__content {
     text-align: center;
-    gap: pxToRem(2);
-    padding: pxToRem(2);
-    width: pxToRem(480);
+    display: flex;
+    flex-direction: column;
+    gap: pxToRem(20);
+    padding: pxToRem(30) 0;
 
-    & h2 {
-      color: $text-color-primary;
-      margin-bottom: pxToRem(30);
-    }
-
-    & p {
-      margin-bottom: pxToRem(60);
+    &--buttons {
+      @include flex-gap(column, pxToRem(20));
+      margin-top: pxToRem(32);
     }
   }
+}
 
-  & button {
-    width: 100%;
-  }
+@media only screen and (max-width: 34.375em) {
+  .modal {
+    width: pxToRem(320);
 
-  & button:last-child {
-    margin-top: pxToRem(30);
+    &__content {
+      gap: pxToRem(10);
+      padding: pxToRem(10) 0;
+
+      &--buttons {
+        margin-top: pxToRem(10);
+      }
+    }
   }
 }
 </style>

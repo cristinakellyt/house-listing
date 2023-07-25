@@ -1,5 +1,11 @@
 <template>
-  <base-modal @confirm="deleteHouse" @cancel="closeModal">
+  <base-modal
+    @confirm="deleteHouse"
+    @cancel="closeModal"
+    firstBnTheme="primary"
+    secondBtnTheme="secondary"
+    :btnsSize="desktopView ? 'large' : 'small'"
+  >
     <template v-slot:title>
       <h2>Delete listing</h2>
     </template>
@@ -15,9 +21,13 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useHousesStore } from '@/stores/HousesStore'
+import { computed, inject } from 'vue'
 
 const router = useRouter()
 const emit = defineEmits(['closeModal'])
+const windowWidth = inject('windowWidth')
+const desktopView = computed(() => windowWidth.value > 550)
+
 const housesList = useHousesStore()
 
 const props = defineProps({

@@ -9,6 +9,7 @@ h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: pxToRem(22);
   font-weight: 700;
+  color: $text-color-primary;
 }
 
 @media only screen and (max-width: 34.375em) {
