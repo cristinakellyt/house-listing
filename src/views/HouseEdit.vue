@@ -17,6 +17,7 @@ const props = defineProps({
 
 const house = ref('')
 
+// Fetch the house data based on the provided 'houseId' received through router params.
 const getHouse = async () => {
   try {
     house.value = await housesList.houseById(props.houseId)
@@ -25,6 +26,7 @@ const getHouse = async () => {
   }
 }
 
+// Handle the edit of a given house and go to its details page
 const editHouse = async (formData, imageFormData) => {
   try {
     await housesList.editHouse(formData, props.houseId)

@@ -21,25 +21,33 @@
 
 <script setup>
 import { ref } from 'vue'
-
+// Define the 'onSearch' event
 const emit = defineEmits(['onSearch'])
 
 defineProps({
   size: String
 })
 
-const searchKey = ref('')
+const searchKey = ref('') // Store the user's search input.
 
+// Handle input changes.
 const onInputHandler = () => {
+  // If the search input is empty, emit the 'onSearch' event with
+  // empty search key. Means the user wants to clear its search.
   if (searchKey.value === '') emit('onSearch', searchKey.value)
 }
 
+// Handle the 'Enter' key press event.
 const onEnterHandler = () => {
+  // Emit the 'onSearch' event with the current search key. Means the user wants to search.
   emit('onSearch', searchKey.value)
 }
 
+// Clear the search input through the clear button.
 const clearSearchKey = () => {
+  // Clear the search input by setting the 'searchKey' to an empty string.
   searchKey.value = ''
+  // Emit the 'onSearch' event with the updated empty search key.
   emit('onSearch', searchKey.value)
 }
 </script>

@@ -21,13 +21,12 @@
 
 <script setup>
 const emit = defineEmits(['confirm', 'cancel'])
-const props = defineProps({
+
+defineProps({
   firstBnTheme: String,
   secondBtnTheme: String,
   btnsSize: String
 })
-
-console.log(props.firstBnTheme)
 
 const confirm = () => {
   emit('confirm')

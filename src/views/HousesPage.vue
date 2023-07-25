@@ -31,14 +31,15 @@ import HouseNotFound from '@/components/houses/HouseNotFound.vue'
 import { useHousesStore } from '@/stores/HousesStore'
 import { ref, watch } from 'vue'
 
-const housesList = useHousesStore()
-const filteredHouses = ref(housesList.getHouses)
-const isFiltered = ref(false)
-const numberOfResults = ref('')
-const cityFilter = ref('')
-const sortType = ref('')
+const housesList = useHousesStore() // instance of the 'HousesStore' using the 'useHousesStore' function.
+const filteredHouses = ref(housesList.getHouses) //  reactive reference 'filteredHouses' initialized with the current list of houses.
+const isFiltered = ref(false) //  reactive reference 'isFiltered' initialized as false to keep track of whether the list is filtered or not.
+const numberOfResults = ref('') //  reactive reference 'numberOfResults' to store the number of filtered results (houses).
+const cityFilter = ref('') //  reactive reference 'cityFilter' to store the current city filter emitted through 'searchHouses' event.
+const sortType = ref('') //  reactive reference 'sortType' to store the current sorting option emitted through 'searchHouses' event.
 
-// Update list if houses in store changes, maintaining the sort and filters
+// Watch for changes in the 'housesList.getHouses' getter, and trigger the search function
+// when the list of houses changes, maintaining the sort and filters.
 watch(
   () => housesList.getHouses,
   () => {
@@ -46,6 +47,7 @@ watch(
   }
 )
 
+// Function to handle filter by city and sort the list based on price/size
 const onSearchHouses = (city, sort) => {
   cityFilter.value = city
   sortType.value = sort
@@ -56,10 +58,11 @@ const onSearchHouses = (city, sort) => {
       (house) => house.location.city.toLowerCase() === cityFilter.value.toLowerCase()
     )
     numberOfResults.value = filteredHouses.value.length
-  } else {
-    isFiltered.value = false
+
+    isFiltered.value = false // Set 'isFiltered' to false if there's no city filter applied.
   }
 
+  // Sort 'filteredHouses' based on the chosen sorting type ('price' or 'size').
   if (sortType.value === 'price') {
     filteredHouses.value.sort((a, b) => a.price - b.price)
   }

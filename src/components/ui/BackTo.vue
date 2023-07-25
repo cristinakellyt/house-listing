@@ -18,6 +18,7 @@ const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 
 defineProps({
+  // Path to go when button/link is pressed.
   goTo: {
     type: String,
     default: ''

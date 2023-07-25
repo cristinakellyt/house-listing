@@ -46,16 +46,18 @@ const props = defineProps({ houseId: String })
 
 const housesList = useHousesStore()
 
-const loading = ref(true)
+const loading = ref(true) // indicates page is loading
 const houseFound = ref(false)
 const selectedHouse = ref()
 
+// Fetch the house data from the store based on the provided 'houseId' received through router params.
 const getHouse = async () => {
   try {
     selectedHouse.value = await housesList.houseById(props.houseId)
     houseFound.value = true
     loading.value = false
   } catch (error) {
+    // If no house found, shows HouseNotFound page.
     houseFound.value = false
   }
 }

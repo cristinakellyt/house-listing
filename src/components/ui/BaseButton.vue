@@ -17,14 +17,18 @@
 
 <script setup>
 defineProps({
+  // A path so the component render a router-link button with the provided route.
+  // If not provided, render a regular button.
   goTo: {
     type: String,
     default: ''
   },
+  // Receives the color required for the button.
   btnColor: {
     type: String,
     default: 'default'
   },
+  // Receives the size required for the button.
   size: {
     type: String,
     default: 'default'

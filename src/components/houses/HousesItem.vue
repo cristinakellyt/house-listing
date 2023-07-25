@@ -45,6 +45,7 @@ import { computed, inject } from 'vue'
 const windowWidth = inject('windowWidth')
 const desktopView = computed(() => windowWidth.value > 550)
 
+// Define the props received and used in the template, specifying their types.
 const props = defineProps({
   id: Number,
   image: String,
@@ -59,9 +60,12 @@ const props = defineProps({
   madeByMe: Boolean
 })
 
+// Make sure price is shown with proper dots e.g 1.000 .
 const formatPrice = useFormatPrice(props.price)
 
 const router = useRouter()
+
+// Navigate to the detail page when the house item is clicked, passing houseId as a param.
 const detailPage = () => {
   router.push({ name: 'detail', params: { houseId: props.id } })
 }

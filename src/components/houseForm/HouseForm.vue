@@ -227,6 +227,7 @@ const props = defineProps({
 
 const isHouseInitialized = props.house !== undefined
 
+// If there is already some content from house props, fill the references with the value, otherwise, it will be empty.
 const street = ref(isHouseInitialized ? props.house.location.street : '')
 const houseNumber = ref(isHouseInitialized ? props.house.location.houseNumber : '')
 const houseNumberAddition = ref(isHouseInitialized ? props.house.location.houseNumberAddition : '')
@@ -241,21 +242,26 @@ const bathrooms = ref(isHouseInitialized ? props.house.rooms.bathrooms : '')
 const constructionDate = ref(isHouseInitialized ? props.house.constructionYear : '')
 const description = ref(isHouseInitialized ? props.house.description : '')
 
+// Reference to track if the user try to submit.
 const isSubmitted = ref(false)
 
+// Compute the value of image src attribute .
 const imageSrc = computed(() => {
   if (image.value instanceof File) {
     return URL.createObjectURL(image.value)
   }
+  // If 'image.value' is not a File object (e.g., a URL or other data), return 'image.value' as is.
+  // This happens whe the data come from props.
   return image.value
 })
 
+// Handle the dots in the price show in the UI.
 const priceFormatted = computed(() => {
   return useFormatPrice(price.value)
 })
 
-// Check if all required fields are filled in and return an array with the missing fields
-// If the array is empty, all required fields are filled in and the form can be submitted
+// Check if all required fields are filled in and return a boolean.
+// If all required fields are filled in and the form can be submitted.
 const isFormInvalid = computed(() => {
   let error = false
   if (
@@ -278,17 +284,19 @@ const isFormInvalid = computed(() => {
   return error
 })
 
+// Handle the submit event.
 const submitForm = ($event) => {
   isSubmitted.value = true
 
   if (isFormInvalid.value) return
 
   let formData = new FormData()
-  // Normalize price to remove dots. API does tell much about how many digits are allows. It was noted that
-  // after some number of digits (6) it just add zeros so it was decided to allow from 0 to 999.999
+  // Normalize price to remove dots. API doesn't tell much about how many digits are allowed. It was noted that
+  // after some number of digits (6) it just add zeros so it was decided to allow price from 0 to 999.999
   price.value = [...price.value.toString()]
   price.value = price.value.filter((element) => element !== '.')
   price.value = price.value.join('')
+  // Append key value pairs to 'formData' in the order that server receives.
   formData.append('price', price.value)
   formData.append('bedrooms', bedrooms.value)
   formData.append('bathrooms', bathrooms.value)
