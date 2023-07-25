@@ -50,6 +50,7 @@ watch(
 // Function to handle filter by city and sort the list based on price/size
 const onSearchHouses = (city, sort) => {
   cityFilter.value = city
+  console.log(cityFilter.value)
   sortType.value = sort
   filteredHouses.value = [...housesList.getHouses]
   if (cityFilter.value) {
@@ -58,7 +59,7 @@ const onSearchHouses = (city, sort) => {
       (house) => house.location.city.toLowerCase() === cityFilter.value.toLowerCase()
     )
     numberOfResults.value = filteredHouses.value.length
-
+  } else {
     isFiltered.value = false // Set 'isFiltered' to false if there's no city filter applied.
   }
 
@@ -69,13 +70,14 @@ const onSearchHouses = (city, sort) => {
   if (sortType.value === 'size') {
     filteredHouses.value.sort((a, b) => a.size - b.size)
   }
+  console.log(isFiltered.value)
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 .search-results-number {
-  margin: pxToRem(30);
+  margin: pxToRem(30) 0;
 }
 
 @media only screen and (max-width: 34.375em) {

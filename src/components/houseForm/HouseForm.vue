@@ -356,10 +356,6 @@ const submitForm = ($event) => {
     &__all-width {
       width: 100%;
     }
-
-    &__invalid {
-      border: 1px solid $element-color-primary;
-    }
   }
 
   &__button {
@@ -397,6 +393,10 @@ const submitForm = ($event) => {
     color: $element-color-tertiary;
     font-family: 'Open Sans', sans-serif;
     font-size: pxToRem(14);
+  }
+
+  &__invalid {
+    border: 1px solid $element-color-primary;
   }
 
   &__invalid::placeholder {

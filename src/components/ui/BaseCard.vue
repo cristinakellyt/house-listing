@@ -12,7 +12,7 @@
   border-radius: pxToRem(10);
   box-shadow: 0 0 pxToRem(20) pxToRem(-4) $element-color-tertiary;
   padding: pxToRem(20);
-  margin: pxToRem(20);
+  margin: pxToRem(20) 0;
 }
 
 @media only screen and (max-width: 34.375em) {
