@@ -2,11 +2,13 @@
   <div v-if="houseFound" class="house-details">
     <div class="house-details__container">
       <BackTo v-if="desktopView" goTo="/houses" />
-      <DetailImage
-        :image="selectedHouse.image"
-        :madeByMe="selectedHouse.madeByMe"
-        :id="selectedHouse.id"
-      />
+      <div class="house-details__image">
+        <DetailImage
+          :image="selectedHouse.image"
+          :madeByMe="selectedHouse.madeByMe"
+          :id="selectedHouse.id"
+        />
+      </div>
       <HouseDescription
         :id="selectedHouse.id"
         :street="selectedHouse.location.street"
@@ -72,12 +74,22 @@ onMounted(() => {
   &__container {
     position: relative;
   }
+
+  &__image {
+    height: pxToRem(600);
+    width: 100%;
+    background-color: $element-color-background2;
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
   .house-details {
     grid-template-columns: 1fr;
     margin: 0 pxToRem(-20);
+
+    &__image {
+      height: pxToRem(259);
+    }
   }
 }
 </style>

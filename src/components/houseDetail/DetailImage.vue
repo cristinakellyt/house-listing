@@ -1,5 +1,5 @@
 <template>
-  <img :src="image" alt="house selected" />
+  <img :src="image" alt="house selected" class="house-details--image" />
   <div v-if="!desktopView" class="house-details--options">
     <base-button goTo="/houses">
       <template v-slot:icon>
@@ -54,5 +54,12 @@ defineProps({
   align-items: center;
   margin-top: pxToRem(55);
   width: 90%;
+}
+
+.house-details--image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  margin: auto;
 }
 </style>
