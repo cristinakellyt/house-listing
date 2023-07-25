@@ -1,6 +1,6 @@
 <template>
   <img :src="image" alt="house selected" />
-  <div class="house-details--options">
+  <div v-if="!desktopView" class="house-details--options">
     <base-button goTo="/houses">
       <template v-slot:icon>
         <img
@@ -33,6 +33,11 @@
 </template>
 
 <script setup>
+import { computed, inject } from 'vue'
+
+const windowWidth = inject('windowWidth')
+const desktopView = computed(() => windowWidth.value > 550)
+
 defineProps({
   image: String,
   madeByMe: Boolean,
@@ -44,16 +49,10 @@ defineProps({
 @import '@/assets/main.scss';
 .house-details--options {
   @include position-top-left(absolute, 0, pxToRem(20));
-  display: none;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: pxToRem(55);
   width: 90%;
-}
-
-@media only screen and (max-width: 34.375em) {
-  .house-details--options {
-    display: flex;
-  }
 }
 </style>
