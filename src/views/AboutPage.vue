@@ -31,10 +31,10 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { inject } from 'vue'
 
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
+const desktopView = inject('desktopView')
+
 </script>
 
 <style scoped lang="scss">

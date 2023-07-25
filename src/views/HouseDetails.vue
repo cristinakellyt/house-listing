@@ -37,10 +37,9 @@ import HouseNotFound from '@/components/houses/HouseNotFound.vue'
 import BackTo from '@/components/ui/BackTo.vue'
 import { useHousesStore } from '@/stores/HousesStore'
 import { onMounted, ref } from 'vue'
-import { inject, computed } from 'vue'
+import { inject } from 'vue'
 
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
+const desktopView = inject('desktopView')
 
 const props = defineProps({ houseId: String })
 

@@ -25,12 +25,11 @@
 </template>
 
 <script setup>
-import { computed, inject, ref } from 'vue'
+import { inject, ref } from 'vue'
 // Define the 'emit' function to emit the 'searchHouses' event to the parent component.
 const emit = defineEmits(['searchHouses'])
 
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
+const desktopView = inject('desktopView')
 
 const searchKey = ref('') // Create a reactive reference 'searchKey' to store the search input.
 

@@ -40,10 +40,9 @@
 import { useRouter } from 'vue-router'
 import useFormatPrice from '@/components/composables/FormatPrice'
 
-import { computed, inject } from 'vue'
+import { inject } from 'vue'
 
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
+const desktopView = inject('desktopView')
 
 // Define the props received and used in the template, specifying their types.
 const props = defineProps({

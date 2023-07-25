@@ -35,11 +35,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { inject } from 'vue'
 
-const props = defineProps(['windowWidth'])
-
-const desktopView = computed(() => props.windowWidth > 550)
+const desktopView = inject('desktopView')
 </script>
 
 <style scoped lang="scss">
