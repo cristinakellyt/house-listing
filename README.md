@@ -1,14 +1,34 @@
-# house-listings
+# Vue House Listing Web Application
 
-This template should help get you started developing with Vue 3 in Vite.
+This project aims to provide users with a platform to view houses available for sale, filter and sort them, post new houses, edit their own listings, and delete them. Additionally, users can view detailed information about each house listed.
 
-## Recommended IDE Setup
+## Table of Contents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Getting Started](#getting-started)
+4. [Project setup](#project-setup)
 
-## Customize configuration
+## Features
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- View a list of houses available for sale.
+- Filter the houses by city name.
+- Filter the houses created by the user.
+- View detailed information about each house, including images, location, price, and description.
+- Post a new house for sale.
+- Edit existing house listings.
+- Delete their own house listings.
+
+## Technologies Used
+
+- Vue.js: A progressive JavaScript framework for building user interfaces.
+- SCSS: A powerful CSS preprocessor that allows for easier and more organized styling.
+- [Vue Router](https://router.vuejs.org/): For handling client-side routing.
+- [Pinia](https://pinia.vuejs.org/): For state management within the application.
+
+## Getting Started
+
+To get started with the project, you'll need to have Node.js and npm (Node Package Manager) installed on your system.
 
 ## Project Setup
 
@@ -16,22 +36,16 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compile for Development
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compile for Production
 
 ```sh
 npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
