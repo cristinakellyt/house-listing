@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 
+// The API it is hard coded here because it is  a private project, besides it is not a good practice
 const APIkey = { 'X-Api-Key': 'tjeKEPrVW9xyG_7hUC-HAdkOYa5BiI1l' }
 const baseAPIUrl = 'https://api.intern.d-tt.nl/api/houses'
 
