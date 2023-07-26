@@ -4,23 +4,25 @@
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+
 main {
-  max-width: var(--max-width);
+  max-width: $max-width;
   margin: 0 auto;
-  padding-top: calc((80 / 16) * 1rem);
+  padding-top: pxToRem(80);
 }
 
 @media only screen and (max-width: 34.375em) {
   main {
-    padding-bottom: calc((80 / 16) * 1rem);
+    padding-bottom: pxToRem(80);
     padding-top: 0;
   }
 }
 
 @media only screen and (max-width: 87.5em) {
   main {
-    margin: 0 var(--margin-right-left-width);
+    margin: 0 pxToRem(20);
   }
 }
 </style>

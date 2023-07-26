@@ -1,33 +1,48 @@
 <template>
-  <div v-if="desktopView" class="back-to-house-list" @click="backTo">
-    <img src="./../icons/ic_back_grey@3x.png" alt="back button" height="20" width="20" />
-    <p>Back to overview</p>
+  <div class="back-to__container">
+    <base-button :goTo="goTo" :class="{ 'back-to__icon-position': !desktopView }">
+      <template v-slot:icon>
+        <img src="/icons/ic_back_grey@3x.png" width="20" height="20" alt="back to button" />
+      </template>
+      <slot>
+        <p v-if="desktopView" class="back-to__paragraph">Back to overview</p>
+      </slot>
+    </base-button>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { inject, computed } from 'vue'
+import { inject } from 'vue'
 
-const windowWidth = inject('windowWidth')
-const desktopView = computed(() => windowWidth.value > 550)
+const desktopView = inject('desktopView')
 
-const router = useRouter()
-const backTo = () => {
-  router.push('/houses')
-}
+defineProps({
+  // Path to go when button/link is pressed.
+  goTo: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
-<style scoped>
-.back-to-house-list {
-  display: flex;
-  align-items: center;
-  gap: var(--r15);
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: var(--r16);
-  margin: calc((30 / 16) * 1rem) 0;
-  color: var(--text-color-primary);
-  cursor: pointer;
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+
+.back-to {
+  &__container {
+    margin: pxToRem(30) 0;
+  }
+
+  &__paragraph {
+    color: $text-color-primary;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: pxToRem(16);
+  }
+
+  &__icon-position {
+    @include position-top-left(absolute, 0, 0);
+    color: red;
+  }
 }
 </style>

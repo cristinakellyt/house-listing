@@ -1,11 +1,18 @@
 <template>
   <div v-if="houseFound" class="house-details">
     <div class="house-details__container">
-      <BackTo></BackTo>
-      <DetailImage :image="selectedHouse.image" :madeByMe="selectedHouse.madeByMe" />
+      <BackTo v-if="desktopView" goTo="/houses" />
+      <div class="house-details__image">
+        <DetailImage
+          :image="selectedHouse.image"
+          :madeByMe="selectedHouse.madeByMe"
+          :id="selectedHouse.id"
+        />
+      </div>
       <HouseDescription
+        :id="selectedHouse.id"
         :street="selectedHouse.location.street"
-        :zipcode="selectedHouse.location.zip"
+        :zip="selectedHouse.location.zip"
         :city="selectedHouse.location.city"
         :houseNumber="selectedHouse.location.houseNumber"
         :price="selectedHouse.price"
@@ -24,50 +31,66 @@
 </template>
 
 <script setup>
-import DetailImage from './../components/houseDetail/DetailImage.vue'
-import HouseDescription from './../components/houseDetail/HouseDescription.vue'
-import HouseNotFound from './../components/houses/HouseNotFound.vue'
-import BackTo from '../components/ui/BackTo.vue'
-import { useHousesStore } from '../stores/HousesStore'
-import { ref } from 'vue'
+import DetailImage from '@/components/houses/DetailImage.vue'
+import HouseDescription from '@/components/houses/HouseDescription.vue'
+import HouseNotFound from '@/components/houses/HouseNotFound.vue'
+import BackTo from '@/components/ui/BackTo.vue'
+import { useHousesStore } from '@/stores/HousesStore'
+import { onMounted, ref } from 'vue'
+import { inject } from 'vue'
+
+const desktopView = inject('desktopView')
 
 const props = defineProps({ houseId: String })
 
 const housesList = useHousesStore()
 
-const loading = ref(true)
+const loading = ref(true) // indicates page is loading
 const houseFound = ref(false)
 const selectedHouse = ref()
 
-const dataCallback = (error, data) => {
-  loading.value = false
-  if (error || data.length === 0) {
-    return
-  }
-
-  if (data) {
+// Fetch the house data from the store based on the provided 'houseId' received through router params.
+const getHouse = async () => {
+  try {
+    selectedHouse.value = await housesList.houseById(props.houseId)
     houseFound.value = true
-    selectedHouse.value = { ...data[0] }
+    loading.value = false
+  } catch (error) {
+    // If no house found, shows HouseNotFound page.
+    houseFound.value = false
   }
 }
 
-housesList.houseById(props.houseId, dataCallback)
+onMounted(() => {
+  getHouse()
+})
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main.scss';
 .house-details {
   display: grid;
   grid-template-columns: 2fr 1fr;
-}
 
-.house-details__container {
-  position: relative;
+  &__container {
+    position: relative;
+  }
+
+  &__image {
+    height: pxToRem(600);
+    width: 100%;
+    background-color: $element-color-background2;
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
   .house-details {
     grid-template-columns: 1fr;
-    margin: 0 calc((-1) * var(--margin-right-left-width));
+    margin: 0 pxToRem(-20);
+
+    &__image {
+      height: pxToRem(259);
+    }
   }
 }
 </style>

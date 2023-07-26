@@ -1,8 +1,8 @@
 <template>
-  <header>
-    <nav>
+  <header class="page-header">
+    <nav class="page-header__nav">
       <router-link to="/houses" v-if="desktopView"
-        ><img src="./../icons/img_logo_dtt@3x.png" alt="dtt-logo"
+        ><img src="/icons/img_logo_dtt@3x.png" alt="dtt-logo" class="page-header__logo"
       /></router-link>
       <ul>
         <li>
@@ -11,8 +11,9 @@
             <img
               v-else
               id="mobile-header-home-btn"
-              src="../icons/ic_mobile_navigarion_home@3x.png"
+              src="/icons/ic_mobile_navigarion_home@3x.png"
               alt="home page"
+              class="page-header__logo"
             />
           </router-link>
         </li>
@@ -22,8 +23,9 @@
             <img
               v-else
               id="mobile-header-info-btn"
-              src="../icons/ic_mobile_navigarion_info@3x.png"
+              src="/icons/ic_mobile_navigarion_info@3x.png"
               alt="about page"
+              class="page-header__logo"
             />
           </router-link>
         </li>
@@ -33,91 +35,91 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { inject } from 'vue'
 
-const props = defineProps(['windowWidth'])
-
-const desktopView = computed(() => props.windowWidth > 550)
+const desktopView = inject('desktopView')
 </script>
 
-<style scoped>
-header {
+<style scoped lang="scss">
+@import '@/assets/main.scss';
+
+.page-header {
   width: 100%;
-  background-color: var(--element-color-backgroun2);
-  padding: calc((20 / 16) * 1rem);
+  background-color: $element-color-background2;
+  padding: pxToRem(20);
   font-family: 'Montserrat', sans-serif;
-  font-size: var(--r18);
-  color: var(--element-color-tertiary);
+  font-size: pxToRem(18);
+  color: $element-color-tertiary;
   position: fixed;
-  z-index: 100;
-}
+  z-index: 1000;
 
-header nav {
-  max-width: var(--max-width);
-  display: flex;
-  align-items: center;
-  gap: calc((50 / 16) * 1rem);
-  margin: 0 auto;
-}
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: pxToRem(50);
+    max-width: $max-width;
+    margin: 0 auto;
+  }
 
-img {
-  width: calc((120 / 16) * 1rem);
-  height: calc((40 / 16) * 1rem);
+  &__logo {
+    width: pxToRem(120);
+    height: pxToRem(40);
+  }
 }
 
 ul {
   display: flex;
   align-items: center;
-  gap: calc((70 / 16) * 1rem);
-}
+  gap: pxToRem(70);
 
-ul li {
-  width: calc((70 / 16) * 1rem);
+  & li {
+    width: pxToRem(70);
+  }
 }
 
 a {
   display: inline-block;
   color: inherit;
   transition: all 0.3s;
-}
 
-a:active,
-a:hover,
-a.router-link-active {
-  font-weight: 700;
-  color: var(--text-color-primary);
+  &:active,
+  &:hover,
+  &.router-link-active {
+    font-weight: 700;
+    color: $text-color-primary;
+  }
 }
 
 /* Header mobile view starts at 550px */
 @media only screen and (max-width: 34.375em) {
-  header {
+  .page-header {
     bottom: 0;
-  }
 
-  header nav {
-    display: block;
-    padding: 0 calc((60 / 16) * 1rem);
-  }
+    &__nav {
+      display: block;
+      padding: 0 pxToRem(60);
+    }
 
-  img {
-    width: calc((30 / 16) * 1rem);
-    height: calc((30 / 16) * 1rem);
+    &__logo {
+      width: pxToRem(25);
+      height: pxToRem(25);
+    }
   }
 
   ul {
     justify-content: space-between;
-  }
 
-  ul li {
-    width: fit-content;
+    & li {
+      width: fit-content;
+    }
   }
 
   a.router-link-active #mobile-header-info-btn {
-    content: url(./../icons/ic_mobile_navigarion_info_active@3x.png);
+    content: url(/icons/ic_mobile_navigarion_info_active@3x.png);
   }
 
   a.router-link-active #mobile-header-home-btn {
-    content: url(./../icons/ic_mobile_navigarion_home_active@3x.png);
+    content: url(/icons/ic_mobile_navigarion_home_active@3x.png);
   }
 }
 </style>

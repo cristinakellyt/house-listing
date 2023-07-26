@@ -1,0 +1,30 @@
+// COLORS
+$element-color-primary: rgb(235, 84, 64);
+$element-color-secondary: rgb(74, 75, 76);
+$element-color-tertiary: rgb(195, 195, 195);
+$element-color-tertiary-lighter: rgb(232, 232, 232);
+$element-color-background1: rgb(246, 246, 246);
+$element-color-background2: rgb(255, 255, 255);
+
+$text-color-primary: rgb(0, 0, 0);
+$text-color-secondary: $element-color-secondary;
+$text-color-hyperlink: rgb(6, 123, 194);
+
+// UTILITIES
+
+$max-width: pxToRem(1400);
+
+// Placeholder selectors
+
+%flex-centralize {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-column-centralize {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
