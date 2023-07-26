@@ -4,22 +4,35 @@
       <search-bar :size="desktopView ? 'large' : 'small'" @onSearch="searchHouses" />
     </div>
     <div class="house-filter__buttons">
-      <base-button
-        :btnColor="priceIsPressed ? 'primary' : 'tertiary'"
-        :size="desktopView ? 'large' : 'small'"
-        @click="sortHouse('price')"
-        class="filter-buttons__price"
-      >
-        Price
-      </base-button>
-      <base-button
-        :btnColor="sizeIsPressed ? 'primary' : 'tertiary'"
-        :size="desktopView ? 'large' : 'small'"
-        @click="sortHouse('size')"
-        class="filter-buttons__size"
-      >
-        Size
-      </base-button>
+      <div class="buttons-sort">
+        <base-button
+          :btnColor="priceIsPressed ? 'primary' : 'tertiary'"
+          :size="desktopView ? 'large' : 'small'"
+          @click="sortHouse('price')"
+          class="buttons-sort__price"
+        >
+          Price
+        </base-button>
+        <base-button
+          :btnColor="sizeIsPressed ? 'primary' : 'tertiary'"
+          :size="desktopView ? 'large' : 'small'"
+          @click="sortHouse('size')"
+          class="buttons-sort__size"
+        >
+          Size
+        </base-button>
+      </div>
+
+      <div>
+        <base-button
+          :btnColor="myListingIsPressed ? 'primary' : 'tertiary'"
+          :size="desktopView ? 'large' : 'small'"
+          @click="myListing"
+          class="filter-buttons__mylisting"
+        >
+          My houses</base-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +46,7 @@ const desktopView = inject('desktopView')
 
 const searchKey = ref('') // Create a reactive reference 'searchKey' to store the search input.
 
-// handle searching for houses based on the input coming from SearchBar component and on the sorting type.
+// handle searching for houses based on the input coming from SearchBar component, on the sorting type and if myListing button is pressed.
 const searchHouses = (input) => {
   searchKey.value = input
   let sortType = ''
@@ -44,12 +57,19 @@ const searchHouses = (input) => {
   }
 
   // Emit the 'searchHouses' event with the search input and the selected sorting type.
-  emit('searchHouses', input, sortType)
+  emit('searchHouses', input, sortType, myListingIsPressed.value)
 }
 
-// Create reactive references 'priceIsPressed' and 'sizeIsPressed' to store sorting options.
+const myListing = () => {
+  myListingIsPressed.value = !myListingIsPressed.value
+  searchHouses(searchKey.value)
+}
+
+// Reactive references 'priceIsPressed' and 'sizeIsPressed' to store sorting options.
+// Reactive reference 'myListingIsPressed' to track if user wants to see his listings.
 const priceIsPressed = ref(false)
 const sizeIsPressed = ref(false)
+const myListingIsPressed = ref(false)
 
 // Handle sorting houses based on the selected sorting type.
 const sortHouse = (sortType) => {
@@ -99,11 +119,18 @@ const sortHouse = (sortType) => {
   }
 
   &__buttons {
-    flex: 0 0 20%;
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: space-between;
+    gap: pxToRem(20);
   }
 }
 
-.filter-buttons {
+.buttons-sort {
+  flex: 0 0 60%;
+}
+
+.buttons-sort {
   &__price {
     width: 50%;
     border-radius: pxToRem(10) 0 0 pxToRem(10);
@@ -123,6 +150,14 @@ const sortHouse = (sortType) => {
     &__buttons {
       flex: 0 0 100%;
     }
+
+    &__buttons {
+      flex-direction: column;
+    }
+  }
+
+  .filter-buttons__mylisting {
+    width: 100%;
   }
 }
 </style>

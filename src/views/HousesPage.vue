@@ -37,30 +37,42 @@ const isFiltered = ref(false) //  reactive reference 'isFiltered' initialized as
 const numberOfResults = ref('') //  reactive reference 'numberOfResults' to store the number of filtered results (houses).
 const cityFilter = ref('') //  reactive reference 'cityFilter' to store the current city filter emitted through 'searchHouses' event.
 const sortType = ref('') //  reactive reference 'sortType' to store the current sorting option emitted through 'searchHouses' event.
+const filterMyListing = ref(false) //reactive reference 'myListing' to store the current madeByMe option emitted through 'searchHouses' event.
 
-// Watch for changes in the 'housesList.getHouses' getter, and trigger the search function
-// when the list of houses changes, maintaining the sort and filters.
+// Watch for changes in the 'housesList.getHouses' getter, and trigger the search function.
+// When the list of houses changes, maintaining the sort and filters.
 watch(
   () => housesList.getHouses,
   () => {
-    onSearchHouses(cityFilter.value, sortType.value)
+    onSearchHouses(cityFilter.value, sortType.value, filterMyListing.value)
   }
 )
 
-// Function to handle filter by city and sort the list based on price/size
-const onSearchHouses = (city, sort) => {
+// Handle filter by city or by if the user is the owner of a house, and sort the list based on price/size.
+const onSearchHouses = (city, sort, madeByMe) => {
   cityFilter.value = city
-  console.log(cityFilter.value)
   sortType.value = sort
+  filterMyListing.value = madeByMe
   filteredHouses.value = [...housesList.getHouses]
+
   if (cityFilter.value) {
     isFiltered.value = true
     filteredHouses.value = filteredHouses.value.filter(
       (house) => house.location.city.toLowerCase() === cityFilter.value.toLowerCase()
     )
     numberOfResults.value = filteredHouses.value.length
-  } else {
-    isFiltered.value = false // Set 'isFiltered' to false if there's no city filter applied.
+  }
+
+  if (filterMyListing.value) {
+    isFiltered.value = true
+    filteredHouses.value = filteredHouses.value.filter(
+      (house) => house.madeByMe === filterMyListing.value
+    )
+    numberOfResults.value = filteredHouses.value.length
+  }
+
+  if (!cityFilter.value && !filterMyListing.value) {
+    isFiltered.value = false
   }
 
   // Sort 'filteredHouses' based on the chosen sorting type ('price' or 'size').
@@ -70,7 +82,6 @@ const onSearchHouses = (city, sort) => {
   if (sortType.value === 'size') {
     filteredHouses.value.sort((a, b) => a.size - b.size)
   }
-  console.log(isFiltered.value)
 }
 </script>
 
