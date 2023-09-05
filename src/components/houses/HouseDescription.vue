@@ -71,21 +71,21 @@ import useFormatPrice from '@/components/composables/FormatPrice'
 
 const desktopView = inject('desktopView')
 
-const props = defineProps({
-  id: Number,
-  street: String,
-  houseNumber: Number,
-  price: Number,
-  zip: String,
-  city: String,
-  bedrooms: Number,
-  bathrooms: Number,
-  size: Number,
-  hasGarage: Boolean,
-  description: String,
-  constructionYear: Number,
-  madeByMe: Boolean
-})
+const props = defineProps([
+  'id',
+  'street',
+  'houseNumber',
+  'price',
+  'zip',
+  'city',
+  'bedrooms',
+  'bathrooms',
+  'size',
+  'hasGarage',
+  'description',
+  'constructionYear',
+  'madeByMe'
+])
 
 const formatedPrice = useFormatPrice(props.price)
 </script>

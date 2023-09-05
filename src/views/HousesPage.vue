@@ -11,13 +11,13 @@
     :key="house.id"
     :id="house.id"
     :image="house.image"
-    :street="house.location.street"
-    :houseNumber="house.location.houseNumber"
+    :street="house.street"
+    :houseNumber="house.houseNumber"
     :price="house.price"
-    :zipCode="house.location.zip"
-    :city="house.location.city"
-    :bedrooms="house.rooms.bedrooms"
-    :bathrooms="house.rooms.bathrooms"
+    :zip="house.zip"
+    :city="house.city"
+    :bedrooms="house.bedrooms"
+    :bathrooms="house.bathrooms"
     :size="house.size"
     :madeByMe="house.madeByMe"
   />
@@ -58,7 +58,7 @@ const onSearchHouses = (city, sort, madeByMe) => {
   if (cityFilter.value) {
     isFiltered.value = true
     filteredHouses.value = filteredHouses.value.filter(
-      (house) => house.location.city.toLowerCase() === cityFilter.value.toLowerCase()
+      (house) => house.city.toLowerCase() === cityFilter.value.toLowerCase()
     )
     numberOfResults.value = filteredHouses.value.length
   }

@@ -17,7 +17,7 @@
         </edit-delete-btns>
       </div>
       <p class="house-price">&euro; {{ formatPrice }}</p>
-      <p class="house-address">{{ zipCode }} {{ city }}</p>
+      <p class="house-address">{{ zip }} {{ city }}</p>
       <div class="house-rooms">
         <span class="house-rooms__info">
           <img src="/icons/ic_bed@3x.png" alt="number of bedrooms" class="house-rooms__icon" />
@@ -45,19 +45,19 @@ import { inject } from 'vue'
 const desktopView = inject('desktopView')
 
 // Define the props received and used in the template, specifying their types.
-const props = defineProps({
-  id: Number,
-  image: String,
-  street: String,
-  houseNumber: Number,
-  price: Number,
-  zipCode: String,
-  city: String,
-  bedrooms: Number,
-  bathrooms: Number,
-  size: Number,
-  madeByMe: Boolean
-})
+const props = defineProps([
+  'id',
+  'image',
+  'street',
+  'houseNumber',
+  'price',
+  'zip',
+  'city',
+  'bedrooms',
+  'bathrooms',
+  'size',
+  'madeByMe'
+])
 
 // Make sure price is shown with proper dots e.g 1.000 .
 const formatPrice = useFormatPrice(props.price)

@@ -74,18 +74,14 @@
       </div>
 
       <div class="form-input form-input__all-width">
-        <label>Upload picture(PNG or JPG)*</label>
-        <div v-if="image" class="form-input__image">
-          <closeable-content @onClose="() => (image = '')" size="small">
-            <img :src="imageSrc" class="form-input__image-fit" alt="file image selected" />
-          </closeable-content>
-        </div>
+        <label>Picture URL*</label>
         <input
-          v-else
-          type="file"
-          accept="image/png, image/jpeg"
-          :class="['form-input-content', { 'form-input__invalid': image === '' && isSubmitted }]"
-          @change="(e) => (image = e.target.files[0])"
+          type="url"
+          pattern="https://.*"
+          minlength="10"
+          maxlength="100"
+          v-model="imageUrl"
+          :class="['form-input-content', { 'form-input__invalid': imageUrl === '' && isSubmitted }]"
         />
       </div>
 
@@ -213,7 +209,6 @@
 
 <script setup>
 import BackTo from '@/components/ui/BackTo.vue'
-import CloseableContent from '@/components/ui/CloseableContent.vue'
 import useFormatPrice from '@/components/composables/FormatPrice'
 
 import { computed, ref } from 'vue'
@@ -228,32 +223,22 @@ const props = defineProps({
 const isHouseInitialized = props.house !== undefined
 
 // If there is already some content from house props, fill the references with the value, otherwise, it will be empty.
-const street = ref(isHouseInitialized ? props.house.location.street : '')
-const houseNumber = ref(isHouseInitialized ? props.house.location.houseNumber : '')
-const houseNumberAddition = ref(isHouseInitialized ? props.house.location.houseNumberAddition : '')
-const zip = ref(isHouseInitialized ? props.house.location.zip : '')
-const city = ref(isHouseInitialized ? props.house.location.city : '')
-const image = ref(isHouseInitialized ? props.house.image : '')
+const street = ref(isHouseInitialized ? props.house.street : '')
+const houseNumber = ref(isHouseInitialized ? props.house.houseNumber : '')
+const houseNumberAddition = ref(isHouseInitialized ? props.house.houseNumberAddition : '')
+const zip = ref(isHouseInitialized ? props.house.zip : '')
+const city = ref(isHouseInitialized ? props.house.city : '')
+const imageUrl = ref(isHouseInitialized ? props.house.image : '')
 const price = ref(isHouseInitialized ? props.house.price : '')
 const size = ref(isHouseInitialized ? props.house.size : '')
 const hasGarage = ref(isHouseInitialized ? props.house.hasGarage : '')
-const bedrooms = ref(isHouseInitialized ? props.house.rooms.bedrooms : '')
-const bathrooms = ref(isHouseInitialized ? props.house.rooms.bathrooms : '')
+const bedrooms = ref(isHouseInitialized ? props.house.bedrooms : '')
+const bathrooms = ref(isHouseInitialized ? props.house.bathrooms : '')
 const constructionDate = ref(isHouseInitialized ? props.house.constructionYear : '')
 const description = ref(isHouseInitialized ? props.house.description : '')
 
 // Reference to track if the user try to submit.
 const isSubmitted = ref(false)
-
-// Compute the value of image src attribute .
-const imageSrc = computed(() => {
-  if (image.value instanceof File) {
-    return URL.createObjectURL(image.value)
-  }
-  // If 'image.value' is not a File object (e.g., a URL or other data), return 'image.value' as is.
-  // This happens whe the data come from props.
-  return image.value
-})
 
 // Handle the dots in the price show in the UI.
 const priceFormatted = computed(() => {
@@ -269,7 +254,7 @@ const isFormInvalid = computed(() => {
     houseNumber.value === '' ||
     zip.value === '' ||
     city.value === '' ||
-    image.value === '' ||
+    imageUrl.value === '' ||
     price.value === '' ||
     size.value === '' ||
     hasGarage.value === '' ||
@@ -301,7 +286,7 @@ const submitForm = ($event) => {
   formData.append('bedrooms', bedrooms.value)
   formData.append('bathrooms', bathrooms.value)
   formData.append('size', size.value)
-  formData.append('streetName', street.value)
+  formData.append('street', street.value)
   formData.append('houseNumber', houseNumber.value)
   formData.append('numberAddition', houseNumberAddition.value)
   formData.append('zip', zip.value)
@@ -311,7 +296,7 @@ const submitForm = ($event) => {
   formData.append('description', description.value)
 
   let imageFormData = new FormData()
-  imageFormData.append('image', image.value)
+  imageFormData.append('image', imageUrl.value)
 
   emit('onFormSubmit', formData, imageFormData)
 

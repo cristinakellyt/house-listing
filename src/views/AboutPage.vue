@@ -2,8 +2,8 @@
   <header v-if="!desktopView" class="about-header">
     <h1>About</h1>
   </header>
-  <section class="dtt-info">
-    <h2>About DTT Real State</h2>
+  <section class="ck-info">
+    <h2>About CK House Company</h2>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem consequuntur voluptatem
       praesentium eaque numquam voluptatibus libero nemo, corrupti doloremque expedita laborum amet
@@ -17,15 +17,9 @@
       ipsa eligendi veniam, omnis aspernatu!
     </p>
 
-    <div class="dtt-design">
-      <h2>Design and Development</h2>
-      <div class="dtt-design__contact">
-        <img src="/icons/img_logo_dtt@3x.png" alt="logo dtt" class="dtt-logo" />
-        <div class="dtt-design__contact-web">
-          <p>By DTT</p>
-          <a href="https://d-tt.nl">www.d-tt.nl</a>
-        </div>
-      </div>
+    <div class="contact">
+      <p>By CK-House</p>
+      <a href="https://github.com/cristinakellyt">www.ck-contact.com</a>
     </div>
   </section>
 </template>
@@ -34,12 +28,11 @@
 import { inject } from 'vue'
 
 const desktopView = inject('desktopView')
-
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
-.dtt-info {
+.ck-info {
   @include flex-gap(column, pxToRem(30));
   margin: pxToRem(60) 0;
 
@@ -49,28 +42,11 @@ const desktopView = inject('desktopView')
   }
 }
 
-.dtt {
-  &-logo {
-    width: pxToRem(250);
-  }
+.contact {
+  margin-top: pxToRem(15);
 
-  &-design {
-    margin-top: pxToRem(15);
-
-    &__contact {
-      @include flex-gap(row, pxToRem(40));
-      margin-top: pxToRem(30);
-
-      &-web {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        & a {
-          color: $text-color-hyperlink;
-        }
-      }
-    }
+  & a {
+    color: $text-color-hyperlink;
   }
 }
 
@@ -79,24 +55,13 @@ const desktopView = inject('desktopView')
     text-align: center;
     margin-top: pxToRem(30);
   }
-  .dtt {
-    &-info {
-      margin: pxToRem(30) 0;
-      gap: pxToRem(10);
 
-      & h2 {
-        font-size: pxToRem(14);
-      }
-    }
+  .ck-info {
+    margin: pxToRem(30) 0;
+    gap: pxToRem(10);
 
-    &-logo {
-      width: pxToRem(100);
-      height: pxToRem(40);
-    }
-
-    &-design__contact {
-      margin-top: pxToRem(15);
-      gap: pxToRem(20);
+    & h2 {
+      font-size: pxToRem(14);
     }
   }
 }
