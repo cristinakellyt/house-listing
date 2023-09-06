@@ -121,16 +121,4 @@ input {
     height: pxToRem(15);
   }
 }
-
-// .search-icon.large,
-// .clear-icon.large {
-//   width: pxToRem(20);
-//   height: pxToRem(20);
-// }
-
-// .search-icon.small,
-// .clear-icon.small {
-//   width: pxToRem(15);
-//   height: pxToRem(15);
-// }
 </style>

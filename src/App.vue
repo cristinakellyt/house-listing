@@ -36,3 +36,7 @@ const housesList = useHousesStore()
 // Fetch houses when the component is initialized.
 housesList.fetchHouses()
 </script>
+
+<style lang="scss">
+@import '@/assets/main.scss';
+</style>

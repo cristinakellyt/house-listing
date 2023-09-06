@@ -55,7 +55,6 @@ const desktopView = inject('desktopView')
   font-size: pxToRem(18);
   color: $element-color-tertiary;
   position: fixed;
-  top: 0;
   z-index: 1000;
 
   &__nav {
