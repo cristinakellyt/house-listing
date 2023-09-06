@@ -2,8 +2,12 @@
   <header class="page-header">
     <nav class="page-header__nav">
       <router-link to="/houses" v-if="desktopView"
-        ><img src="/icons/img_logo_dtt@3x.png" alt="dtt-logo" class="page-header__logo"
-      /></router-link>
+        ><img
+          src="/icons/ic_mobile_navigarion_home_active@3x.png"
+          alt="CK-logo"
+          class="page-header__logo"
+        />
+      </router-link>
       <ul>
         <li>
           <router-link to="/houses">
@@ -62,7 +66,6 @@ const desktopView = inject('desktopView')
   }
 
   &__logo {
-    width: pxToRem(120);
     height: pxToRem(40);
   }
 }
