@@ -74,14 +74,13 @@
       </div>
 
       <div class="form-input form-input__all-width">
-        <label>Picture URL*</label>
+        <label for="picture">Picture URL*</label>
         <input
+          :class="['form-input-content', { 'form-input__invalid': imageUrl === '' && isSubmitted }]"
+          id="picture"
           type="url"
           pattern="https://.*"
-          minlength="10"
-          maxlength="100"
           v-model="imageUrl"
-          :class="['form-input-content', { 'form-input__invalid': imageUrl === '' && isSubmitted }]"
         />
       </div>
 
@@ -350,20 +349,6 @@ const submitForm = ($event) => {
   }
 }
 
-// Start Image
-.form-input__image {
-  width: pxToRem(120);
-  height: pxToRem(120);
-
-  &-fit {
-    border-radius: pxToRem(5);
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-  }
-}
-// End Image
-
 // Start Form Input
 .form-input {
   &-content {
@@ -407,37 +392,6 @@ textarea::placeholder {
   color: $element-color-tertiary;
   font-family: 'Open Sans', sans-serif;
   font-size: pxToRem(14);
-}
-
-// Input type 'file' style
-input[type='file'] {
-  border: 2px dashed $element-color-tertiary;
-  height: pxToRem(120);
-  width: pxToRem(120);
-  cursor: pointer;
-  color: transparent;
-  margin-top: pxToRem(10);
-  position: relative;
-  background-color: transparent;
-
-  &.form-input__invalid {
-    border: 2px dashed $element-color-primary;
-  }
-
-  &::before {
-    @include position-top-left(absolute, 50%, 50%);
-    background-image: url('/icons/ic_plus_grey@3x.png');
-    content: '';
-    transform: translate(-50%, -50%);
-    width: pxToRem(35);
-    height: pxToRem(35);
-    background-size: pxToRem(35);
-    background-repeat: no-repeat;
-  }
-}
-
-::-webkit-file-upload-button {
-  visibility: hidden;
 }
 // End Form Input
 
