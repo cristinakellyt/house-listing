@@ -16,26 +16,22 @@ export const useHousesStore = defineStore('HousesStore', {
   },
   // CRUD operations
   actions: {
-    // Fetch all houses from the backend. For this application we can get all houses
+    // Fetch all houses from the backend. For this application we will fetch from a json data imported
     // For a big application we will need to fetch on demand
-    async fetchHouses() {
+    fetchHouses() {
       for (const house of data) {
         this.houses.push(house)
       }
     },
 
     // Get house by id
-    async houseById(houseId) {
-      const selectedHouse = this.houses.find((house) => house.id === +houseId)
-      return selectedHouse
+    houseById(houseId) {
+      return this.houses.find((house) => house.id === +houseId)
     },
 
     // Create a new house
     postHouse(formData) {
-      const formDataObject = {}
-      for (const [key, value] of formData.entries()) {
-        formDataObject[key] = value
-      }
+      const formDataObject = this.convertFormDataToObject(formData)
 
       formDataObject.id = Math.floor(Math.random() * 100)
       formDataObject.madeByMe = true
@@ -46,22 +42,16 @@ export const useHousesStore = defineStore('HousesStore', {
     },
 
     // Upload an image for a given house
-    async postImage(img, houseId) {
-      const imgUrlObject = {}
-      for (const [key, value] of img.entries()) {
-        imgUrlObject[key] = value
-      }
+    postImage(imgFormData, houseId) {
+      const imgUrlObject = this.convertFormDataToObject(imgFormData)
 
       const selectedHouse = this.houses.find((house) => house.id === +houseId)
       selectedHouse.image = imgUrlObject.image
     },
 
     // Action to edit an existing house using a POST request to the server
-    async editHouse(formData, houseId) {
-      const formDataObject = {}
-      for (const [key, value] of formData.entries()) {
-        formDataObject[key] = value
-      }
+    editHouse(formData, houseId) {
+      const formDataObject = this.convertFormDataToObject(formData)
 
       //Find the house selected to be edited
       let selectedHouse = this.houses.find((house) => house.id === +houseId)
@@ -77,8 +67,18 @@ export const useHousesStore = defineStore('HousesStore', {
     },
 
     // Delete house by ID
-    async deleteHouse(houseId) {
+    deleteHouse(houseId) {
       this.houses = this.houses.filter((house) => house.id !== +houseId)
+    },
+
+    //Convert form data format in javascript object
+    convertFormDataToObject(formData) {
+      const formDataObject = {}
+      for (const [key, value] of formData.entries()) {
+        formDataObject[key] = value
+      }
+
+      return formDataObject
     }
   }
 })
