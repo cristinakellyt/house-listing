@@ -60,14 +60,26 @@ button.default {
 
 button.primary {
   background-color: $element-color-primary;
+
+  &:hover {
+    background-color: darken($element-color-primary, 10%);
+  }
 }
 
 button.secondary {
   background-color: $element-color-secondary;
+
+  &:hover {
+    background-color: darken($element-color-secondary, 10%);
+  }
 }
 
 button.tertiary {
   background-color: $element-color-tertiary;
+
+  &:hover {
+    background-color: darken($element-color-tertiary, 10%);
+  }
 }
 
 button.large {
@@ -84,4 +96,9 @@ a:link,
 a:visited {
   color: inherit;
 }
+
+// button:hover {
+//   background-color: aqua;
+//   transform: translateY(-pxToRem(5));
+// }
 </style>
