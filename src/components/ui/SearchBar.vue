@@ -7,7 +7,6 @@
       placeholder="Search for a house"
       v-model.trim="searchKey"
       @input="onInputHandler"
-      @keyup.enter="onEnterHandler"
     />
     <img
       v-show="searchKey"
@@ -20,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 // Define the 'onSearch' event
 const emit = defineEmits(['onSearch'])
 
@@ -30,18 +29,24 @@ defineProps({
 
 const searchKey = ref('') // Store the user's search input.
 
+// watch(searchKey.value, (newValue) => {
+//   console.log('Search key changed:', newValue)
+//   emit('onSearch', newValue)
+// })
+
 // Handle input changes.
 const onInputHandler = () => {
   // If the search input is empty, emit the 'onSearch' event with
   // empty search key. Means the user wants to clear its search.
-  if (searchKey.value === '') emit('onSearch', searchKey.value)
+  console.log(searchKey.value)
+  emit('onSearch', searchKey.value)
 }
 
 // Handle the 'Enter' key press event.
-const onEnterHandler = () => {
-  // Emit the 'onSearch' event with the current search key. Means the user wants to search.
-  emit('onSearch', searchKey.value)
-}
+// const onEnterHandler = () => {
+//   // Emit the 'onSearch' event with the current search key. Means the user wants to search.
+//   emit('onSearch', searchKey.value)
+// }
 
 // Clear the search input through the clear button.
 const clearSearchKey = () => {

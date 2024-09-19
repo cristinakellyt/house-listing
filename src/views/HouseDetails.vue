@@ -25,6 +25,12 @@
         :madeByMe="selectedHouse.madeByMe"
       />
     </div>
+    <RecommendedHouses
+      class="house-details--recommended"
+      :city="selectedHouse.city"
+      :id="selectedHouse.id"
+      :key="selectedHouse.id"
+    />
   </div>
   <div v-else-if="loading">Loading...</div>
   <HouseNotFound v-else />
@@ -35,6 +41,7 @@ import DetailImage from '@/components/houses/DetailImage.vue'
 import HouseDescription from '@/components/houses/HouseDescription.vue'
 import HouseNotFound from '@/components/houses/HouseNotFound.vue'
 import BackTo from '@/components/ui/BackTo.vue'
+import RecommendedHouses from '@/components/houses/RecommendedHouses.vue'
 import { useHousesStore } from '@/stores/HousesStore'
 import { onMounted, ref } from 'vue'
 import { inject } from 'vue'
@@ -71,6 +78,7 @@ onMounted(() => {
 .house-details {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-gap: pxToRem(40);
 
   &__container {
     position: relative;
@@ -81,15 +89,24 @@ onMounted(() => {
     width: 100%;
     background-color: $element-color-background2;
   }
+
+  &--recommended {
+    margin-top: pxToRem(40);
+  }
 }
 
 @media only screen and (max-width: 34.375em) {
   .house-details {
     grid-template-columns: 1fr;
     margin: 0 pxToRem(-20);
+    grid-gap: 0;
 
     &__image {
       height: pxToRem(259);
+    }
+
+    &--recommended {
+      margin-top: pxToRem(20);
     }
   }
 }

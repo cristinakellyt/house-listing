@@ -50,15 +50,20 @@ watch(
 
 // Handle filter by city or by if the user is the owner of a house, and sort the list based on price/size.
 const onSearchHouses = (city, sort, madeByMe) => {
+  console.log(city, sort, madeByMe)
   cityFilter.value = city
   sortType.value = sort
   filterMyListing.value = madeByMe
   filteredHouses.value = [...housesList.getHouses]
 
   if (cityFilter.value) {
+    console.log(cityFilter.value)
     isFiltered.value = true
-    filteredHouses.value = filteredHouses.value.filter(
-      (house) => house.city.toLowerCase() === cityFilter.value.toLowerCase()
+    console.log(filteredHouses.value)
+    // debugger
+    // Filter 'filteredHouses' based on the chosen city. Checke if contains the cityFilter value.
+    filteredHouses.value = filteredHouses.value.filter((house) =>
+      house.city.toLowerCase().includes(cityFilter.value.toLowerCase())
     )
     numberOfResults.value = filteredHouses.value.length
   }
