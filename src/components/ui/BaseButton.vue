@@ -96,9 +96,4 @@ a:link,
 a:visited {
   color: inherit;
 }
-
-// button:hover {
-//   background-color: aqua;
-//   transform: translateY(-pxToRem(5));
-// }
 </style>

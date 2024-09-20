@@ -36,7 +36,6 @@ const props = defineProps({
   city: String,
   id: Number
 })
-console.log('recommended houses', props)
 
 const recommendedHouses = ref('')
 const housesList = ref(null)
@@ -46,7 +45,6 @@ const loading = ref(true)
 // Function to fetch recommended houses based on the city
 const fetchRecommendedHouses = async () => {
   housesList.value = await housesStore.getHouses
-  console.log(housesList.value)
 
   // If fetching fails, set errorFetching to true
   if (!housesList.value) errorFetching.value = true
