@@ -6,6 +6,7 @@
     </div>
     <h2 v-else-if="errorFetching">We had a problem, please try again later</h2>
     <HouseItem
+      @click="detailPage(house.id)"
       v-else
       v-for="house in recommendedHouses"
       :key="house.id"
@@ -29,8 +30,10 @@
 import HouseItem from '@/components/houses/HousesItem.vue'
 import { useHousesStore } from '@/stores/HousesStore'
 import { onBeforeMount, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const housesStore = useHousesStore()
+const router = useRouter()
 
 const props = defineProps({
   city: String,
@@ -64,6 +67,11 @@ const fetchRecommendedHouses = async () => {
   // Limit the recommended houses to the first 3
   const firstHouses = recommendedHouses.value.slice(0, 3)
   recommendedHouses.value = firstHouses
+}
+
+// Function to navigate to the detail page of the recommended house
+const detailPage = (id) => {
+  router.push({ name: 'detail', params: { houseId: id } })
 }
 
 onBeforeMount(() => {

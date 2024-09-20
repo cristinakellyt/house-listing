@@ -43,9 +43,11 @@ import HouseNotFound from '@/components/houses/HouseNotFound.vue'
 import BackTo from '@/components/ui/BackTo.vue'
 import RecommendedHouses from '@/components/houses/RecommendedHouses.vue'
 import { useHousesStore } from '@/stores/HousesStore'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { inject } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const desktopView = inject('desktopView')
 
 const props = defineProps({ houseId: String })
@@ -55,11 +57,12 @@ const housesList = useHousesStore()
 const loading = ref(true) // indicates page is loading
 const houseFound = ref(false)
 const selectedHouse = ref()
+const houseID = ref(props.houseId)
 
 // Fetch the house data from the store based on the provided 'houseId' received through router params.
 const getHouse = async () => {
   try {
-    selectedHouse.value = await housesList.houseById(props.houseId)
+    selectedHouse.value = await housesList.houseById(houseID.value)
     houseFound.value = true
     loading.value = false
   } catch (error) {
@@ -71,6 +74,15 @@ const getHouse = async () => {
 onMounted(() => {
   getHouse()
 })
+
+// Watch for changes in the param id from route and trigger the 'getHouse' function.
+watch(
+  () => route.params.houseId,
+  () => {
+    houseID.value = route.params.houseId
+    getHouse()
+  }
+)
 </script>
 
 <style scoped lang="scss">
